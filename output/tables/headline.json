@@ -1,0 +1,95 @@
+{
+  "N": 7,
+  "N_usd_deals_total": 16,
+  "N_jumbo_before_macro": 12,
+  "jumbo_threshold_usd_bn": 10.0,
+  "macro_excl_bdays": 1,
+  "event_window": [
+    -1,
+    1
+  ],
+  "merges_applied": 0,
+  "event_dates": [
+    "2024-08-07",
+    "2025-09-24",
+    "2025-11-03",
+    "2025-11-17",
+    "2026-02-02",
+    "2026-02-09",
+    "2026-07-07"
+  ],
+  "event_total_usd_bn": 130.5,
+  "event_10y_equiv_bn": 148.0377215940031,
+  "X_pca": {
+    "value_bp": 0.07665292552554985,
+    "nw_t": 1.7157132114086666,
+    "nw_se": 0.044677003718246615,
+    "nw_lags": 2,
+    "nw_p": 0.08621454551212324,
+    "placebo_mean_bp": -0.012764880367875221,
+    "placebo_sd_bp": 0.21948779790789041,
+    "placebo_p": 0.675,
+    "mde95_bp": 0.4301960838994652,
+    "recovery": -0.1069276220821366
+  },
+  "X_abnormal": {
+    "value_bp": 0.824488441637652,
+    "unweighted_bp": 1.1405115369854533,
+    "nw_t": 0.9296017338997568,
+    "nw_se": 0.8869265316221536,
+    "nw_lags": 2,
+    "nw_p": 0.3525773293695169,
+    "placebo_mean_bp": -0.019775865036678136,
+    "placebo_sd_bp": 1.6956703206699277,
+    "placebo_p": 0.622,
+    "mde95_bp": 3.3235138285130583,
+    "mde80pct_power_bp": 4.7478768978757975
+  },
+  "Y": {
+    "value_bp": 80.99999999999996,
+    "start_date": "2026-01-02",
+    "start_pct": 4.19,
+    "end_date": "2026-09-15",
+    "end_pct": 5.0,
+    "series": "FRED DGS10 (10Y constant maturity par yield)"
+  },
+  "term_premium": {
+    "realised_2026_dTP_bp": -8.570170683882905,
+    "realised_2026_dExpectations_bp": 79.04955928839227,
+    "acm_last": "2026-09-15",
+    "supply_2026_10y_equiv_bn": 194.30120295798565,
+    "impact_b0_bp_per_bn": 0.0802841415121403,
+    "impact_t": 3.417824940863145,
+    "implied_impact_bp": 15.599305274258015,
+    "b_h5_bp_per_bn": 0.0113730020371566,
+    "b_h5_t": 0.1688300509222756,
+    "implied_persistent_bp": 2.209787977063149
+  },
+  "explained_share": {
+    "via_concession_scaled": {
+      "n_jumbo_2026": 7,
+      "X_bp": 0.824488441637652,
+      "implied_total_bp": 5.771419091463564,
+      "share_of_Y": 0.07125208754893292,
+      "ci95_total_bp": [
+        -6.397212922392383,
+        17.94005110531951
+      ],
+      "caveat": "assumes permanence; window (0,+1) and the local projections say otherwise"
+    },
+    "via_concession_X_abn": {
+      "n_events_2026": 3,
+      "sum_2026_bp": -0.18175838156768842,
+      "share_of_Y": -0.0022439306366381297
+    },
+    "via_term_premium_impact": {
+      "bp": 15.599305274258015,
+      "share_of_Y": 0.19258401573158054
+    },
+    "via_term_premium_persistent": {
+      "bp": 2.209787977063149,
+      "share_of_Y": 0.027281333050162348
+    },
+    "realised_TP_share_of_Y": -0.10580457634423344
+  }
+}
