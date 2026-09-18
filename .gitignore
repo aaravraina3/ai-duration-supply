@@ -3,3 +3,12 @@ __pycache__/
 *.pyc
 data/raw/
 data/processed/_post_K*.csv
+
+# Regenerable by src/data_pull.py. Large public files, not worth redistributing.
+data/processed/gsw.csv
+data/processed/acm.csv
+data/processed/fred.csv
+data/processed/nlp_corpus.csv
+data/processed/nlp_scored.csv
+data/processed/regression_panel.csv
+data/processed/auctions.csv

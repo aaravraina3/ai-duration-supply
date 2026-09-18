@@ -8,23 +8,59 @@ Everything here is built from free primary sources. No paid data, no API keys.
 
 ## Headline
 
+Read the audit section below before quoting any of these. An adversarial pass
+(`src/audit*.py`) materially weakened two of them.
+
 | | |
 |---|---|
 | **N** | **7** jumbo USD offerings, threshold $10B, after macro and clustering filters (12 jumbos before the macro filter, 16 USD deals total) |
-| **X** | **+0.82 bp** duration-weighted abnormal cheapening at target tenors, NW t = 0.93, placebo mean −0.02 bp (p = 0.62) |
+| **X** | **+0.82 bp** duration-weighted abnormal cheapening at target tenors, NW t = 0.93, placebo p = 0.62. **Driven entirely by one event**, see below |
 | **Y** | **+81 bp**, 10Y CMT from 4.19% on 2026-01-02 to 5.00% on 2026-09-15 |
 | **explained share** | **7.1%** of Y (5.8 bp), 95% CI −6.4 to +17.9 bp. Not distinguishable from zero |
 
-The term premium leg is the informative one:
+The term premium leg is the informative one. AI duration supply moves the ACM
+10Y term premium on announcement by **+0.080 bp per $bn of 10-year equivalents**,
+worth 15.6 bp across 2026 issuance, and the effect is gone by five business days
+(b = +0.011). The daily regression reports NW t = 3.42, but that overstates it:
 
-- 2026 change in the ACM 10Y term premium: **−8.6 bp**. It fell.
-- 2026 change in expected short rates: **+79.0 bp**. That is the whole move.
-- AI duration supply does move the term premium on announcement, **+0.080 bp per
-  $bn of 10-year equivalents (t = 3.42)**, worth 15.6 bp across 2026 issuance.
-  The effect is gone by five business days (b = +0.011, t = 0.17).
+- **Randomization test on the announcement effect: p = 0.069.** The placebo
+  standard error is 1.9x the Newey-West one.
+- **Plain OLS t = 1.92.** The HAC correction *shrinks* the standard error below
+  OLS, which is a warning sign rather than a robustness result.
+- **Kish effective n = 9.6**, not T = 673. The regressor is 16 lumpy shocks plus
+  deterministic decay; 95% of its variation sits in 16 days.
+- It does survive leave-one-out (b from +0.067 to +0.093, min |t| = 2.59) and a
+  wild cluster bootstrap (p = 0.017).
 
-So the supply effect is real and transitory. BofA's ~30 bp claim does not survive
-as a persistent term premium effect, because the 2026 term premium did not rise.
+So: a marginally significant, clearly transitory announcement effect. Not a
+persistent term premium effect, and not a 30 bp one.
+
+## What the audit broke
+
+**The "it's all expectations" framing does not survive endpoints.** Calendar 2026
+shows ΔTP = −8.6 bp against ΔExpectations = +79.0 bp. But across 25 start/end
+pairs ΔTP ranges **−28.6 to +23.9 bp and is positive in 12 of 25**. Over the full
+2024-2026 sample the 10Y rose 105 bp of which **+103.1 bp is term premium** and
+−1.7 bp is expectations, the exact opposite. The only endpoint-robust claim is
+the narrow one: within calendar-2026 windows, |ΔExp| > |ΔTP| in all 25 pairs.
+Over the horizon on which the AI issuance ramp actually happened, term premium is
+the whole story, which makes the supply hypothesis *more* plausible, not less.
+
+**X is one observation.** Dropping Meta 2024-08-07 flips X from +0.82 to −0.12 bp.
+That event carries an abnormal move of +8.88 bp against a −3.4 to +3.5 range for
+the other six, and it sits inside the August 2024 yen-carry unwind (VIX 38.57 on
+08-05, 97th percentile of the sample on the event date). Do not defend X.
+
+**The mechanism has an internal inconsistency.** In the same regression, Treasury
+coupon duration supply, roughly 10x larger, carries a coefficient of −0.0014
+(t = −0.15). If duration absorption raised the term premium, the larger supplier
+should dominate. It does not, and the signs differ. Separately, ΔACM TP10 is 96%
+explained by five PCs of the same zero curve, so the dependent variable is close
+to a fixed linear function of the long-end move it is being asked to explain.
+
+**No reverse causality found, but the test is weak.** Logit of announcement
+timing on prior 5d/20d yield changes, 60-day level percentile and VIX gives
+LR p = 0.676, nothing near significance, at n = 16.
 
 ## What is in the sample
 
@@ -80,19 +116,24 @@ distribution has sd 1.70 bp, so the minimum detectable effect is 3.3 bp at 95% a
 anticipates, is below the noise floor. X being insignificant is a statement about
 power, not about the world.
 
-## Resume bullet
+## Summary bullet
 
-Using the null-result variant from the brief, since that is what the data
-supports:
-
-> **AI Debt Supply and the Treasury Term Premium** | Python, Nelson-Siegel-Svensson, ACM, PCA, HMM, NLP
+> **AI Debt Supply and the Treasury Term Premium** | Python, Nelson-Siegel-Svensson, ACM, PCA, local projections
 >
-> Measured AI debt supply impact on the Treasury long end, hand-building a
-> 16-deal hyperscaler issuance panel from SEC 424B/FWP filings and regressing ACM
-> term premium on announced 10-year-equivalent duration; found a +0.08bp per $bn
-> announcement effect (t=3.4) that decays to zero within five days, and no
-> persistent term premium effect against the +81bp 2026 10Y move, contradicting
-> sell-side estimates of 30bp
+> Built a 16-deal hyperscaler issuance panel from SEC 424B/FWP filings
+> (announcement-dated, 100% term-sheet coupon match, validated at $92.8B 2025
+> issuance against consensus) and estimated the ACM term premium response to
+> announced 10-year-equivalent duration; +0.08bp per $bn on announcement
+> (randomization p=0.07) decaying to zero within five days, with no persistent
+> effect, against sell-side estimates of 30bp
+
+The NLP supply-pressure index in `src/nlp.py` is deliberately not in that list.
+It exists and runs, but it is TF-IDF plus truncated SVD rather than a neural
+encoder, its corpus is 716 effectively distinct passages after 0.90 dedup (not
+the 1,604 raw), its 40 "labels" are rule-selected rather than read individually,
+and a plain decayed passage count beats it in the regression (t = +2.86 with the
+right sign, versus t = −1.20 with the wrong one). Calling it an NLP index
+oversells it.
 
 ## Layout
 
@@ -122,6 +163,12 @@ src/
   robustness.py     the full specification grid
   headline.py       every headline number, single source of truth
   figures.py
+  audit1_lags.py    effective sample size, NW lag sweep, wild cluster bootstrap
+  audit2_loo.py     event independence and leave-one-out
+  audit3_endpoints.py  endpoint sensitivity of the 2026 decomposition
+  audit4_placebo_reverse.py  randomization test on the LP, reverse causality
+  audit5_mbs_scale.py  scale vs Treasury supply, what the MBS gap costs
+  audit6_nlp_real.py   whether the text index beats a passage counter
 output/
   figures/  tables/  writeup.md
 ```

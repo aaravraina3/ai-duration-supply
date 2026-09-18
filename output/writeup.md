@@ -2,6 +2,12 @@
 
 Aarav Raina, September 2026
 
+> **Read the addendum in §10 first.** An adversarial audit run after this was
+> written materially weakened two claims below. Section 6's "the term premium
+> fell, so it cannot be a supply story" is endpoint-dependent and does not hold.
+> Section 5's X is driven by a single event. The body is kept as written so the
+> revision is visible.
+
 ---
 
 ## 1. The question
@@ -271,3 +277,70 @@ inference about effect sizes below 3 bp.
 - Forward capex language comes from 10-K and 10-Q MD&A, not earnings calls.
 - The macro exclusion rule was changed after seeing how many events it dropped,
   though before looking at any yield outcome. The full ladder is reported.
+
+---
+
+## 10. Addendum: adversarial audit
+
+Run after the body was written, to try to break it. Scripts: `src/audit1_lags.py`
+through `src/audit6_nlp_real.py`. Three findings change what is defensible.
+
+**§6 does not survive endpoint variation.** The body reports ΔTP = −8.6 bp for
+calendar 2026 and concludes the selloff cannot be a supply story. Across 25
+start/end pairs ΔTP ranges **−28.6 to +23.9 bp and is positive in 12 of 25**.
+Over the full 2024-2026 sample the 10Y rose 105 bp of which **+103.1 bp is term
+premium** and −1.7 bp is expectations, the reverse of the calendar-2026 cut. The
+surviving claim is only that within calendar-2026 windows |ΔExp| > |ΔTP| in all
+25 pairs. Over the horizon on which the issuance ramp happened, the term premium
+is the whole move, which makes the supply hypothesis more plausible rather than
+less. The §8 summary is wrong on this point.
+
+**§5's X is one observation.** Leave-one-out over the seven events gives X from
+−0.120 to +1.595 bp. Dropping Meta 2024-08-07 alone flips the sign. That event's
+own abnormal move is +8.88 bp against −3.4 to +3.5 for the other six, and it
+falls inside the August 2024 yen-carry unwind (VIX 38.57 on 08-05; the event date
+sits at the 97th percentile of the sample). X should not be defended.
+
+**§6's t-statistic overstates the announcement effect.** Reported NW t = 3.42.
+Plain OLS gives **t = 1.92**, and the HAC correction shrinks the standard error
+below OLS. A 1000-draw randomization test on the local projection gives a placebo
+sd 1.9x the Newey-West one and **p = 0.069** at h = 0 (h = 2: p = 0.116;
+h = 5: p = 0.918). Kish effective n of the daily regressor is **9.6**, not 673.
+The effect does survive leave-one-out (b from +0.067 to +0.093, min |t| = 2.59),
+dropping all three overlapping deal pairs (b = +0.090), and a wild cluster
+bootstrap with the null imposed (p = 0.017).
+
+**Two further problems for the mechanism.** Treasury coupon duration supply,
+roughly 10x larger, carries −0.0014 (t = −0.15) in the identical regression where
+AI supply carries +0.085. Duration absorption does not predict that. And ΔACM
+TP10 is 96% explained by five PCs of the same zero curve (64% by Δ10y alone), so
+the dependent variable is close to a fixed linear function of the long-end move
+it is asked to explain. A hedging flow in the cash market would produce this
+pattern without any change in required risk compensation.
+
+**Reverse causality: no evidence, weak test.** Logit of announcement timing on
+prior 5d and 20d yield changes, 60-day level percentile and VIX gives pseudo-R²
+= 0.0157, LR p = 0.676. Mean 10Y level on issuance days 4.270% vs 4.310%
+otherwise. At n = 16 this rules out very little, and it does not test the things
+treasurers actually watch: credit spreads, swap spreads, blackout windows.
+
+**Scope of the 30 bp claim actually tested.** AI 10-year-equivalent duration is
+3.9% of Treasury coupon duration supply in 2025 and 9.4% in 2026. Agency MBS is
+**not tested at all**; no free daily or monthly series was reachable. Nor is the
+non-AI majority of IG corporate, nor private-credit and ABS data-centre
+financing. If MBS supply correlates with corporate supply, the reported
+coefficient absorbs it and is biased up.
+
+**The 15.6 bp figure, precisely.** 0.0802841415 bp/$bn x 194.30120 $bn =
+15.5993 bp. The coefficient is estimated on all 16 USD deals and applied to all 8
+2026 USD deals, so there is no jumbo/all mismatch. It is a **sum of 8 separate
+one-day impacts**, each decaying to zero within a week, not a level effect. The
+eight never coexist: peak simultaneous decayed stock is 60.8 $bn, so the largest
+instantaneous level effect available in 2026 is 4.9 bp.
+
+**Specification search.** The estimator that produced X did not exist until the
+specified one returned a null with control-fit R² = 1.000. Also chosen after
+seeing data: USD-only filtering, GSW over the par grid, the >30y tenor cap, the
+`is_prose` and per-issuer boilerplate filters, local projections, and the
+recovery experiment itself. `regression.py` runs 16 specifications and the body
+highlights the significant one. No multiplicity correction is applied anywhere.
