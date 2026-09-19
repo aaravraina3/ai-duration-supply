@@ -133,7 +133,30 @@ Fed path is controlled for.
 roughly 32 monthly observations for 2024-2026. Thin. Plan the inference for that
 up front rather than discovering it later.
 
-**Status: OPEN.**
+**Result (19 Sep).** The naive pickup regression gives +65.7 (t = 8.2), the
+OPPOSITE of the prediction, and it is mechanical: `pickup` contains UST10 and
+TP10 is 64% a function of the 10Y. Decomposed into the non-US half,
+`hurdle = JGB10 + (USD3m - JPY3m)`:
+
+| Spec | coef | t | R² |
+|---|---|---|---|
+| dTP10 ~ d_hurdle | +0.308 | 1.66 | 0.091 |
+| + US expectations | +0.300 | 1.34 | 0.091 |
+| + US expectations + 2Y | **-0.017** | **-0.10** | 0.691 |
+| orthogonalised hurdle | +0.300 | 1.33 | 0.069 |
+
+Adding the US 2Y takes R² from 0.09 to 0.69 and the hurdle coefficient to zero.
+The US front end explains the term premium moves; Japan adds nothing.
+
+The hurdle also **fell 31bp** over the sample (557 to 526), because collapsing
+hedge cost (517 to 232bp) more than offset rising JGB yields (40 to 294bp). Even
+at face value the implied contribution is -9bp against a realised +152bp move.
+
+**Status: NOT SUPPORTED.** The popular repatriation narrative does not survive a
+control for the US front end. Caveat: n=39 monthly, cross-currency basis omitted,
+and the hedged pickup is negative in 39 of 39 months while Japan kept holding
+$1T, so the CIP framework may be the wrong lens rather than the finding being
+right.
 
 ---
 
@@ -270,3 +293,24 @@ daily series. Corpus is 716 effectively distinct passages after 0.90 dedup, from
 68 filings; 82% of the raw corpus has a near-duplicate. Produced a wrong-signed
 coefficient (t = −1.20) and was **beaten by a plain decayed passage count**
 (t = +2.86). Retired.
+
+
+---
+
+## Strategy
+
+### S1. The announcement effect is monetisable
+
+**Trade.** Buy duration at the close of announcement day, exit at t+5, modelled
+as a 10Y note with 3bp round-trip cost.
+
+**Falsified if** the walk-forward Sharpe is indistinguishable from zero, or the
+result depends on a small number of trades.
+
+**Result.** In-sample Sharpe 0.87, t = 1.24, bootstrap 95% CI [-0.50, +2.55].
+Walk-forward Sharpe 0.55, hit rate 50%. **0 of 16 leave-one-out variants reach
+t > 2.** Top 3 trades are 102% of total P&L. Holding-period Sharpe oscillates
+from -0.88 (2d) to +0.87 (5d) with no monotonic structure, which is selection
+rather than decay. At zero cost it is still not significant.
+
+**Status: REJECTED.** Full writeup in `06_STRATEGY.md`.
