@@ -249,5 +249,3 @@ The useful habit I came away with is to **spend an afternoon testing whether you
 The second habit is to let the randomization test win. Analytical standard errors are assumptions wearing a lab coat. Shuffling your event dates a thousand times is not.
 
 Code, data and the full audit are at [github.com/aaravraina3/ai-duration-supply](https://github.com/aaravraina3/ai-duration-supply). Everything is from free sources: FRED, the Fed Board, the New York Fed, SEC EDGAR, BLS and Treasury Fiscal Data. The `research/` folder has the hypothesis log with statuses, including the ones that died.
-
-*Aarav Raina is an undergraduate at Northeastern University. He likes rates, market microstructure, and finding out his own results are wrong.*
