@@ -314,3 +314,29 @@ from -0.88 (2d) to +0.87 (5d) with no monotonic structure, which is selection
 rather than decay. At zero cost it is still not significant.
 
 **Status: REJECTED.** Full writeup in `06_STRATEGY.md`.
+
+
+---
+
+### H11. Weak Treasury auction demand raises the term premium
+
+**Why.** H4 used auction SIZE, which has been constant since May 2026, so its
+null was uninformative. Demand metrics vary every auction even when size does
+not.
+
+**Predictions, written before running.** Bid-to-cover coefficient negative,
+dealer share positive, tail positive.
+
+**Result (23 Sep).** Bid-to-cover surprise **-4.49 (t = -1.79)**, and
+-6.81 (t = -1.96) alongside dealer share. Randomization test **p = 0.0705**, the
+same marginal significance as the corporate channel. Concentrated at 7-10y
+auctions (-14.85, t = -2.77) and absent at 2-5y and 20-30y, which matches the
+10-year dependent variable. Dealer share flips sign between specifications and
+is unusable. The tail proxy is **contaminated** (R2 = 0.390 with the same-day 10Y
+move) and discarded. Decays by half within one business day.
+
+The AI coefficient is unchanged when auction demand is included: +0.0802
+(t = 3.56).
+
+**Status: SUPPORTED, marginally.** This supersedes H4. Full detail in
+`08_LOG_2026-09-23.md`.

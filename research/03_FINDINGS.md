@@ -98,6 +98,22 @@ every horizon, and the buyback effect concentrates in the sector Treasury
 operates in. That joint pattern is harder to produce by chance than one
 significant cell.
 
+**B5. Weak auction demand raises the term premium.** NEW, 23 Sep. Bid-to-cover
+surprise carries **-4.49 (t = -1.79)**, randomization p = 0.0705, concentrated at
+7-10y auctions (-14.85, t = -2.77) and absent elsewhere. A one-standard-deviation
+weak auction is worth **+0.50 bp**, against +1.76 bp for a $25B AI deal, but
+Treasury runs roughly 84 coupon auctions a year against 5.9 AI deals. Decays by
+half in one business day. Confidence **C** alone, **B** as part of the pattern in
+B3/B4. The tail proxy was contaminated (R2 = 0.390 with the same-day move) and
+is not used.
+
+**B6. Three flows, three correct signs.** Corporate issuance adds duration and
+raises the term premium (+0.080/$bn). Treasury buybacks remove it and lower it
+(-0.180/$bn). Weak auction demand makes duration harder to place and raises it
+(-4.49 per unit bid-to-cover). All three are marginal individually and all three
+are transitory. The coherence across independent flows is the evidence, not any
+single t-statistic.
+
 ---
 
 ## C. What cannot be measured here
@@ -161,7 +177,8 @@ K=3 (−4332.1 vs −4332.5).
 filings; 82% of the raw corpus has a near-duplicate. Wrong-signed coefficient
 (t = −1.20) and **beaten by a plain decayed passage count** (t = +2.86).
 
-**E3. "Treasury supply does nothing, so duration absorption is false."** I made
+**E3. "Treasury supply does nothing, so duration absorption is false."** (now
+replaced by a positive result, see B5) I made
 this argument from a coefficient of −0.0014 (t = −0.15). It is now withdrawn.
 Treasury has held coupon auction sizes constant since May 2026, so the regressor
 is close to a constant over much of the sample and a null on it is not evidence.
