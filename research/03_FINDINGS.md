@@ -10,7 +10,7 @@ Confidence labels:
 - **C** suggestive, does not clear conventional significance
 - **X** established negative result
 
-Last updated 19 September 2026.
+Last updated 23 September 2026. B4 refuted, B6 downgraded.
 
 ---
 
@@ -60,8 +60,14 @@ channels coexist in one regression with the right signs: issuance **+0.0835**
 (t = +3.62), buybacks **−0.168** (t = −1.30). Randomization p = 0.34.
 Confidence **C** on its own, but see B4.
 
-**B4. The effect is largest where the curve is least mechanically tied to the
-cash 10Y.** NEW, and the strongest mechanism evidence in the project.
+**B4. REFUTED 23 Sep, see `09_ADVERSARIAL_REVIEW.md` F1.** The orthogonality
+below is a Svensson artifact. On FRED CMT points the 20y10y forward has R² = 0.623
+with the cash 10Y, and the buyback effect there shrinks from −0.665 to −0.275.
+The AI coefficient survives (+0.1326, t = 3.35) but no longer separates flow
+from premium. Kept below as originally written.
+
+~~The effect is largest where the curve is least mechanically tied to the
+cash 10Y.~~ Originally described as the strongest mechanism evidence in the project.
 
 Announcement-day response by curve segment, AI issuance:
 
@@ -107,7 +113,11 @@ half in one business day. Confidence **C** alone, **B** as part of the pattern i
 B3/B4. The tail proxy was contaminated (R2 = 0.390 with the same-day move) and
 is not used.
 
-**B6. Three flows, three correct signs.** Corporate issuance adds duration and
+**B6. Downgraded 23 Sep.** Sign coherence has probability 0.125 under the null,
+and Fisher-combining the three randomization p-values gives p = 0.046 before any
+multiplicity correction. See `09_ADVERSARIAL_REVIEW.md` F2.
+
+**B6 (original). Three flows, three correct signs.** Corporate issuance adds duration and
 raises the term premium (+0.080/$bn). Treasury buybacks remove it and lower it
 (-0.180/$bn). Weak auction demand makes duration harder to place and raises it
 (-4.49 per unit bid-to-cover). All three are marginal individually and all three

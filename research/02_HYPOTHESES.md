@@ -267,7 +267,15 @@ Buybacks reverse the sign across every segment and are strongest at 20y10y
 (−0.668, t = −1.97 at h=0; −1.028, t = −2.81 at h=2), which is the sector
 Treasury actually buys.
 
-**Status: LARGELY REJECTED.** The pure hedging-flow explanation does not fit a
+**Status, revised 23 Sep: OPEN.** The result above does not survive. The 20y10y
+forward was built from GSW, a Svensson fit that is weakly constrained beyond 20
+years. Rebuilt from observed FRED CMT points, the same forward has R² = **0.623**
+with the cash 10Y, not 0.063, and the two constructions correlate at only 0.384.
+The orthogonality was an extrapolation artifact, so this test does not separate
+flow from premium. The AI coefficient survives on CMT (+0.1326, t = 3.35); the
+interpretation does not. See `09_ADVERSARIAL_REVIEW.md` F1.
+
+Original status, kept for the record: **LARGELY REJECTED.** The pure hedging-flow explanation does not fit a
 response that is bigger in far forwards than in cash and that reverses under
 duration removal in the matching sector. Caveat: this is 30 tests with no
 multiplicity correction, so the defence is the coherence of the pattern rather
