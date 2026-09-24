@@ -40,7 +40,7 @@ def gsw():
     d = pd.read_csv(p, skiprows=hdr)
     d["Date"] = pd.to_datetime(d["Date"])
     d = d.set_index("Date").sort_index()
-    keep = [c for c in d.columns if c.startswith(("SVENY", "SVENF", "BETA", "TAU"))]
+    keep = [c for c in d.columns if c.startswith(("SVENY", "SVENPY", "SVENF", "BETA", "TAU"))]
     d = d[keep].apply(pd.to_numeric, errors="coerce")
     d.to_csv(PROC / "gsw.csv")
     print(f"GSW: {d.shape}, {d.index.min().date()} -> {d.index.max().date()}")

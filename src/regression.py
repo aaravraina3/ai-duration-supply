@@ -21,7 +21,7 @@ def nw_lags(T):
 
 def treasury_supply():
     """Daily coupon-auction size, and duration-weighted 10y equivalents."""
-    d = json.load(open(RAW / "fiscal_auctions.json"))
+    d = json.load(open(RAW / "auctions_full.json"))   # same file auctions.py reads
     a = pd.DataFrame(d["data"])
     a = a[a.security_type.isin(["Note", "Bond"])].copy()
     a["auction_date"] = pd.to_datetime(a.auction_date)
@@ -70,13 +70,18 @@ def dataset():
     df["dTP10"] = acm.ACMTP10.diff() * 100
     df["dRN10"] = acm.ACMRNY10.diff() * 100
     df["dY10"] = acm.ACMY10.diff() * 100
-    df = df.join(S[["S", "dS"]]).join(D[["D", "dD"]]).join(P)
+    # NLP index and HMM posteriors are retired (see research/09 m8, m9). They are
+    # left-joined so they can never truncate the core sample again: a stale
+    # regime file silently cut the main regression at 2026-09-11.
+    df = df.join(D[["D", "dD"]]).join(S[["S", "dS"]], how="left").join(P, how="left")
     df["dbe"] = fred.T10YIE.reindex(df.index).ffill().diff() * 100
     df["dvix"] = fred.VIXCLS.reindex(df.index).ffill().diff()
     df["doil"] = 100 * np.log(fred.DCOILWTICO.reindex(df.index).ffill()).diff()
     for c in ["auc_amt", "auc_10y", "auc_surprise"]:
         df[c] = T[c].reindex(df.index).fillna(0.0)
-    return df.dropna()
+    core = ["dTP10", "dRN10", "dY10", "D", "dD", "dbe", "dvix", "doil",
+            "auc_amt", "auc_10y", "auc_surprise"]
+    return df.dropna(subset=core)
 
 
 CTRL = ["dbe", "doil", "dvix", "auc_surprise", "auc_10y"]
@@ -92,8 +97,10 @@ def run(df, supply="S", regime=True, dep="dTP10", ctrl=CTRL):
     for c in ctrl:
         X[c] = df[c]
     X = sm.add_constant(X)
-    m = sm.OLS(df[dep], X).fit(cov_type="HAC",
-                               cov_kwds={"maxlags": nw_lags(len(df)), "use_correction": True})
+    ok = X.notna().all(axis=1) & df[dep].notna()   # specs using retired inputs run on their own sample
+    X, yv = X[ok], df.loc[ok, dep]
+    m = sm.OLS(yv, X).fit(cov_type="HAC",
+                               cov_kwds={"maxlags": nw_lags(len(yv)), "use_correction": True})
     return m
 
 

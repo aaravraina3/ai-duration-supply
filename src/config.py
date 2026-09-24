@@ -15,7 +15,8 @@ SEC_UA = "Northeastern University Research raina.aa@northeastern.edu"
 
 # ---------------------------------------------------------------- sample
 SAMPLE_START = "2024-01-01"
-SAMPLE_END   = "2026-09-16"     # last full FRED business day at build time
+SAMPLE_END   = "2026-09-22"     # last ACM + FRED day. GSW lags to 2026-09-18.
+# Every module reads this. Hardcoded end dates are how the samples drifted apart.
 
 # ---------------------------------------------------------------- universe
 ISSUERS = {

@@ -5,6 +5,8 @@ freely available, so the forward-capex language is taken from the MD&A and
 liquidity sections of the periodic reports instead, which is the same content
 under audit. Prospectus use-of-proceeds text comes from the 424B files already on disk.
 """
+import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+
 import json, re, time, pathlib
 import pandas as pd, requests
 from bs4 import BeautifulSoup

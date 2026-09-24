@@ -17,17 +17,22 @@ RULE (v3, the only construction that is both hedged and free of the intercept)
     z > 0  (bigger than typical deal)  -> STEEPENER  (short 10Y vs 2Y, DV01 matched)
     z < 0  (smaller than typical deal) -> FLATTENER (long 10Y vs 2Y, DV01 matched)
 
-WHY THE HEDGE RATIO IS 0.664 AND NOT FITTED HERE
-It comes from abnormal.py, estimated on 625 NON-event windows. Refitting it on
-the event sample would be the leak this whole project has been trying to avoid.
+HEDGE RATIO
+Re-estimated at run time from the normal relation in abnormal.py, on non-event
+windows up to today. For a live signal that is correct: all of it is the past.
 """
 import json, sys, time, datetime as dt
 import numpy as np, pandas as pd, requests
 from config import PROC, RAW, SEC_UA, ISSUERS
 from eventlist import mod_duration, DUR10
 
-BETA = 0.664
 HOLD = 5
+# Hedge ratio: for a LIVE signal, all data up to today is legitimately "prior", so
+# the as-of estimate is the right one. It is computed at run time rather than
+# hard-coded, so it can never silently go stale or leak into a backtest.
+def current_beta():
+    import strategy2 as S2
+    return S2.beta_asof(pd.Timestamp.today().normalize())
 LOOKBACK_DAYS = 10
 
 HEALTH = """
@@ -35,9 +40,9 @@ HEALTH = """
   STATISTICAL HEALTH OF THIS SIGNAL   (read before sizing anything)
     backtested N                16 events
     signal-to-noise             0.22  (2.56bp effect vs 11.36bp noise)
-    v3 Sharpe after costs       +0.31
+    v3 Sharpe after costs       +0.27  (strategy2.trades_v3, t = 0.33)
     bootstrap 95% CI on Sharpe  includes zero
-    leave-one-out variants t>2  0 of 15
+    leave-one-out variants t>2  0 of 14
     configurations tried        30 on the same 16 events
     events needed for t=2       ~80
   The backtest cannot distinguish this rule from noise. Position size
@@ -75,7 +80,8 @@ def position_for(size10, prior_sizes):
     scale = abs(z) / np.mean(np.abs(np.array(prior_sizes) - np.mean(prior_sizes)))
     side = "STEEPENER (short 10Y / long 2Y, DV01 matched)" if z > 0 else \
            "FLATTENER (long 10Y / short 2Y, DV01 matched)"
-    return dict(z=z, units=scale, side=side, hedge_ratio=BETA, hold_days=HOLD), None
+    return dict(z=z, units=scale, side=side, hedge_ratio=round(current_beta(), 3),
+                hold_days=HOLD), None
 
 
 def main():

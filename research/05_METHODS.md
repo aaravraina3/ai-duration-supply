@@ -31,10 +31,12 @@ notional treats them as identical and throws away the thing being tested.
 coupon under a par assumption, which is right at issue and drifts afterwards.
 Immaterial here because everything is measured on the announcement day.
 
-**One decision that mattered more than expected.** Floating-rate tranches get
-0.25y duration, not their maturity, because they reset quarterly. Amazon's $37B
-March deal has $2.75B of floaters. Treating them as 2-3 year duration would have
-injected phantom duration into the largest event in the sample.
+**A decision that turned out not to matter.** Floating-rate tranches get 0.25y
+duration, not their maturity, because they reset quarterly. I first wrote that
+this "mattered more than expected." Then I checked: only 7 of 103 tranches are
+floaters ($5.75B), and moving their duration anywhere from 0 to 2 years changes
+the day-0 coefficient from +0.0813 to +0.0807. Correct in principle, immaterial
+in this sample.
 
 ---
 
@@ -53,7 +55,7 @@ horizon, with no restriction on the dynamics.
 **Alternatives rejected.**
 - *VAR with an impulse response.* More efficient if the lag structure is right,
   and catastrophically wrong if it is not, because misspecification at short lags
-  propagates into every horizon of the IRF. With 673 daily observations and a
+  propagates into every horizon of the IRF. With 680 daily observations and a
   regressor that is 16 lumpy shocks, I had no basis for choosing a lag order.
 - *A single regression on a decayed stock.* I actually did this first and it
   nearly cost me the finding. A decayed stock mean-reverts, so the change in it
@@ -73,14 +75,14 @@ and overlapping windows make the residuals autocorrelated by construction. I set
 **Chosen.** Report both, believe the randomization test.
 
 **Why.** They disagreed badly. On the announcement effect, Newey-West gives
-t = 3.42 and p < 0.001. A 1000-draw randomization test, reassigning event dates
-while holding the shock sizes fixed, gives **p = 0.069**, with a placebo standard
-error 1.9x the Newey-West one.
+t = 3.47 and p < 0.001 (unified sample to 2026-09-22). A 2000-draw randomization
+test, reassigning event dates while holding the shock sizes fixed, gives
+**p = 0.078**, with a placebo standard error about 1.9x the Newey-West one.
 
 The tell that something was wrong: **the HAC standard error was smaller than the
-OLS standard error** (0.0235 against 0.0443). HAC is a correction for serial
+OLS standard error** (0.0230 against 0.0442). HAC is a correction for serial
 correlation. When it shrinks your error bars, it is exploiting negative
-autocorrelation in the score, and with a regressor whose Kish effective n is 9.6,
+autocorrelation in the score, and with a regressor whose Kish effective n is 9.7,
 that is not a correction I trust.
 
 **Alternatives rejected.**
@@ -173,35 +175,61 @@ point specifically cheapened." I relabelled the output accordingly.
 
 ---
 
-## 7. Decomposing the curve to separate flow from risk premium
+## 7. Separating flow from risk premium, and the first attempt that failed
 
-**Chosen.** Run the same event study on the 10Y spot, 5y5y, 10y10y and 20y10y
-forwards, computed from the zero curve as
+**The problem.** ACM TP10 is 96% explained by five PCs of the same curve and 64%
+by the 10Y alone. So dealers selling cash 10Ys to hedge a new deal move the
+measured "term premium" with no change in required compensation. I needed a
+test the hedge does not touch.
+
+**First attempt, refuted.** Run the event study on forwards built from the GSW
+zero curve,
 
 ```
 f(n1, n2)  =  (n2 * y(n2)  -  n1 * y(n1))  /  (n2 - n1)
 ```
 
-**Why.** ACM TP10 is 96% explained by five PCs of the same curve and 64% by the
-10Y alone. So a dealer selling cash 10Ys to hedge a deal moves the measured "term
-premium" mechanically, with no change in required compensation. I needed a
-dependent variable the hedge does not touch.
+and lean on the 20y10y forward, which looked nearly orthogonal to the cash 10Y
+(R² 0.06) while still carrying the effect. That was an artifact. GSW is a Svensson
+fit with few bonds past 20 years, so its far forward is mostly the fit's own
+parameter noise. Built from observed CMT points, the same forward has R² 0.623
+with the 10Y, and the two versions correlate at 0.384. This is exactly the lesson
+of §5 and I did not apply it. Forwards are now built from CMT points, and the GSW
+versions are kept only to show the problem (fig12).
 
-The 20y10y forward has an **R² of 0.103** with the cash 10Y. It is nearly
-orthogonal to where a rate lock would be placed.
+**Chosen instead: the on-the-run spread.**
 
-**Result.** The effect is *larger* in the far forwards than in cash (5y5y/spot
-ratio 1.17) and present at 20y10y with t = 3.18. Buybacks reverse the sign
-everywhere and bite hardest at 20y10y, the sector Treasury actually buys.
+```
+otr(10)  =  CMT par yield(10)  -  GSW par yield(10)     [SVENPY10]
+```
+
+CMT is built from on-the-run securities. GSW is fit only to seasoned bonds and
+explicitly excludes on-the-runs. Rate-lock hedges around new corporate deals sell
+the most liquid Treasuries, which are the on-the-runs. So a hedging flow should
+cheapen on-the-runs against seasoned paper and widen this spread on deal days; a
+repricing of duration risk moves both together and leaves it alone. I wrote the
+predictions down before running it. The spread moves +0.004 bp per $bn (t 0.77),
+4% of the yield move. At 10 years the GSW fit is well constrained, unlike the far
+forward, so this is the maturity where the comparison is cleanest.
+
+**Also chosen: real yields, without the breakeven control.** A nominal-only flow
+should move nominal yields more than TIPS and widen breakevens. Real yields move
+0.87 times the nominal response and breakevens do not move.
+
+**What neither test rules out.** Futures-based hedging. The 10-year note future
+delivers the cheapest-to-deliver issue, usually a seasoned note that GSW also
+fits, so futures selling would move both legs of the spread together.
 
 **Alternatives rejected.**
 - *Swap spreads.* The cleanest separation, since a cash hedge moves Treasuries
-  against swaps. No free daily swap curve found.
-- *MOVE index.* Would test whether rate vol repriced. Not free.
+  against swaps. Daily history exists at BlueGamma behind an account signup, which
+  I did not create.
+- *Intraday Treasury prices around pricing time.* Would show whether the move is
+  concentrated in the pricing window. Not free.
+- *MOVE index.* Would test whether rate volatility repriced. Not free.
 
-**Cost.** 30 tests (5 dependents x 3 horizons x 2 shocks) with no multiplicity
-correction. The defence is the coherence of the sign pattern, not any single
-t-statistic, and I say so wherever it is cited.
+**Cost.** Several more tests with no multiplicity correction. Both are reported
+as evidence against one alternative, not as proof of the mechanism.
 
 ---
 
@@ -278,8 +306,8 @@ as the training minimum.
 Three things I now do by default in this project:
 
 **Kish effective sample size** for lumpy regressors. The daily regression has
-T = 673 but 95% of the regressor's variation sits in 16 days, giving an effective
-n of **9.6**. Quoting n = 673 anywhere would be misleading.
+T = 680 but 95% of the regressor's variation sits in 16 days, giving an effective
+n of **9.7**. Quoting n = 680 anywhere would be misleading.
 
 ```
 n_eff  =  (sum x_i^2)^2  /  sum x_i^4
@@ -287,12 +315,12 @@ n_eff  =  (sum x_i^2)^2  /  sum x_i^4
 
 **Wild cluster bootstrap with the null imposed** when clustering on few groups.
 17 episode clusters is well inside the range where cluster-robust standard errors
-are unreliable. Gives p = 0.017 against a cluster-robust t of 3.48.
+are unreliable. Gives p = 0.012 against a cluster-robust t of 3.72.
 
 **Leave-one-out on everything.** It has caught two results that were single
-observations: X = +0.82bp flips sign without Meta 2024-08-07, and the strategy
+observations: X = +0.86bp flips sign without Meta 2024-08-07, and the strategy
 never reaches t > 2 in any of 16 LOO variants. The local projection coefficient
-passed (+0.067 to +0.093, min |t| = 2.59), which is why it is the one result I
+passed (+0.068 to +0.094, min |t| = 2.63), which is why it is the one result I
 still stand behind.
 
 ---
@@ -312,3 +340,65 @@ announcement timestamp.
 
 **Honest note.** Costs are not what kills this strategy. At zero cost the Sharpe
 is 1.01 and it is still statistically indistinguishable from zero.
+
+---
+
+## 12. Placebo dates matched on timing, not drawn uniformly
+
+**Chosen.** For each real deal, compute its lag in business days since the last
+FOMC decision, CPI print or payrolls release. Each placebo draw replaces every
+real deal with a date at the same lag, drawn from days at least five sessions
+from any real deal, and gives it the real deal's size. A stricter version also
+matches the type of the last release.
+
+**Why.** Deals are not uniform in time. Treasurers price in the quiet after a
+macro print: 9 of 16 deals sit 1-3 days after a release. The term premium drifts
+up after releases in this sample (+0.72 bp on release days, +0.72 bp at lag 2).
+A uniform placebo cannot see that; a matched one inherits it, so any effect that
+survives matching is not post-release drift.
+
+**Result.** Matched placebo mean +0.0001 at day 0. p moves from 0.078 to 0.0825
+(lag) and 0.1095 (lag and type). About half the day-2 response is reproduced by
+the stricter placebo, so that part of the peak was drift.
+
+**Cost.** Matching on lag and type leaves few candidate dates in some cells; where
+a cell is empty the draw falls back to lag-only matching.
+
+---
+
+## 13. Checking controls for being functions of the outcome
+
+**Chosen.** For every control, ask whether it is built from the dependent
+variable, and test whether the shock moves it.
+
+**Why.** The breakeven is nominal minus real by construction. Controlling for it
+while regressing real yields makes the real and nominal coefficients identical at
+day 0, which is what the first TIPS test returned (+0.0971, t 3.48 in both). That
+was an identity, not a finding.
+
+**Result.** The AI shock does not move breakevens (+0.015, t 0.82), so the
+control is not absorbing the effect. Dropping it raises the day-0 TP10
+coefficient to +0.095 (t 4.93). The headline keeps the control because it was
+specified in advance.
+
+---
+
+## 14. A frozen held-out test instead of more corrections
+
+**Chosen.** Freeze one specification in `src/holdout.py`, hash it, record the hash
+in `10_PREREGISTRATION.md`, and test it only on deals announced after 2026-09-24.
+
+**Why.** Several hundred test statistics were computed on the in-sample data. No
+correction applied after the fact recovers what a search destroys, and choosing
+which correction to apply is itself another degree of freedom. An untouched
+sample is the only repair.
+
+**Alternatives rejected.**
+- *Bonferroni or Holm on the existing results.* Honest, but it just says nothing
+  is significant, which is already known.
+- *A held-out split of the existing sample.* Every choice in the project was made
+  looking at all of it, so no part of it is held out in the sense that matters.
+
+**Cost.** The test needs 32 deals for 80% power. At the 2026 pace that is about
+three years. I first set the gate at 14, which has 49% power, and changed it
+before any held-out data existed.

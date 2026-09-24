@@ -6,6 +6,8 @@ loading) so indices are comparable across runs. Smoothed posteriors are used for
 description only; anything that feeds a predictive regression uses FILTERED
 posteriors, which condition on the past alone.
 """
+import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+
 import numpy as np, pandas as pd
 from hmmlearn.hmm import GaussianHMM
 from config import PROC, HMM_K, HMM_RESTARTS, RANDOM_SEED

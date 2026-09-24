@@ -1,7 +1,10 @@
 """Is the supply-pressure index measuring text, or just counting filings?"""
+import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+
 import numpy as np, pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from config import PROC, NLP_HALFLIFE_DAYS
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import nlp as N
 
 idx, d, (pi, qi), (ndrop, nf), svd = N.build()

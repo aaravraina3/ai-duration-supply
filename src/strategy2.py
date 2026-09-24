@@ -15,8 +15,11 @@ THE FIX, AND WHY IT IS NOT DATA MINING
 Hedge the 2Y exposure and scale the position by deal size. Both choices are
 pinned by things decided before this backtest existed:
   - the hedge instrument is the 2Y because that is the control in abnormal.py
-  - the hedge ratio is 0.664 because that is the coefficient estimated there, on
-    NON-EVENT windows, so it never saw a trade
+  - the hedge ratio comes from the same normal relation, re-estimated at each trade
+    on windows that end BEFORE the trade (beta_asof). An earlier version used the
+    full-sample 0.664 and claimed it "never saw a trade"; true, but it did see the
+    future. Fixed per review item M2. Estimates run 0.574 to 0.682 and the result
+    is unchanged, so the look-ahead was real but immaterial.
   - size scaling because the hypothesis is that the effect is proportional to
     duration supplied, which is what every regression in this project assumes
 
@@ -48,12 +51,46 @@ from config import PROC, RANDOM_SEED
 import curve as C
 
 MODDUR = 8.0
-BETA = 0.664            # from abnormal.py, fit on 625 non-event windows
+BETA = 0.664            # full-sample value, kept ONLY for comparison. Review item M2:
+                        # it was fit on non-event windows spanning all of 2024-2026,
+                        # so a 2024 trade using it saw 2026 data. Backtests now use
+                        # beta_asof(), fit only on windows that end before the trade.
+MIN_WINDOWS = 120       # minimum history before a hedge ratio is trusted
 COST_BP = 6.0           # two legs, ~3bp each round trip
 HOLD = 5
 
 
-def trades(hold=HOLD, beta=BETA, cost=COST_BP, size_scaled=True, jumbo_only=False):
+_BETA_CACHE = {}
+
+
+def beta_asof(date, h=2):
+    """Hedge ratio of the 10Y on the 2Y using ONLY data strictly before `date`.
+    Same normal relation as abnormal.py: h-day changes, dy10 ~ d2y + dbe, fit on
+    windows that do not overlap any deal announced before `date`."""
+    key = (pd.Timestamp(date), h)
+    if key in _BETA_CACHE:
+        return _BETA_CACHE[key]
+    import abnormal as A, statsmodels.api as sm
+    df, tn = A.panel()
+    W = A.build_windows(df, tn, h=h)
+    W = W[W.index < pd.Timestamp(date)]
+    ev = pd.read_csv(PROC / "deals_all.csv", parse_dates=["announce"])
+    bad = set()
+    for a in ev.announce[ev.announce < pd.Timestamp(date)]:
+        p = W.index.searchsorted(a)
+        bad |= {W.index[j] for j in range(max(0, p - h - 1), min(len(W), p + h + 2))}
+    est = W[~W.index.isin(bad)]
+    if len(est) < MIN_WINDOWS:
+        _BETA_CACHE[key] = np.nan
+        return np.nan
+    m = sm.OLS(est.dy10, sm.add_constant(est[["d2y", "dbe"]])).fit()
+    _BETA_CACHE[key] = float(m.params["d2y"])
+    return _BETA_CACHE[key]
+
+
+def trades(hold=HOLD, beta=None, cost=COST_BP, size_scaled=True, jumbo_only=False):
+    """beta=None means expanding-window beta_asof() at each trade (no look-ahead).
+    Pass a number to force a fixed hedge ratio, e.g. BETA for the old behaviour."""
     z = C.load_gsw(start="2024-01-01")
     y10, y2 = z[10.0] * 100, z[2.0] * 100
     ev = pd.read_csv(PROC / "deals_all.csv", parse_dates=["announce"])
@@ -67,12 +104,15 @@ def trades(hold=HOLD, beta=BETA, cost=COST_BP, size_scaled=True, jumbo_only=Fals
         if p >= len(idx) or p + hold >= len(idx):
             continue
         size = e.tenyr_equiv / 1e9
-        spread = (y10.iloc[p + hold] - y10.iloc[p]) - beta * (y2.iloc[p + hold] - y2.iloc[p])
+        b_use = beta_asof(e.announce) if beta is None else beta
+        if not np.isfinite(b_use):
+            continue                       # not enough history yet to set a hedge
+        spread = (y10.iloc[p + hold] - y10.iloc[p]) - b_use * (y2.iloc[p + hold] - y2.iloc[p])
         # steepener: profits when the 10Y cheapens vs the 2Y
         gross = spread * MODDUR
         scale = size / mean_size if size_scaled else 1.0
         rows.append(dict(announce=e.announce, issuer=e.issuer, size10=size,
-                         scale=scale, spread_bp=spread,
+                         scale=scale, spread_bp=spread, beta=b_use,
                          gross_bp=gross * scale, net_bp=gross * scale - cost * scale,
                          entry=idx[p], exit=idx[p + hold]))
     return pd.DataFrame(rows)
@@ -101,6 +141,24 @@ def boot(r, col="net_bp", n=10000, seed=RANDOM_SEED):
         sd = s.std(ddof=1)
         out.append(s.mean() / sd * np.sqrt(freq) if sd > 0 else np.nan)
     return np.array(out)
+
+
+def trades_v3(hold=HOLD, cost=COST_BP, beta=None):
+    """v3: trade only the size DIFFERENTIAL. Position proportional to
+    size - E[size], with E[size] the expanding mean of PRIOR deals, so the constant
+    in the spread regression (-5.77 bp, which made a one-way steepener lose on 13 of
+    16 deals) is not taken. Previously this lived only in an ad-hoc script; it is a
+    function now so the Sharpe quoted in the writeups is reproducible. The ad-hoc
+    version gave +0.31 after costs; this one gives +0.27, because it also stops
+    normalising positions by the full-sample mean size."""
+    base = trades(hold=hold, beta=beta, cost=0.0, size_scaled=False).sort_values("announce")
+    base = base.reset_index(drop=True)
+    prior_mean = base.size10.expanding().mean().shift(1)
+    z = base.size10 - prior_mean
+    scale = z / z.abs().expanding().mean().shift(1)
+    base["scale"] = scale
+    base["net_bp"] = scale * base.spread_bp * MODDUR - cost * scale.abs()
+    return base.dropna(subset=["net_bp"])
 
 
 def walk_forward(min_train=6, holds=(2, 3, 5, 8)):

@@ -15,7 +15,7 @@ Pre-registered before running (see research/02_HYPOTHESES.md H7):
 Treasury doubled 10Y-30Y operation sizes to at least $4B effective 2026-09-09.
 """
 import json, numpy as np, pandas as pd, requests, statsmodels.api as sm
-from config import RAW, PROC, SEC_UA
+from config import RAW, PROC, SEC_UA, SAMPLE_END
 from eventlist import mod_duration, DUR10
 
 URL = ("https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/"
@@ -52,7 +52,39 @@ def build(edge=0.0):
     return d
 
 
-def daily_series(d, start="2024-01-01", end="2026-09-18"):
+def build_surprise():
+    """Review item M4. Operation dates and maximum sizes are announced before each
+    operation, so on the operation day only the FILL is news. 64.6% of 2024+
+    operations fill exactly to the announced maximum, so most of the par accepted
+    was anticipated and the raw series overstates the shock.
+
+    expected fill = expanding median of PRIOR fills in the same bucket (no look-ahead)
+    surprise      = accepted - max_announced x expected_fill,  in 10y-equivalents
+
+    Zero-fill operations are kept: nothing accepted against a positive maximum is
+    the largest possible negative surprise, and dropping them (as build() does)
+    would throw away exactly the informative cases."""
+    d = fetch()
+    d["operation_date"] = pd.to_datetime(d.operation_date)
+    d["par"] = pd.to_numeric(d.total_par_amt_accepted, errors="coerce").fillna(0.0)
+    d["mx"] = pd.to_numeric(d.max_par_amt_redeemed, errors="coerce")
+    d = d.dropna(subset=["mx"])
+    d = d[d.mx > 0].copy()
+    d["tenor"] = d.maturity_bucket.map(BUCKET_MID)
+    d = d.dropna(subset=["tenor"]).sort_values("operation_date")
+    d["fill"] = (d.par / d.mx).clip(0, 1)
+    d["exp_fill"] = d.groupby("maturity_bucket").fill.transform(
+        lambda x: x.shift(1).expanding(min_periods=3).median())
+    d["exp_fill"] = d.exp_fill.fillna(d.fill.expanding().median().shift(1)).fillna(1.0)
+    d["dur"] = d.tenor.map(lambda t: mod_duration(t, 4.5))
+    d["surprise_par"] = d.par - d.mx * d.exp_fill
+    d["ten10_surprise"] = d.surprise_par * d.dur / DUR10 / 1e9
+    d["ten10_expected"] = d.mx * d.exp_fill * d.dur / DUR10 / 1e9
+    d["is_long"] = d.maturity_bucket.isin(LONG_BUCKETS)
+    return d
+
+
+def daily_series(d, start="2024-01-01", end=SAMPLE_END):
     idx = pd.bdate_range(start, end)
     g = d[d.is_long].groupby("operation_date").ten10.sum()
     a = d.groupby("operation_date").ten10.sum()
@@ -147,4 +179,30 @@ if __name__ == "__main__":
         r = L.project(pnl, se, dep="TP10", hmax=0).iloc[0]
         print(f"    midpoint {e:+.0f}y: b={r.b:+.4f} t={r.t:+.2f}")
 
-    daily_series(d).to_csv(PROC / "buybacks_daily.csv")
+    # ---------------------------------------------------- surprise-only shock (M4)
+    print("\n" + "=" * 76)
+    print("SURPRISE COMPONENT ONLY (max size is pre-announced; only the fill is news)")
+    print("=" * 76)
+    su = build_surprise()
+    s24 = su[su.operation_date >= "2024-01-01"]
+    lg = s24[s24.is_long]
+    print(f"  long-bucket ops since 2024: {len(lg)}, fully filled {(lg.fill > 0.999).mean():.1%}")
+    print(f"  expected (anticipated) 10y-equiv : {lg.ten10_expected.sum():7.1f} $bn")
+    print(f"  surprise 10y-equiv, net           : {lg.ten10_surprise.sum():+7.1f} $bn "
+          f"(abs {lg.ten10_surprise.abs().sum():.1f})")
+    print(f"  share of the raw series that was news: "
+          f"{lg.ten10_surprise.abs().sum() / (lg.ten10_expected.sum() + 1e-9):.1%}")
+    idx = pd.bdate_range("2024-01-01", SAMPLE_END)
+    ssur = lg.groupby("operation_date").ten10_surprise.sum().reindex(idx).fillna(0.0)
+    ssur = ssur[ssur != 0]
+    ssur = ssur[ssur.index.isin(pnl.index)]
+    print(f"  non-zero surprise days in panel: {len(ssur)}")
+    print("  prediction: MORE duration removed than expected -> TP DOWN (negative b)")
+    for h in (0, 2, 5):
+        r = L.project(pnl, ssur, dep="TP10", hmax=h); r = r[r.h == h].iloc[0]
+        print(f"    h={h}: b={r.b:+.4f} t={r.t:+.2f}")
+    out = daily_series(d)
+    out["bb_long_surprise"] = lg.groupby("operation_date").ten10_surprise.sum() \
+        .reindex(out.index).fillna(0.0)
+    out.to_csv(PROC / "buybacks_daily.csv")
+    su.to_csv(PROC / "buybacks_surprise_detail.csv", index=False)

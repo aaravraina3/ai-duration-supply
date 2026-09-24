@@ -45,7 +45,9 @@ def spec_grid():
 
 
 def hmm_grid():
-    import regime, regression as R
+    import sys, pathlib
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent / 'archive'))
+    import regime, regression as R   # retired module, see archive/README.md
     out = []
     for Kk in (2, 3, 4):
         m, ll, desc, post, f, extras = regime.build(K=Kk)

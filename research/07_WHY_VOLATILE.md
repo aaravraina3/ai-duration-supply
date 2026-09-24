@@ -1,5 +1,10 @@
 # Why the numbers jump around
 
+*v3 figures updated 23 Sep. The original +0.31 came from an ad-hoc script that
+normalised positions by the full-sample mean deal size and used a full-sample
+hedge ratio, both small look-aheads. `strategy2.trades_v3()` removes both and
+gives +0.27. The conclusion does not change.*
+
 Four layers, smallest to largest. The fourth is the real answer.
 
 ---
@@ -70,7 +75,7 @@ real and the constant is against you.
 The correct construction harvests the slope alone, sizing the position by
 `size − E[size]` on an expanding-window mean so it never sees future deals. Long
 steepener on big deals, flattener on small ones. That gives Sharpe **+0.90 gross
-and +0.31 after 6bp of two-leg cost**, with 0 of 15 leave-one-out variants
+and +0.27 after 6bp of two-leg cost**, with 0 of 14 leave-one-out variants
 reaching t > 2.
 
 ---
@@ -83,7 +88,7 @@ Same 16 events, same hypothesis, three constructions:
 |---|---|---|---|
 | v1 | outright 10Y, 5 days | **+0.87** | +1.24 |
 | v2 | size-scaled 2s10s steepener | **−1.10** | −1.57 |
-| v3 | size-demeaned spread, expanding window | **+0.31** | +0.42 |
+| v3 | size-demeaned spread, expanding window | **+0.27** | +0.33 |
 
 A Sharpe swing of two full points from construction choices alone. Holding period
 does the same thing inside v1: −0.88 at 2 days, +0.87 at 5 days, −0.69 at 10

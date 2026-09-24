@@ -1,5 +1,11 @@
 # Trying to find AI debt in the Treasury curve
 
+> **Superseded.** This was the first narrative writeup, from 18 September. Several numbers below predate the adversarial review and
+> the fixes of 23 September 2026. Current numbers are in
+> [`research/03_FINDINGS.md`](research/03_FINDINGS.md); the long-form writeup is
+> [`POST.md`](POST.md).
+
+
 Notes on a project where most of the work was figuring out which questions the
 data could actually answer.
 

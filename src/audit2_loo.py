@@ -51,7 +51,7 @@ for a in allsh.index:
     rows.append((str(a.date()), allsh[a], b, t))
 r = pd.DataFrame(rows, columns=["dropped", "size_10y_bn", "b", "t"]).sort_values("b")
 print(r.to_string(index=False, float_format=lambda v: f"{v:8.4f}"))
-print(f"\n  range of b: {r.b.min():+.4f} to {r.b.max():+.4f}  (baseline +0.0803)")
+print(f"\n  range of b: {r.b.min():+.4f} to {r.b.max():+.4f}  (baseline {b_at(allsh)[0]:+.4f})")
 print(f"  range of t: {r.t.min():5.2f} to {r.t.max():5.2f}")
 print(f"  min |t| across LOO: {r.t.abs().min():.2f} -> "
       f"{'survives' if r.t.abs().min() > 1.96 else 'DOES NOT survive'} at 5% in every LOO fit")

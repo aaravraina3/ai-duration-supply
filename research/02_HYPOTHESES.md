@@ -11,6 +11,10 @@ the data it needs, and a status. Status values:
 
 Anything marked OPEN has no result attached to it yet. Do not cite OPEN rows.
 
+**All statuses are exploratory.** See `10_PREREGISTRATION.md`. Current numbers
+live in `03_FINDINGS.md`; where a result below differs from that file, the
+findings file wins.
+
 ---
 
 ## Tested
@@ -30,6 +34,13 @@ leave-one-out (+0.067 to +0.093, min |t| = 2.59) and a wild cluster bootstrap
 
 **Status: WEAK.** Right sign, robust to sample perturbation, marginal on
 inference. Do not claim significance at 5%.
+
+**Update 23 Sep, unified sample to 2026-09-22 (n = 680).** b = +0.0812 (NW t 3.47,
+OLS t 1.97). The placebo was rebuilt so each fake date sits at the same lag after
+the last macro release as the real deal it replaces, since deals cluster 1-3 days
+after FOMC/CPI/NFP. Uniform p 0.078, matched on lag **p 0.0825**, matched on lag
+and release type p 0.1095. Post-release drift exists but does not produce the
+day-0 coefficient (matched placebo mean +0.0001). Status unchanged: WEAK.
 
 ---
 
@@ -192,6 +203,12 @@ Against the pre-registered decision rule: the coefficient is negative and its
 confidence interval on magnitude, [0, 0.43], contains the AI coefficient of
 0.080. **The duration channel survives.**
 
+**Update 23 Sep.** Operation dates and maximum sizes are announced beforehand;
+75% of long-bucket operations fill exactly to the maximum, so 11.5% of the raw
+series was news. A surprise-only shock (fill minus expected fill) keeps the sign:
+h = 0 −0.39 (t −0.79), h = 2 −1.45 (t −2.46), 18 events. Anticipated flows can
+still move prices (Lou, Yan and Zhang 2013), so both versions are reported.
+
 **Status: SUPPORTED ON SIGN, not on significance.** The buyback coefficient alone
 does not clear 5%. Its value is that it is the mirror the mechanism predicts, and
 it gets much stronger when split by curve segment (see H10).
@@ -266,6 +283,17 @@ where a rate lock would be placed, and the effect is present there at t = 3.18.
 Buybacks reverse the sign across every segment and are strongest at 20y10y
 (−0.668, t = −1.97 at h=0; −1.028, t = −2.81 at h=2), which is the sector
 Treasury actually buys.
+
+**Update 23 Sep, after fixing F1.** Two free tests replace the refuted one.
+(1) On-the-run spread, CMT minus GSW par at 10y: if hedgers sold on-the-runs it
+should widen on deal days. Pre-registered prediction: rise under flow, ~0 under
+premium. Result **+0.004 bp/$bn (t 0.77), 4% of the yield move**. (2) Real yields
+without the breakeven control: 0.87x the nominal response, breakevens flat
+(+0.015, t 0.82). Both cut against cash on-the-run hedging. Neither excludes
+futures hedging, whose cheapest-to-deliver is usually a seasoned note.
+
+**Status: PARTLY ADDRESSED.** The simplest flow story is rejected; the question
+is not closed without swap spreads or intraday data.
 
 **Status, revised 23 Sep: OPEN.** The result above does not survive. The 20y10y
 forward was built from GSW, a Svensson fit that is weakly constrained beyond 20
@@ -346,5 +374,9 @@ move) and discarded. Decays by half within one business day.
 The AI coefficient is unchanged when auction demand is included: +0.0802
 (t = 3.56).
 
-**Status: SUPPORTED, marginally.** This supersedes H4. Full detail in
-`08_LOG_2026-09-23.md`.
+**Update 23 Sep.** The 7-10y bucket was chosen after seeing the cross-section.
+The all-tenor local projection is now the primary: h = 0 **+4.50 (t 1.81)**,
+n = 220, against +14.76 (t 2.59) for the selected bucket. This replicates the
+auction price-pressure result of Lou, Yan and Zhang (2013).
+
+**Status: WEAK.** Supersedes H4. Detail in `08_LOG_2026-09-23.md`.

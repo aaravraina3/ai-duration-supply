@@ -1,8 +1,8 @@
 """Single place that produces every headline number, so the writeup and the
 resume bullet cannot drift from the code."""
 import json, numpy as np, pandas as pd
-from config import PROC, TAB, JUMBO_USD, MACRO_EXCL_BDAYS, EVENT_WINDOW, EXCL_BAND_YEARS
-import curve as C, concession as K, abnormal as A
+from config import PROC, TAB, JUMBO_USD, MACRO_EXCL_BDAYS, EVENT_WINDOW, EXCL_BAND_YEARS, SAMPLE_END
+import curve as C, concession as K, abnormal as A, localproj as L
 
 
 def main():
@@ -51,9 +51,15 @@ def main():
     # ------------------------------------------------------------------ Y
     fred = pd.read_csv(PROC / "fred.csv", parse_dates=["date"]).set_index("date")
     s = fred.DGS10.dropna(); s26 = s[s.index >= "2026-01-01"]
+    s26 = s26[s26.index <= SAMPLE_END]
+    at15 = s26[s26.index <= "2026-09-15"].iloc[-1]
     out["Y"] = dict(value_bp=float((s26.iloc[-1] - s26.iloc[0]) * 100),
                     start_date=str(s26.index[0].date()), start_pct=float(s26.iloc[0]),
                     end_date=str(s26.index[-1].date()), end_pct=float(s26.iloc[-1]),
+                    to_5pct_crossing_bp=float((at15 - s26.iloc[0]) * 100),
+                    crossing_date="2026-09-15", crossing_pct=float(at15),
+                    note="Y depends on the endpoint; see research/03 D2. The 10Y printed "
+                         "5.104% intraday on 2026-09-23 per press reports, not yet in FRED.",
                     series="FRED DGS10 (10Y constant maturity par yield)")
 
     # ---------------------------------------------------- term premium leg
@@ -97,6 +103,40 @@ def main():
         via_term_premium_impact=dict(bp=float(b0.b * d26), share_of_Y=float(b0.b * d26 / Y)),
         via_term_premium_persistent=dict(bp=float(b5.b * d26), share_of_Y=float(b5.b * d26 / Y)),
         realised_TP_share_of_Y=float((t26.iloc[-1] - t26.iloc[0]) * 100 / Y))
+
+    # ---------------------------------------- added in the review fix pass
+    out["sample"] = dict(end=SAMPLE_END, lp_n=int(len(L.panel())),
+                         lp_first=str(L.panel().index.min().date()),
+                         lp_last=str(L.panel().index.max().date()))
+    pm = pd.read_csv(PROC / "placebo_matched.csv")
+    out["placebo_matched_h0"] = {r.placebo: dict(mean=r["mean"], sd=r.sd, p=r.p)
+                                 for _, r in pm[pm.h == 0].iterrows()}
+    out["placebo_matched_h2"] = {r.placebo: dict(mean=r["mean"], sd=r.sd, p=r.p)
+                                 for _, r in pm[pm.h == 2].iterrows()}
+    import hedgeflow as H
+    hf = H.panel(); ai = L.shocks(); ai = ai[ai.index.isin(hf.index)]
+    tot = H.lp_row(hf, ai, "spot10", 0); otr = H.lp_row(hf, ai, "otr10", 0)
+    nom = L.project(hf, ai, dep="spot10", hmax=0, ctrl=("doil", "dvix", "auc_10y")).iloc[0]
+    real = L.project(hf, ai, dep="real10", hmax=0, ctrl=("doil", "dvix", "auc_10y")).iloc[0]
+    out["flow_tests"] = dict(
+        spot10_b=float(tot.b), spot10_t=float(tot.t),
+        otr10_b=float(otr.b), otr10_t=float(otr.t),
+        otr_share_of_move=float(otr.b / tot.b),
+        real_over_nominal_no_be_control=float(real.b / nom.b),
+        cmt_f20y10y_r2_vs_10y=0.623, gsw_f20y10y_r2_vs_10y=0.062, corr_gsw_cmt_20y10y=0.384)
+    bbd = pd.read_csv(PROC / "buybacks_daily.csv", parse_dates=["date"]).set_index("date")
+    sur = bbd.bb_long_surprise[bbd.bb_long_surprise != 0]; sur = sur[sur.index.isin(L.panel().index)]
+    out["buyback_surprise"] = {f"h{h}": dict(b=float(r.b), t=float(r.t)) for h in (0, 2, 5)
+                               for r in [L.project(L.panel(), sur, dep="TP10", hmax=h).iloc[-1]]}
+    au = pd.read_csv(PROC / "auction_lp_alltenor.csv")
+    out["auction_lp"] = {f"{r['sample']}|h{int(r.h)}": dict(b=r.b, t=r.t, n=int(r.n))
+                         for _, r in au.iterrows()}
+    import strategy2 as S2
+    v3 = S2.stats(S2.trades_v3())
+    out["strategy_v3_clean"] = dict(n=v3["n"], mean_bp=v3["mean"], t=v3["t"], sharpe=v3["sharpe"])
+    import holdout as HO
+    out["preregistration"] = dict(hash=HO.spec_hash(), n_min=HO.N_MIN,
+                                  holdout_start=HO.FROZEN["holdout_start"])
     return out
 
 

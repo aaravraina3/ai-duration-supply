@@ -418,3 +418,71 @@ free data.
 8. How does H11 relate to existing work on Treasury auction price pressure?
 9. Is there any free source of daily USD swap rates or intraday Treasury prices?
    If not, is the flow-versus-premium question answerable at all with this data?
+
+---
+
+# Author response, 23 September 2026
+
+Every item below was worked in `src/` on one unified sample, 2024-01-03 to
+2026-09-22 (n = 680), and the canonical numbers are in `03_FINDINGS.md`.
+
+| Item | Status | What was done | Result |
+|---|---|---|---|
+| F1 | **Conceded** | CMT-built forwards made primary in `hedgeflow.py`; two new free flow tests added | 20y10y is not orthogonal on observed data (R² 0.623). New on-the-run spread test: AI effect +0.004 bp/$bn (t 0.77), 4% of the yield move, so the move is not concentrated in on-the-run bonds. Real yields move 0.87x nominals and breakevens do not move. Evidence against cash on-the-run hedging; futures hedging not excluded |
+| F2 | **Conceded** | Held-out test frozen in `holdout.py`, registered in `10_PREREGISTRATION.md` | Hash `7afd3de6e97fcd28`, one-sided, timing-matched inference, gate at 32 deals for 80% power. First draft used a 14-deal gate; changed to 32 before any held-out data existed after a power check showed 49% at 14 |
+| M1 | **Fixed** | `placebo_matched.py`: placebo dates drawn at the same business-day lag after the last FOMC/CPI/NFP release, and separately at the same lag and release type | Post-release drift exists (+0.72 bp on release days). It does not produce the day-0 coefficient: matched placebo mean +0.0001. p goes 0.078 (uniform) to 0.0825 (lag) to 0.1095 (lag and type). About half the h = 2 response is reproduced by the lag-and-type placebo |
+| M2 | **Fixed** | `strategy2.beta_asof()` re-estimates the hedge at each trade on prior windows; v3 promoted from an ad-hoc script to `trades_v3()`, which also removed a second look-ahead in its position scaling; `signal_live.py` computes β at run time | β runs 0.574 to 0.682. v2 Sharpe −1.10 either way. v3 +0.27 after costs (previously reported +0.31) |
+| M3 | **Fixed** | One `SAMPLE_END` in `config.py`; hard-coded end dates removed from five modules; retired inputs left-joined so they can never truncate the core | Regression and local projections both run 2024-01-03 to 2026-09-22, n = 680. Regression coefficient +0.0872 (t 3.80) |
+| M4 | **Fixed, with a caveat** | `buybacks.build_surprise()`: expected fill from prior operations in the same bucket, shock = accepted minus expected | 75% of long-bucket operations fill to the announced maximum; 11.5% of the raw series was news. Surprise shock: h = 2 −1.45 (t −2.46), 18 events. Caveat: Lou, Yan and Zhang (2013) show anticipated Treasury flows still move prices, so the raw series is not simply wrong, it measures the whole flow |
+| M5 | **Fixed** | Related work added to README and `POST.md` | Lou, Yan and Zhang (2013, RFS 26(8)) verified; the auction result replicates it |
+| M6 | **Partly addressed** | Same as F1 | On-the-run and TIPS evidence narrow the alternatives. Not closed without swap or intraday data |
+| M7 | **Addressed by F2** | Held-out test | Nothing to report until 32 new deals |
+| M8 | **Fixed** | All-tenor auction LP made primary | +4.50 (t 1.81), against +14.76 (t 2.59) for the selected 7-10y bucket |
+| M9 | **Cannot be fixed** | Documented | The ±3 day rule keeps one event; there is no pre-registered estimate to fall back to |
+| M10 | **Fixed** | Sample map added to README | |
+| m1 | **Checked, immaterial** | PCA loadings re-estimated without event days | Loadings correlate at 0.99996; concession +0.0754 vs +0.0808 |
+| m3 | **Checked, immaterial** | Floater duration 0, 0.25, 0.5, 2 years | b0 +0.0813 to +0.0807. Only 7 of 103 tranches are floaters; the post overstated how much this mattered and is corrected |
+| m6 | **Fixed** | fig8 legend moved | |
+| m7 | **Fixed** | `POST.md` opening updated for the 5.104% print | |
+| m8, m9 | **Fixed** | NLP index and HMM moved to `src/archive/` with a README; nothing in `src/` depends on them | |
+| m2, m4, m5 | Unchanged | Bucket midpoints already stable; Kish n now stated once as 9.7; ACM vintage checked once, no revision | |
+
+## New problem found while fixing
+
+**A sixth instance of the mechanical-contamination pattern.** The first TIPS test
+returned a real-yield coefficient exactly equal to the nominal one, +0.0971 with
+t 3.48 in both. That is an identity, not a result: every regression controls for
+Δbreakeven, and the breakeven is nominal minus real, so at h = 0 the two
+regressions are the same regression. The informative version drops the breakeven
+control. Checking whether the breakeven control biases the headline: the AI shock
+does not move breakevens (+0.015, t 0.82), so it is not a bad control in the
+sense that matters, and removing it raises the day-0 TP10 coefficient from +0.081
+to +0.095 (t 4.93). The headline keeps the pre-specified control.
+
+## Answers to the review questions
+
+1. **Specification count.** Several hundred reported test statistics, about
+   fifteen pre-registered. Breakdown in `10_PREREGISTRATION.md`.
+2. **Why GSW for the forward test.** No good reason. The injection experiment had
+   already shown Svensson distorts local structure and the lesson was not applied
+   to the far forward. Fixed.
+3. **Timing-matched placebo.** The day-0 coefficient survives: p 0.08 to 0.11.
+4. **Buyback surprise.** 11.5% of the raw series; 25% of long-bucket operations
+   filled below the announced maximum.
+5. **β out of sample.** Now yes, at every trade.
+6. **Why 11 September.** A stale HMM posterior file; fixed.
+7. **Which sample.** Table in the README.
+8. **Relation to auction literature.** H11 replicates Lou, Yan and Zhang (2013).
+9. **Free swap or intraday data.** Daily swap rates exist at BlueGamma behind an
+   account signup, which this project did not create. No free intraday Treasury
+   source was found. So flow versus premium remains partly open.
+
+## Revised verdict
+
+Still would not pass a top venue: the effect is marginal under the best available
+inference, the sample is one regime, and the mechanism is only partly identified.
+What changed is that the two most damaging alternatives now have direct tests.
+Post-macro drift does not explain the day-0 effect, and the move is not an
+on-the-run hedging artifact. The claim that survives is a transitory,
+marginally significant price response to jumbo AI issuance that is too small and
+too short-lived to be a 30 bp story.

@@ -11,11 +11,13 @@ not bias its sign.
 The corpus is dated by FILING date, never period end, so nothing enters the index
 before it was public.
 """
+import sys, pathlib; sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+
 import re, numpy as np, pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from sklearn.preprocessing import normalize
-from config import PROC, NLP_HALFLIFE_DAYS, RANDOM_SEED
+from config import PROC, NLP_HALFLIFE_DAYS, RANDOM_SEED, SAMPLE_END
 
 BOILER_SHARE = 0.30       # drop text appearing in >30% of filings (doc's quirk #1)
 N_LABEL = 20              # hand-labelled passages per side
@@ -108,7 +110,7 @@ def build(halflife=NLP_HALFLIFE_DAYS):
     u = E[pi].mean(0) - E[qi].mean(0)
     u = u / np.linalg.norm(u)
     d["score"] = E @ u
-    daily = pd.date_range(d.date.min(), "2026-09-16", freq="B")
+    daily = pd.date_range(d.date.min(), SAMPLE_END, freq="B")
     lam = np.log(2) / halflife
     dd = d.date.values.astype("datetime64[D]").astype(int)
     sc = d.score.values

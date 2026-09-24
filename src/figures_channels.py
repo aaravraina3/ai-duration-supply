@@ -15,6 +15,12 @@ DEPS = [("spot10", "10Y spot"), ("f5y5y", "5y5y fwd"),
 
 
 def main():
+    """Superseded. This drew fig11/fig12 from GSW forwards, whose 20y10y result was a
+    Svensson artifact (review F1). figures_fix.fig11_12 draws them from CMT points."""
+    import figures_fix; return figures_fix.fig11_12()
+
+
+def _main_original_gsw():
     df = H.panel()
     ai = L.shocks()
     bb = pd.read_csv(PROC / "buybacks_daily.csv", parse_dates=["date"]).set_index("date").bb_long

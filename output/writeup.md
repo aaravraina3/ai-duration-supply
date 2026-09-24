@@ -1,5 +1,11 @@
 # AI Debt Supply and the Treasury Term Premium
 
+> **Superseded.** This is the original writeup, with a first audit addendum. Several numbers below predate the adversarial review and
+> the fixes of 23 September 2026. Current numbers are in
+> [`research/03_FINDINGS.md`](../research/03_FINDINGS.md); the long-form writeup is
+> [`POST.md`](../POST.md).
+
+
 Aarav Raina, September 2026
 
 > **Read the addendum in §10 first.** An adversarial audit run after this was

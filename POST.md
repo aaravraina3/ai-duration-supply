@@ -1,8 +1,8 @@
 # I tried to find AI debt in the Treasury curve
 
-Aarav Raina · September 21, 2026 · 17 min read
+Aarav Raina · September 24, 2026 · 21 min read
 
-On September 15 the 10-year Treasury yield closed at 5.00% for the first time since July 2007. A few days before that, a piece of sell-side research crossed my desk claiming that roughly 30 basis points of the 2026 selloff came from corporate and mortgage bond supply.
+On September 15 the 10-year Treasury yield closed at 5.00% for the first time since July 2007. A week later it was trading above 5.1%. Around the same time I read a sell-side estimate that roughly 30 basis points of the 2026 selloff came from corporate and mortgage bond supply.
 
 That is a specific, falsifiable claim, and as far as I could tell nobody had published the work behind it.
 
@@ -37,13 +37,13 @@ Things I only found by actually reading the documents:
 - Alphabet's May deal is a yen samurai. Amazon's March deal has a euro twin filed one day after the dollar one. $34.8 billion equivalent of the total is non-dollar, and that supplies duration to bunds and gilts, not Treasuries.
 - Amazon's $37B March deal has 11 tranches, two of them floating rate. A floater resets its coupon every quarter, so its interest-rate duration is about three months, not eight years.
 
-That last one matters more than it sounds. The whole project is denominated in duration, not dollars.
+The general point matters more than that example. The whole project is denominated in duration, not dollars.
 
 ```
 D_t  =  sum over tranches j of  ( notional_j  x  ModDur_j )  /  ModDur_10Y
 ```
 
-This converts every deal into "how many billions of 10-year notes would carry the same interest rate risk." A $5B 30-year tranche is worth roughly twice a $5B 10-year. Counting notional instead would have put $2.75B of phantom duration into the largest event in the sample.
+This converts every deal into "how many billions of 10-year notes would carry the same interest rate risk." A $5B 30-year tranche is worth roughly twice a $5B 10-year. The floaters turned out not to matter much here: only 7 of 103 tranches are floating, and treating them as anything from zero to two years of duration moves the main result in the fourth decimal place.
 
 > *Duration.* How much a bond's price moves when yields move. A 10-year note has duration around 8, meaning a 1% rise in yields costs you about 8% of the price. It is the natural unit for "how much interest rate risk is this."
 
@@ -119,6 +119,8 @@ That afternoon was the most useful one of the project. Measure what your instrum
 
 ## What I found instead
 
+None of the underlying idea is new. Greenwood and Vayanos (2014) showed Treasury supply moves term premia, and Vayanos and Vila's preferred-habitat model (2021) is the theory for why supply at a maturity should move yields at that maturity. What's new here is the supply source.
+
 Smooth curves cannot tell you whether a bump is local in maturity. They can tell you whether the long end moved more than the front end and inflation expectations imply, because that compares the same smooth number across event days and normal days, and the smoothing cancels out.
 
 That works. And the more interesting version is to ask how long it lasts, using local projections: a separate regression for each horizon h, from zero to sixty days after the announcement.
@@ -135,10 +137,10 @@ TP(t+h) - TP(t-1)  =  a_h  +  b_h * shock_t  +  controls  +  error
 
 | Days after announcement | Effect (bp per $bn) | t |
 |---|---|---|
-| 0 | +0.080 | 3.42 |
-| 2 | +0.113 | 3.20 |
-| 5 | +0.011 | 0.17 |
-| 20 | −0.054 | −0.40 |
+| 0 | +0.081 | 3.47 |
+| 2 | +0.115 | 3.24 |
+| 5 | +0.013 | 0.19 |
+| 20 | −0.045 | −0.34 |
 
 Real on impact, dead within a week. Scaled by 2026 issuance that is about 16bp of announcement-day effect across the whole year and roughly nothing that persists.
 
@@ -146,58 +148,85 @@ That already answers the 30bp claim, at least for this slice of supply. Whatever
 
 ## Then I tried to break it
 
-I ran an adversarial pass on my own results. Three things came out of it, and two of them hurt.
+I ran an adversarial pass on my own results, then a second, harsher one a few days later. Most of what follows came out of those.
 
-**The t-statistic was softer than it looked.** Newey-West gave me t = 3.42. But plain OLS gives t = 1.92, and a randomization test (shuffle the event dates a thousand times, keep the deal sizes, see how often you get a coefficient this big) gives p = 0.069.
+**The t-statistic was softer than it looked.** Newey-West gave me t = 3.47. But plain OLS gives t = 1.97, and a randomization test (shuffle the event dates two thousand times, keep the deal sizes, see how often you get a coefficient this big) gives p = 0.078.
 
-The tell was something I should have caught immediately: the Newey-West standard error was smaller than the OLS one, 0.0235 against 0.0443. Newey-West is a correction for correlated errors. When your correction makes your error bars tighter, it is exploiting something, and with a regressor that is 16 lumpy shocks it is not a correction worth trusting.
+The tell was something I should have caught immediately: the Newey-West standard error was smaller than the OLS one, 0.0230 against 0.0442. Newey-West is a correction for correlated errors. When your correction makes your error bars tighter, it is exploiting something, and with a regressor that is 16 lumpy shocks it is not a correction worth trusting.
 
 > *Newey-West.* A standard fix that widens your error bars when your data points are correlated over time. Everyone in finance uses it reflexively. It assumes your sample is big and spread out, which mine is not.
 
-The regressor has 673 daily observations, but 95% of its variation sits in 16 days. The effective sample size is about 9.6.
+The regressor has 680 daily observations, but 95% of its variation sits in 16 days. The effective sample size is about 10.
+
+**The placebo was ignoring the calendar.** Shuffling event dates uniformly assumes the real dates are random. They aren't. Remember that treasurers price just after macro releases: 9 of the 16 deals land one to three days after an FOMC decision, CPI print or payrolls number. And in this sample the term premium does tend to drift up in those days, about +0.7bp on the release day itself. So maybe my "effect" was just deals inheriting post-release drift.
+
+The fix is to draw every fake date at the same distance after a macro release as the real deal it replaces.
+
+*Figure 4. The day-0 coefficient under three kinds of placebo dates, against the real one in red.*
+
+![Timing-matched placebo](output/figures/fig15_placebo_matched.png)
+
+| Placebo | Mean | p |
+|---|---|---|
+| uniform | +0.001 | 0.078 |
+| same lag after a release | +0.000 | 0.083 |
+| same lag and same release type | +0.008 | 0.110 |
+
+The matched placebo stays centred on zero, so the drift doesn't produce the announcement-day effect. The p-value gets a little worse, which is the honest direction for it to move. It did explain part of something else though: about half of the day-2 "peak" in the impulse response reappears under matched placebo dates, so some of that was drift after FOMC meetings.
 
 **The endpoint result was wrong.** I had written that the 2026 term premium fell 8.6bp while expected short rates rose 79bp, so the selloff could not be a supply story. Then I varied the start and end dates.
 
-*Figure 4. The 2026 change in the term premium, for 25 combinations of start and end date. Blue is negative, red is positive.*
+*Figure 5. The 2026 change in the term premium, for 25 combinations of start and end date. Blue is negative, red is positive.*
 
 ![Endpoint sensitivity](output/figures/fig9_endpoints.png)
 
-It ranges from −29bp to +24bp and is positive in 12 of the 25 windows. Worse, over the full 2024 to 2026 sample the 10-year rose 105bp of which +103bp is term premium. The exact opposite of the calendar-2026 cut I had picked.
+It ranges from −29bp to +24bp and is positive in 12 of the 25 windows. Moving the end date forward one week, past the Fed's 16 September hike, takes it from −8.6bp to −21.9bp. And over the full 2024 to 2026 sample the 10-year rose 105bp of which +103bp is term premium. The exact opposite of the calendar-2026 cut I had picked.
 
 So a claim I had already written into a document was an artifact of the window I chose. I kept the original text and added a correction rather than quietly editing it.
 
-**What survived.** The core coefficient held up. Leave-one-out across all 16 deals gives a range of +0.067 to +0.093 with a minimum t of 2.59, dropping all three pairs of deals that overlap gives +0.090, and a wild cluster bootstrap gives p = 0.017. It is the one result I still stand behind, at p around 0.07 rather than the 0.001 I originally thought.
+**What survived.** The core coefficient held up. Leave-one-out across all 16 deals gives a range of +0.068 to +0.094 with a minimum t of 2.63, dropping all three pairs of deals that overlap gives +0.091, and a wild cluster bootstrap gives p = 0.012. It is the one result I still stand behind, at p around 0.08 rather than the 0.001 I originally thought.
 
 ## The satisfying part
 
-Here is the test I am happiest with.
+If this is really about duration absorption, then somebody *removing* long duration should move the same numbers the other way. Treasury does exactly that: it runs buyback operations in the same market, at daily frequency, and in September it doubled the size of its 10-to-30-year buybacks.
 
-If this is really about duration absorption, then somebody *removing* long duration should move the same numbers the other way. Treasury does exactly that: it runs buyback operations, on announced dates, in the same market, at daily frequency. And in September it doubled the size of its 10-to-30-year buybacks.
+So I ran the identical regression on Treasury's long-end buyback operations, with the prediction written down first: the coefficient should be negative. It is, −0.20 per $bn.
 
-So I ran the identical regression on 67 Treasury buyback operations, with the prediction written down first: the coefficient should be negative.
+There's a catch I missed the first time. Buyback dates and maximum sizes are announced in advance, and three quarters of long-end operations fill exactly to that maximum, so only about 11% of what I was counting was actually news on the day. Using just the surprise part, how much more or less got filled than expected, the sign holds: −1.45 per $bn two days later (t −2.46), on 18 operations. The earlier version isn't useless either. Lou, Yan and Zhang (2013) showed Treasury prices sag before auctions and recover after even though everyone knows the auction is coming, because dealers can only hold so much. Anticipated flows still move prices.
 
-It is. And it gets better when you split by where on the curve you look.
+Weak Treasury auctions push the same way. When bid-to-cover comes in low, the term premium rises (t 1.81 across all auctions). That one is basically a replication of the Lou, Yan and Zhang result.
 
-*Figure 5. Announcement-day response by curve segment. Issuance adds duration and pushes yields up; buybacks remove it and push them down.*
+*Figure 6. Day-0 response by curve segment, forwards built from observed Treasury yields. Issuance adds duration and pushes yields up; buybacks remove it and push them down.*
 
 ![Channels](output/figures/fig11_channels.png)
 
-| Curve segment | AI issuance | Buybacks | How tied to the cash 10Y |
-|---|---|---|---|
-| 10Y spot | +0.095 (t 3.21) | −0.057 (t −0.32) | R² = 1.000 |
-| 5y5y forward | +0.111 (t 3.66) | −0.169 (t −0.91) | R² = 0.901 |
-| 10y10y forward | +0.134 (t 3.72) | −0.278 (t −1.53) | R² = 0.528 |
-| 20y10y forward | +0.111 (t 3.18) | −0.668 (t −1.97) | R² = 0.103 |
+Three flows, three signs that line up. That sounds better than it is. If there were no effect at all, each sign would be a coin flip, and three matching coin flips happens one time in eight. It's consistent. It isn't proof.
 
-The last column is the point. The 20y10y forward barely moves with the cash 10-year at all. If the whole effect were just dealers selling 10-year notes to hedge a deal, it should vanish out there. It does not: t = 3.18.
+## I thought I'd ruled out hedging. I hadn't.
 
-And Treasury's buybacks bite hardest exactly at 20y10y, which is precisely the maturity bucket Treasury is actually buying.
+The obvious objection to all of this: when a company sells $25 billion of bonds, the banks and investors hedge by selling Treasuries, mostly around the 10-year point. That flow pushes 10-year yields up for a day or two and then unwinds. No change in what investors actually demand for holding duration. Just plumbing.
 
-Two flows, opposite directions, both strongest where the mechanism says they should be. That is the closest thing to a clean mechanism check in the whole project.
+My first answer was the 20y10y forward, the 10-year rate implied twenty years out. On the Fed's fitted curve it barely moved with the cash 10-year at all (R² 0.06), and the effect still showed up there. So, I argued, it can't be a hedge sitting on the 10-year.
 
-> *Forward rate.* The 20y10y is the market's implied 10-year yield starting twenty years from now. You back it out of today's curve. It is useful here because it is far away from where anyone is actually trading.
+> *Forward rate.* The 20y10y is the market's implied 10-year yield starting twenty years from now. You back it out of today's curve.
 
-I should flag the obvious: that table is 30 separate tests with no multiplicity correction. The defence is that the *pattern* is coherent, not that any single cell clears a threshold.
+That argument was wrong, and for exactly the reason from the injection experiment. The fitted curve has very few bonds past twenty years pinning it down, so its far forward is mostly the fit's own noise. Build the same forward from actual observed Treasury yields and it moves with the 10-year a lot.
+
+*Figure 7. How tied each forward is to the cash 10-year, on the fitted curve versus observed yields.*
+
+![Orthogonality artifact](output/figures/fig12_orthogonality.png)
+
+R² of 0.62, not 0.06. The two versions of "the 20y10y forward" only correlate with each other at 0.38. I had learned that exact lesson with the injection experiment and then walked straight back into it.
+
+So I needed a test that uses observed prices. There's a nice one hiding in plain sight. The Treasury's constant-maturity yields are built from on-the-run bonds, the newest and most liquid issues, which are what hedgers actually sell. The Fed's fitted curve deliberately excludes on-the-runs and uses only older, seasoned bonds. So the gap between the two at 10 years measures how cheap on-the-runs are relative to everything else. If hedgers were dumping on-the-runs, that gap should widen on deal days.
+
+*Figure 8. The day-0 move in the 10-year yield, next to the move in the on-the-run minus seasoned spread.*
+
+![On-the-run spread](output/figures/fig16_otr_spread.png)
+
+It barely moves: 4% of the yield move. Whatever happened on deal days, it happened to on-the-run and seasoned bonds together. Real yields tell a similar story. A hedge in nominal Treasuries should push nominal yields more than inflation-protected ones, but real yields move 0.87 times as much as nominals and breakevens don't move at all.
+
+That rules out the simplest version of the hedging story. It doesn't rule out all of it. Hedgers can use futures instead of cash bonds, and the bond a 10-year future delivers is usually a seasoned one that the fitted curve also sees. Closing that gap needs swap rates or intraday prices, and I don't have either for free.
 
 ## Can you trade it?
 
@@ -209,7 +238,7 @@ The first version of the trade was: buy a 10-year note at the close of announcem
 
 **The signal is a quarter the size of the noise.**
 
-*Figure 6. Left: the distribution of 5-day moves in the 10Y, with the expected effect marked in red. Right: how many events you need before that effect becomes visible.*
+*Figure 9. Left: the distribution of 5-day moves in the 10Y, with the expected effect marked in red. Right: how many events you need before that effect becomes visible.*
 
 ![Signal and noise](output/figures/fig13_signal_noise.png)
 
@@ -223,7 +252,7 @@ But the honest answer is the fourth one. Same 16 events, same idea, three ways o
 |---|---|
 | outright 10Y, 5 days | +0.87 |
 | size-scaled 2s10s steepener | −1.10 |
-| size-demeaned spread | +0.31 |
+| size-demeaned spread | +0.27 |
 
 A two-point Sharpe swing from construction choices alone. Holding period does the same thing: −0.88 at two days, +0.87 at five, −0.69 at ten, with no pattern.
 
@@ -235,14 +264,16 @@ The volatility is not a bug to engineer away. It is the honest width of the unce
 
 - **Drop the AI framing.** Run every jumbo investment-grade deal, not five names. That is hundreds of events instead of sixteen, and it is the only change that actually fixes the power problem. The AI angle is what makes the question interesting and also what makes it unanswerable.
 - **Get intraday.** The effect is a same-day phenomenon measured on daily closes. Most of what there is to see is happening inside the announcement day.
-- **Trade the buyback side.** Treasury ran 67 long-end operations against my 16 deals, with the coefficient already pointing the right way. More events, same hypothesis.
+- **Wait for the held-out test.** Every p-value above comes from searching over specifications on the same data, and no after-the-fact correction survives that. So I froze one test in code, hashed it, and it only runs on deals announced after 24 September. It needs 32 of them for decent power, which is about three years at this year's pace.
 - **Transaction-level bond data.** The one thing that would let me answer the original maturity-localization question at all.
 
 ## Why this was fun
 
 The transferable lesson is not about bonds.
 
-Three separate times in this project I built something that produced a confident, significant-looking number, and all three times the number was an artifact of the dependent variable containing the thing I was regressing it on. The concession estimator, the term premium measure, and the Japan hedged-yield test all had the same disease in different clothes. Each time the tell was a number that looked too good: R² of 1.000, a standard error that shrank when it should have grown, a t-statistic of 8.2 with the wrong sign.
+Six separate times in this project I built something that produced a confident, significant-looking number, and every time the number came from the measurement rather than the market: a fitted curve standing in for real prices, or a dependent variable that already contained the thing I was regressing it on. The concession estimator, the term premium measure, a Japan hedged-yield test, an auction tail measured against the previous close, the far forward, and a TIPS regression that controlled for breakevens, which are just nominal minus real. Each time the tell was a number that looked too good: R² of 1.000, a standard error that shrank when it should have grown, a t-statistic of 8.2 with the wrong sign, two coefficients that matched to four decimal places.
+
+The fifth one stung, because I'd already written the lesson down.
 
 The useful habit I came away with is to spend an afternoon testing whether your measurement can detect a thing you put there on purpose, before you spend a week interpreting what it says about the real world. The injection experiment cost almost nothing and it was the difference between publishing "there is no effect" and publishing "this method cannot see one."
 

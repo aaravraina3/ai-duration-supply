@@ -13,6 +13,11 @@ BLUE, RED, GREY, GREEN = "#1f4e79", "#c0392b", "#7f8c8d", "#27ae60"
 
 
 def fig8_recovery():
+    """Superseded by figures_fix.fig8, which fixes the legend overlap (review m6)."""
+    import figures_fix; return figures_fix.fig8()
+
+
+def _fig8_recovery_original():
     ev = pd.read_csv(PROC / "events.csv", parse_dates=["announce"])
     tr = pd.read_csv(PROC / "tranches.csv", parse_dates=["announce"])
     z = C.load_gsw(start="2024-01-01"); V, _ = K.loadings(z)

@@ -46,7 +46,7 @@ the corporate side, so the coefficients are directly comparable to the AI
 issuance number.
 """
 import json, numpy as np, pandas as pd, requests, statsmodels.api as sm
-from config import RAW, PROC, SEC_UA
+from config import RAW, PROC, SEC_UA, SAMPLE_END
 from eventlist import mod_duration, DUR10
 import curve as C
 
@@ -109,7 +109,7 @@ def build():
     return d
 
 
-def daily(d, start="2024-01-01", end="2026-09-24"):
+def daily(d, start="2024-01-01", end=SAMPLE_END):
     idx = pd.bdate_range(start, end)
     g = d[d.date >= start].groupby("date")
     out = pd.DataFrame(index=idx)
