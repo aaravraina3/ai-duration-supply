@@ -16,6 +16,7 @@ body { font-family: Georgia, "Times New Roman", serif; font-size: 10.5pt;
 h1 { font-size: 19pt; font-weight: normal; margin: 0 0 2mm 0; line-height: 1.25; }
 h2 { font-size: 12.5pt; font-weight: bold; margin: 9mm 0 2.5mm 0;
      page-break-after: avoid; }
+p { orphans: 3; widows: 3; }
 p { margin: 0 0 3.2mm 0; text-align: left; }
 /* byline */
 body > p:first-of-type { color: #555; font-size: 9.5pt; margin-bottom: 7mm; }
@@ -23,17 +24,20 @@ ul { margin: 0 0 3.5mm 0; padding-left: 5mm; }
 li { margin-bottom: 1.6mm; }
 table { border-collapse: collapse; margin: 4mm 0 5mm 0; font-size: 9.5pt;
         page-break-inside: avoid; }
+/* keep a table with the sentence that introduces it, but not glued to a figure */
+p + table { page-break-before: avoid; }
 th, td { border-bottom: 0.4pt solid #ccc; padding: 1.6mm 4mm 1.6mm 0;
          text-align: left; }
 th { border-bottom: 0.7pt solid #555; font-weight: bold; }
 blockquote { margin: 4mm 0 4mm 4mm; padding-left: 4mm;
              border-left: 1.2pt solid #bbb; color: #333; font-size: 9.8pt; }
 blockquote p { margin: 0; }
+blockquote p + p { margin-top: 2.2mm; }
 code { font-family: "SF Mono", Menlo, monospace; font-size: 9pt; }
 pre { background: #f6f6f6; padding: 3mm 4mm; font-size: 8.8pt;
       line-height: 1.4; margin: 3.5mm 0 4.5mm 0; page-break-inside: avoid;
       white-space: pre-wrap; }
-img { max-width: 100%; max-height: 88mm; display: block;
+img { max-width: 100%; max-height: 78mm; display: block;
       margin: 2mm auto 0 auto; }
 figure { margin: 4mm 0 5mm 0; page-break-inside: avoid; }
 figure p.cap { font-style: italic; margin: 0 0 1.5mm 0; font-size: 9.8pt; }

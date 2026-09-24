@@ -62,7 +62,7 @@ def f3_supply():
 
 def f4_localproj():
     lp = pd.read_csv(PROC / "localproj_all.csv")
-    fig, ax = plt.subplots(figsize=(5.4, 3.2))
+    fig, ax = plt.subplots(figsize=(7.4, 2.9))
     ax.plot(lp.h, lp.b, color=BLUE, lw=1.6)
     ax.fill_between(lp.h, lp.b - 1.96 * lp.se, lp.b + 1.96 * lp.se, color=BLUE, alpha=.15)
     ax.axhline(0, color="k", lw=.8)

@@ -50,7 +50,7 @@ def fig9_endpoints():
     for i, st in enumerate(starts):
         for j, en in enumerate(ends):
             M[i, j] = (at(tp, en) - at(tp, st)) * 100
-    fig, ax = plt.subplots(figsize=(6.2, 3.2))
+    fig, ax = plt.subplots(figsize=(7.2, 2.8))
     v = np.nanmax(np.abs(M))
     im = ax.imshow(M, cmap="RdBu_r", vmin=-v, vmax=v, aspect="auto")
     ax.set_xticks(range(len(ends))); ax.set_xticklabels(ends, rotation=30, ha="right", fontsize=7)

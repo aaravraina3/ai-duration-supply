@@ -39,7 +39,7 @@ HEALTH = """
   ------------------------------------------------------------------
   STATISTICAL HEALTH OF THIS SIGNAL   (read before sizing anything)
     backtested N                16 events
-    signal-to-noise             0.22  (2.56bp effect vs 11.36bp noise)
+    signal-to-noise             0.23  (2.56bp effect vs 11.36bp noise)
     v3 Sharpe after costs       +0.27  (strategy2.trades_v3, t = 0.33)
     bootstrap 95% CI on Sharpe  includes zero
     leave-one-out variants t>2  0 of 14

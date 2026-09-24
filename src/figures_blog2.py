@@ -43,7 +43,7 @@ def main():
     ax[1].set_xlabel("number of events")
     ax[1].set_ylabel("expected t-statistic")
     ax[1].set_title(f"Signal-to-noise = {snr:.2f}", fontsize=9)
-    ax[1].legend(frameon=False, fontsize=7.5, loc="upper left")
+    ax[1].legend(frameon=False, fontsize=7.5, loc="lower right")
     fig.tight_layout()
     fig.savefig(FIG / "fig13_signal_noise.png")
     plt.close(fig)

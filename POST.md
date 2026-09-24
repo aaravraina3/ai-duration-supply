@@ -2,13 +2,13 @@
 
 Aarav Raina · September 24, 2026 · 21 min read
 
-On September 15 the 10-year Treasury yield closed at 5.00% for the first time since July 2007. A week later it was trading above 5.1%. Around the same time I read a sell-side estimate that roughly 30 basis points of the 2026 selloff came from corporate and mortgage bond supply.
+On September 15 the 10-year Treasury yield closed at 5.00% for the first time since July 2007. A week later it hit 5.10%. Around the same time I read a sell-side estimate that roughly 30 basis points of the 2026 selloff came from corporate and mortgage bond supply.
 
 That is a specific, falsifiable claim, and as far as I could tell nobody had published the work behind it.
 
 Meanwhile the five big AI spenders (Amazon, Alphabet, Meta, Microsoft, Oracle) had issued $179.5 billion of dollar bonds in 2026, up from $92.8 billion in 2025 and close to nothing before that. Every one of those bonds is duration that somebody has to hold. If corporate supply moves Treasury yields, this is where you would look.
 
-So I spent a couple of weeks trying to measure it, using only free data.
+So I spent the next week or so trying to measure it, using only free data.
 
 The headline result is small and mostly negative. The interesting part is everything that broke on the way there, and specifically the afternoon I spent proving that my own main estimator was incapable of answering the question I had pointed it at.
 
@@ -176,7 +176,7 @@ The matched placebo stays centred on zero, so the drift doesn't produce the anno
 
 **The endpoint result was wrong.** I had written that the 2026 term premium fell 8.6bp while expected short rates rose 79bp, so the selloff could not be a supply story. Then I varied the start and end dates.
 
-*Figure 5. The 2026 change in the term premium, for 25 combinations of start and end date. Blue is negative, red is positive.*
+*Figure 5. The 2026 change in the term premium by start and end date, in bp.*
 
 ![Endpoint sensitivity](output/figures/fig9_endpoints.png)
 
@@ -230,19 +230,17 @@ That rules out the simplest version of the hedging story. It doesn't rule out al
 
 ## Can you trade it?
 
-This is where a friend asked the good question: if the effect is real, why are your backtest numbers jumping around so much?
+This is where the obvious question comes in: if the effect is real, why do the backtest numbers jump around so much?
 
 The first version of the trade was: buy a 10-year note at the close of announcement day, sell five days later, capture the reversion. In-sample Sharpe 0.87. Then everything fell apart under inspection.
 
 **The position is barely about the deal.** A five-day 10-year position has a yield standard deviation of 11.4bp, which is 91bp of price. My realized P&L standard deviation was 62bp. For five days you own whatever CPI, the Fed and oil do. The deal is incidental.
 
-**The signal is a quarter the size of the noise.**
-
 *Figure 9. Left: the distribution of 5-day moves in the 10Y, with the expected effect marked in red. Right: how many events you need before that effect becomes visible.*
 
 ![Signal and noise](output/figures/fig13_signal_noise.png)
 
-A mean-size deal moves the 10-year about 2.56bp. Five-day noise is 11.36bp. Signal-to-noise is 0.22. To see that at t = 2 you need about 79 events. I have 16.
+**The signal is a quarter the size of the noise.** A mean-size deal moves the 10-year about 2.56bp. Five-day noise is 11.4bp. Signal-to-noise is 0.23. To see that at t = 2 you need about 79 events. I have 16.
 
 **I also found a real bug.** Deal size explained 1.2% of the outright P&L. Hedge out the 2-year and it explains 21.1%, seventeen times more. The issuance shock is a *steepening* shock, not a level shift. I had tested the hypothesis with a control for the 2-year and then traded it without one, which is just sloppy.
 
@@ -256,7 +254,7 @@ But the honest answer is the fourth one. Same 16 events, same idea, three ways o
 
 A two-point Sharpe swing from construction choices alone. Holding period does the same thing: −0.88 at two days, +0.87 at five, −0.69 at ten, with no pattern.
 
-By the end I had run 30 distinct configurations against the same 16 events. At a signal-to-noise of 0.22, thirty configurations will produce a Sharpe above 1 by luck. Whichever one looks best is the one that got luckiest, and no amount of principled-sounding story afterwards changes that.
+By the end I had run 30 distinct configurations against the same 16 events. At a signal-to-noise of 0.23, thirty configurations will produce a Sharpe above 1 by luck. Whichever one looks best is the one that got luckiest, and no amount of principled-sounding story afterwards changes that.
 
 The volatility is not a bug to engineer away. It is the honest width of the uncertainty around a 2.5bp effect measured sixteen times.
 
@@ -277,6 +275,6 @@ The fifth one stung, because I'd already written the lesson down.
 
 The useful habit I came away with is to spend an afternoon testing whether your measurement can detect a thing you put there on purpose, before you spend a week interpreting what it says about the real world. The injection experiment cost almost nothing and it was the difference between publishing "there is no effect" and publishing "this method cannot see one."
 
-The second habit is to let the randomization test win. Analytical standard errors are assumptions wearing a lab coat. Shuffling your event dates a thousand times is not.
+The second habit is to let the randomization test win. Analytical standard errors are assumptions wearing a lab coat. Shuffling your event dates a few thousand times is not.
 
 Code, data and the full audit are at [github.com/aaravraina3/ai-duration-supply](https://github.com/aaravraina3/ai-duration-supply). Everything is from free sources: FRED, the Fed Board, the New York Fed, SEC EDGAR, BLS and Treasury Fiscal Data. The `research/` folder has the hypothesis log with statuses, including the ones that died.

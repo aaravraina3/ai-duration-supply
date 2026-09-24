@@ -32,7 +32,7 @@ CPI, the Fed, oil and Tokyo do. The deal is incidental.
 |---|---|
 | Expected effect, mean-size deal | **2.56 bp** of yield |
 | 5-day noise in the 10Y | **11.36 bp** of yield |
-| Signal-to-noise | **0.22** |
+| Signal-to-noise | **0.23** |
 | Trades needed for t = 2 | **~80** |
 | Trades available | **16** |
 
@@ -108,7 +108,7 @@ Count of distinct configurations run against these same 16 events:
 | v3 demeaned variants | 2 |
 | **Total** | **30** |
 
-At N = 16 with a signal-to-noise of 0.22, thirty configurations will produce a
+At N = 16 with a signal-to-noise of 0.23, thirty configurations will produce a
 Sharpe above 1 by chance. Whichever one looks best is the one that got luckiest,
 and that is true no matter how principled the story I tell about it afterwards.
 
