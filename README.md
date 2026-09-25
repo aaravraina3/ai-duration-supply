@@ -1,6 +1,6 @@
 # AI Debt Supply and the Treasury Term Premium
 
-**Paper:** [AI Debt and the Treasury Curve (PDF)](AI-Debt-and-the-Treasury-Curve.pdf)
+**Read the paper: [AI Debt and the Treasury Curve (PDF)](PAPER.pdf)**
 
 Measures whether AI-related corporate bond issuance moves the Treasury long end,
 and how much of the 2026 selloff it could explain.
@@ -146,7 +146,7 @@ research/
   00_PLAN.md ... 10_PREREGISTRATION.md
 output/
   figures/  tables/
-AI-Debt-and-the-Treasury-Curve.pdf   the research paper
+PAPER.pdf           the research paper
 ```
 
 ## Running it

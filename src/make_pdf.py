@@ -5,7 +5,7 @@ from weasyprint import HTML, CSS
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SRC = ROOT / "POST.md"
-OUT = ROOT / "AI-Debt-and-the-Treasury-Curve.pdf"
+OUT = ROOT / "PAPER.pdf"
 
 CSS_TEXT = """
 @page { size: A4; margin: 22mm 20mm 20mm 20mm;
