@@ -12,3 +12,8 @@ data/processed/nlp_corpus.csv
 data/processed/nlp_scored.csv
 data/processed/regression_panel.csv
 data/processed/auctions.csv
+
+# Post drafts stay local; the published version is paper/
+POST.md
+BLOG.md
+output/writeup.md
