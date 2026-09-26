@@ -137,6 +137,71 @@ def main():
     import holdout as HO
     out["preregistration"] = dict(hash=HO.spec_hash(), n_min=HO.N_MIN,
                                   holdout_start=HO.FROZEN["holdout_start"])
+
+    # --------------------------- every inference number the paper quotes at h=0
+    # Written here so none of them lives only in prose.
+    import statsmodels.api as sm
+    from config import RANDOM_SEED
+    P = L.panel(); sh = L.shocks()
+    x = sh.reindex(P.index).fillna(0.0)
+    y0 = P.TP10 - P.TP10.shift(1)
+    X0 = sm.add_constant(pd.DataFrame({"shock": x, **{c: P[c] for c in ("dbe", "doil", "dvix", "auc_10y")}}))
+    ok = y0.notna() & X0.notna().all(axis=1)
+    y0, X0 = y0[ok], X0[ok]
+    ols = sm.OLS(y0, X0).fit()
+    nw = sm.OLS(y0, X0).fit(cov_type="HAC", cov_kwds={"maxlags": 5, "use_correction": True})
+    # cluster by episode: every day belongs to the most recent announcement
+    ep = pd.Series(0, index=X0.index)
+    for i, a in enumerate(sorted(sh.index), start=1):
+        ep[X0.index >= a] = i
+    cl = sm.OLS(y0, X0).fit(cov_type="cluster", cov_kwds={"groups": ep.values})
+    rng = np.random.default_rng(RANDOM_SEED)
+    r0 = sm.OLS(y0, X0.drop(columns="shock")).fit()
+    uniq = np.unique(ep.values)
+    tb = np.empty(2000)
+    for b in range(2000):
+        w = pd.Series(rng.choice([-1.0, 1.0], size=len(uniq)), index=uniq).reindex(ep.values).values
+        yb = r0.fittedvalues.values + r0.resid.values * w
+        tb[b] = sm.OLS(yb, X0).fit(cov_type="cluster", cov_kwds={"groups": ep.values}).tvalues["shock"]
+    loo = pd.DataFrame([L.project(P, sh.drop(a), hmax=0).iloc[0] for a in sh.index])
+    second_of_pair = [pd.Timestamp(d) for d in ("2026-02-09", "2025-11-03", "2026-05-05")]
+    dp = L.project(P, sh.drop(second_of_pair, errors="ignore"), hmax=0).iloc[0]
+    v = X0["shock"].values ** 2
+    out["h0_inference"] = dict(
+        spec="TP(t) - TP(t-1) on shock ($bn 10y-equiv), controls dbe doil dvix auc_10y",
+        n=int(ols.nobs), b=float(ols.params["shock"]),
+        ols=dict(se=float(ols.bse["shock"]), t=float(ols.tvalues["shock"]), p=float(ols.pvalues["shock"])),
+        newey_west=dict(lags=5, small_sample_correction=True, se=float(nw.bse["shock"]),
+                        t=float(nw.tvalues["shock"]), p=float(nw.pvalues["shock"])),
+        cluster_by_episode=dict(n_clusters=int(len(uniq)), se=float(cl.bse["shock"]),
+                                t=float(cl.tvalues["shock"]), p=float(cl.pvalues["shock"])),
+        wild_cluster_bootstrap=dict(reps=2000, weights="Rademacher", null_imposed=True,
+                                    n_clusters=int(len(uniq)),
+                                    p=float(np.mean(np.abs(tb) >= abs(cl.tvalues["shock"])))),
+        randomization_draws=2000,
+        leave_one_out=dict(b_min=float(loo.b.min()), b_max=float(loo.b.max()),
+                           t_min=float(loo.t.min()), t_max=float(loo.t.max())),
+        drop_overlapping_pairs=dict(dropped=[str(d.date()) for d in second_of_pair],
+                                    b=float(dp.b), t=float(dp.t)),
+        shock_days=int((v > 0).sum()),
+        kish_effective_n=float(v.sum() ** 2 / (v ** 2).sum()))
+    lpt = pd.read_csv(PROC / "localproj_all.csv")
+    out["lp_table"] = {f"h{int(r.h)}": dict(b=float(r.b), se=float(r.se), t=float(r.t), p=float(r.p))
+                       for _, r in lpt[lpt.h.isin([0, 1, 2, 3, 4, 5, 10, 20])].iterrows()}
+    out["lp_first_h_not_significant_5pct"] = int(lpt[lpt.p > 0.05].h.min())
+
+    # -------------- AI share of Treasury coupon duration supply, cutoff explicit
+    import regression as R
+    auc = R.treasury_supply()["auc_10y"]
+    auc = auc[auc.index <= SAMPLE_END]
+    ai = allg.set_index("announce").tenyr_equiv / 1e9
+    share = {"cutoff": SAMPLE_END,
+             "note": "both legs in $bn 10y-equivalent; Treasury leg is coupon auctions "
+                     "from Jan 1 of each year through the cutoff (full year before 2026)"}
+    for yr in (2024, 2025, 2026):
+        a_ = float(ai[ai.index.year == yr].sum()); t_ = float(auc[auc.index.year == yr].sum())
+        share[str(yr)] = dict(ai_10y_bn=a_, treasury_coupon_10y_bn=t_, share=a_ / t_)
+    out["coupon_duration_share"] = share
     return out
 
 

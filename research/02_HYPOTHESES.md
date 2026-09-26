@@ -36,7 +36,7 @@ leave-one-out (+0.067 to +0.093, min |t| = 2.59) and a wild cluster bootstrap
 inference. Do not claim significance at 5%.
 
 **Update 23 Sep, unified sample to 2026-09-22 (n = 680).** b = +0.0812 (NW t 3.47,
-OLS t 1.97). The placebo was rebuilt so each fake date sits at the same lag after
+OLS t 1.84, p 0.066). The placebo was rebuilt so each fake date sits at the same lag after
 the last macro release as the real deal it replaces, since deals cluster 1-3 days
 after FOMC/CPI/NFP. Uniform p 0.078, matched on lag **p 0.0825**, matched on lag
 and release type p 0.1095. Post-release drift exists but does not produce the
@@ -69,7 +69,8 @@ tenors under a ±2y band, so it is not an escape.
 **Falsified if** the coefficient decays to zero within a month.
 
 **Result.** h=0: +0.080 (p = 0.069). h=2: +0.113 (p = 0.116). h=5: **+0.011,
-p = 0.918**. Gone within a week.
+p = 0.918**. Gone within three days. On the unified sample (to 2026-09-22) h=3 is
++0.064 (t 1.18), the first horizon not significant at 5% (`output/tables/headline.json`, `lp_table`).
 
 **Status: REJECTED.** The effect is transitory. This is the strongest single
 finding in the project and the one that most directly contradicts a persistent

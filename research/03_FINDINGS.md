@@ -46,16 +46,19 @@ README. **A**
 
 **B1. AI issuance raises the 10Y term premium on the announcement day.**
 
+Every number in this table is in `output/tables/headline.json` (`h0_inference`,
+`placebo_matched_h0`, `flow_tests`), written by `src/headline.py`.
+
 | Measure | Value |
 |---|---|
 | Local projection, h = 0 | **+0.0812 bp per $bn** of 10-year equivalents |
-| Newey-West t (6 lags) | 3.47 |
-| Plain OLS t | 1.97 (p = 0.049) |
-| Kish effective n | 9.7 |
+| Newey-West t (5 lags) | 3.47 |
+| Plain OLS t | 1.84 (p = 0.066) |
+| Kish effective n | 9.3 |
 | Randomization, uniform placebo | p = 0.078 |
 | Randomization, placebo matched on lag after macro release | **p = 0.0825** |
 | Randomization, matched on lag and release type | p = 0.1095 |
-| Wild cluster bootstrap, 17 clusters, null imposed | p = 0.012 |
+| Wild cluster bootstrap, 17 clusters, null imposed | p = 0.015 |
 | Leave-one-out over 16 deals | +0.068 to +0.094, min t 2.63 |
 | Drop the three overlapping pairs | +0.091 (t 3.39) |
 | 2025 onward only | +0.063 (t 3.01) |
@@ -69,7 +72,8 @@ Matching placebo dates on that lag leaves the placebo centred at +0.0001, so
 post-release drift does not produce the day-0 coefficient. It does move the
 p-value from 0.078 to 0.08-0.11. **B**
 
-**B2. The effect is transitory.** h = 2: +0.115 (t 3.24). h = 5: **+0.0125
+**B2. The effect is transitory.** h = 2: +0.115 (t 3.24). h = 3: +0.064 (t 1.18),
+the first horizon not significant at 5%, so it is gone within three days. h = 5: **+0.0125
 (t 0.19)**. Against the timing-matched baseline the h = 5 response is below zero
 (placebo mean +0.041 matched on lag, +0.099 on lag and type), so the effect does
 not merely decay, it is gone relative to comparably timed days. Part of the h = 2
@@ -175,7 +179,10 @@ the extra week spanning the Fed hike. Across 25 start and end pairs ΔTP ranges
 within calendar-2026 windows expectations dominate. **A** on the sensitivity.
 
 **D3. AI supply is a small share of duration supply.** 194.3 $bn of 10-year
-equivalents in 2026, 9.4% of Treasury coupon duration supply (2,073.5 $bn). **A**
+equivalents in 2026, 9.2% of Treasury coupon duration supply (2,108.9 $bn of coupon
+auctions from 2026-01-01 through the sample end, 2026-09-22). 2025: 3.9% (114.6 of
+2,904.6 $bn, full year). Both computed in `output/tables/headline.json`
+(`coupon_duration_share`), which carries its own cutoff date. **A**
 
 **D4. The Fed hike took the 5% crossing back.** 25 bp to 3.75-4.00% on
 2026-09-16, unanimous. 10Y 5.01% on the day, 4.94% the next. **A** on the data.

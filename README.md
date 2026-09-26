@@ -15,11 +15,12 @@ On one sample, 2024-01-03 to 2026-09-22, n = 680 trading days:
 
 - Announced USD duration from the five AI hyperscalers raises the 10Y term
   premium by **+0.081 bp per $bn of 10-year equivalents on the announcement
-  day**. Newey-West t 3.47, plain OLS t 1.97, randomization p 0.078, and
+  day**. Newey-West t 3.47, plain OLS t 1.84 (p 0.066), randomization p 0.078, and
   **p 0.08 to 0.11 against placebo dates matched on timing after macro
   releases**. Survives leave-one-out (min t 2.63) and a wild cluster bootstrap
-  (p 0.012).
-- **It is gone within a week**: +0.013 at five days (t 0.19). Across 2026
+  (p 0.015).
+- **It is gone within three days**: +0.064 at h=3 (t 1.18), +0.013 at h=5 (t 0.19).
+  h=2 is the last horizon significant at 5%. Across 2026
   issuance that is 15.8 bp of one-day impacts and about 2.4 bp that persists.
 - So it cannot be a persistent 30 bp supply effect from this slice of issuance.
 - Treasury buybacks and weak Treasury auctions move the term premium in the
@@ -103,7 +104,7 @@ Excluded and why:
 > (announcement-dated, 100% term-sheet coupon match, validated at $92.8B 2025
 > issuance against consensus) and estimated the Treasury term premium response to
 > announced 10-year-equivalent duration: +0.08bp per $bn on the announcement day
-> (timing-matched randomization p≈0.08), gone within five days, with no
+> (timing-matched randomization p≈0.08), gone within three days, with no
 > persistent effect, against sell-side estimates of 30bp
 
 ## Layout

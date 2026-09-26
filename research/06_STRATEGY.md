@@ -12,7 +12,8 @@ negative result.
 ## The trade
 
 The local projections say a jumbo announcement pushes long-end yields up on the
-day and the effect decays to zero within about five business days. From h=0 to
+day and the effect is indistinguishable from zero from about three business days
+(h=3 t 1.18 on the term premium). From h=0 to
 h=5 on the 10Y spot, the cumulative coefficient goes from +0.095 to −0.028 bp per
 $bn of 10-year equivalents.
 

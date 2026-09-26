@@ -2,7 +2,7 @@
 
 THE TRADE, AND WHERE IT COMES FROM
 The local projections say a jumbo announcement pushes long-end yields up on the
-day and the effect decays to zero within about five business days. Cumulatively,
+day and the effect is indistinguishable from zero from about three business days. Cumulatively,
 from h=0 to h=5:
 
     10Y spot:  b(5) - b(0)  =  -0.028 - 0.095  =  -0.123 bp per $bn 10y-equiv

@@ -80,9 +80,9 @@ test, reassigning event dates while holding the shock sizes fixed, gives
 **p = 0.078**, with a placebo standard error about 1.9x the Newey-West one.
 
 The tell that something was wrong: **the HAC standard error was smaller than the
-OLS standard error** (0.0230 against 0.0442). HAC is a correction for serial
+OLS standard error** (0.0234 against 0.0441). HAC is a correction for serial
 correlation. When it shrinks your error bars, it is exploiting negative
-autocorrelation in the score, and with a regressor whose Kish effective n is 9.7,
+autocorrelation in the score, and with a regressor whose Kish effective n is 9.3,
 that is not a correction I trust.
 
 **Alternatives rejected.**
@@ -307,7 +307,8 @@ Three things I now do by default in this project:
 
 **Kish effective sample size** for lumpy regressors. The daily regression has
 T = 680 but 95% of the regressor's variation sits in 16 days, giving an effective
-n of **9.7**. Quoting n = 680 anywhere would be misleading.
+n of **9.7**. The local projection's shock is zero on all but 16 days, Kish n 9.3.
+Quoting n = 680 anywhere would be misleading.
 
 ```
 n_eff  =  (sum x_i^2)^2  /  sum x_i^4
@@ -315,7 +316,10 @@ n_eff  =  (sum x_i^2)^2  /  sum x_i^4
 
 **Wild cluster bootstrap with the null imposed** when clustering on few groups.
 17 episode clusters is well inside the range where cluster-robust standard errors
-are unreliable. Gives p = 0.012 against a cluster-robust t of 3.72.
+are unreliable. On the h = 0 local projection it gives p = 0.015 against a
+cluster-robust t of 3.46 (`headline.json`, `h0_inference`). The earlier p = 0.012
+was the same test on the daily regression in `regression.py` (`src/audit1_lags.py`), a
+different coefficient, and should not be quoted for the local projection.
 
 **Leave-one-out on everything.** It has caught two results that were single
 observations: X = +0.86bp flips sign without Meta 2024-08-07, and the strategy
