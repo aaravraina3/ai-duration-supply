@@ -85,7 +85,7 @@ surviving to h = 5 is **2.4 bp**. **A** on transitoriness.
 **B3. Treasury buybacks move the term premium the other way.** Raw long-bucket
 series: −0.197 bp per $bn at h = 0 (t −1.53), randomization p = 0.316. But the
 operation date and maximum size are announced beforehand, and 75% of long-bucket
-operations since 2024 filled exactly to that maximum, so only **11.5%** of the
+operations since 2024 filled exactly to that maximum, so only **12.4%** of the
 raw series was news on the day (review M4). The surprise-only shock, fill minus
 expected fill, keeps the sign: h = 0 −0.39 (t −0.79), **h = 2 −1.45 (t −2.46)**,
 h = 5 −0.72 (t −0.59), on 18 non-zero surprise days. Lou, Yan and Zhang (2013)
@@ -174,8 +174,8 @@ not yet in FRED and not in any result here. **A**
 **D2. The decomposition depends on the endpoint.** To 2026-09-15: ΔTP −8.6 bp,
 ΔExpectations +79.0 bp. To 2026-09-22: **ΔTP −21.9 bp, ΔExpectations +86.9 bp**,
 the extra week spanning the Fed hike. Across 25 start and end pairs ΔTP ranges
-−28.6 to +23.9 bp and is positive in 12. Over 2024-2026 as a whole the 10Y rose
-105 bp of which +103 bp was term premium. The only robust statement is that
+−28.6 to +23.9 bp and is positive in 12. Over 2024-01-02 to 2026-09-22 the 10Y rose
+101 bp of which +90 bp was term premium (105 and +103 to 2026-09-15). The only robust statement is that
 within calendar-2026 windows expectations dominate. **A** on the sensitivity.
 
 **D3. AI supply is a small share of duration supply.** 194.3 $bn of 10-year

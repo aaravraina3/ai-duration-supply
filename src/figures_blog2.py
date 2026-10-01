@@ -16,7 +16,8 @@ def main():
     z = C.load_gsw(start="2024-01-01")
     y10 = z[10.0] * 100
     dy5 = (y10.shift(-5) - y10).dropna()
-    sig = 0.123 * 20.8          # LP h0->h5 coefficient x mean deal size, bp
+    deals = pd.read_csv(PROC / "deals_all.csv")
+    sig = 0.123 * deals.tenyr_equiv.mean() / 1e9   # LP h0->h5 reversion x mean deal size, bp
 
     fig, ax = plt.subplots(1, 2, figsize=(9.4, 3.3))
 

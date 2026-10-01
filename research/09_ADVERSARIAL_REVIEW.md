@@ -467,7 +467,7 @@ to +0.095 (t 4.93). The headline keeps the pre-specified control.
    already shown Svensson distorts local structure and the lesson was not applied
    to the far forward. Fixed.
 3. **Timing-matched placebo.** The day-0 coefficient survives: p 0.08 to 0.11.
-4. **Buyback surprise.** 11.5% of the raw series; 25% of long-bucket operations
+4. **Buyback surprise.** 12.4% of the raw series; 25% of long-bucket operations
    filled below the announced maximum.
 5. **β out of sample.** Now yes, at every trade.
 6. **Why 11 September.** A stale HMM posterior file; fixed.

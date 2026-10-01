@@ -42,7 +42,7 @@ with an author response section giving the fix and result for each item.
 | M1 | Placebos ignored that deals price just after macro releases | Timing-matched placebo run. Day-0 effect survives, p moves 0.078 to 0.08-0.11 |
 | M2 | Strategy hedge ratio used future data | Expanding-window β. Real but immaterial, Sharpe unchanged |
 | M3 | Main regression silently stopped at 2026-09-11 | One `SAMPLE_END`, every module reads it |
-| M4 | Buyback dates and sizes are pre-announced | Surprise-only shock built. 11.5% of the raw series was news |
+| M4 | Buyback dates and sizes are pre-announced | Surprise-only shock built. 12.4% of the raw series (|surprise| over accepted 10y-equivalents) was news |
 | M5 | No literature | Cited below. The auction result replicates Lou, Yan and Zhang (2013) |
 | M8 | Auction LP used a tenor bucket chosen after the fact | All-tenor LP is primary: t 1.81, not 2.59 |
 

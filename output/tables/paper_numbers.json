@@ -1,0 +1,272 @@
+{
+  "n_tranches": {
+    "value": 103.0,
+    "printed": "103",
+    "matches": true,
+    "source": "tranches.csv rows"
+  },
+  "n_floating_tranches": {
+    "value": 7.0,
+    "printed": "7",
+    "matches": true,
+    "source": "tranches.csv floating"
+  },
+  "largest_deal_usd_bn": {
+    "value": 37.0,
+    "printed": "37",
+    "matches": true,
+    "source": "deals_all.csv, Amazon 2026-03-10"
+  },
+  "largest_deal_tranches": {
+    "value": 11.0,
+    "printed": "11",
+    "matches": true,
+    "source": "deals_all.csv n_tranches"
+  },
+  "mean_deal_10y_equiv_bn": {
+    "value": 20.781878493764737,
+    "printed": "21",
+    "matches": true,
+    "source": "deals_all.csv tenyr_equiv"
+  },
+  "share_bdays_clean_3day_rule": {
+    "value": 0.3693820224719101,
+    "printed": "37",
+    "matches": true,
+    "source": "macro_calendar.csv, +/-3 bdays of FOMC/CPI/NFP"
+  },
+  "jumbos_killed_by_3day_rule": {
+    "value": 11.0,
+    "printed": "11",
+    "matches": true,
+    "source": "deals_all.csv + macro_calendar.csv"
+  },
+  "killed_priced_1to3_after_release": {
+    "value": 8.0,
+    "printed": "8",
+    "matches": true,
+    "source": "same"
+  },
+  "all_deals_1to3_after_release": {
+    "value": 9.0,
+    "printed": "9",
+    "matches": true,
+    "source": "same"
+  },
+  "three_factor_variance_share": {
+    "value": 0.9916398642223114,
+    "printed": "99.2",
+    "matches": true,
+    "source": "gsw.csv PCA, concession.loadings"
+  },
+  "concession_band_min_bp": {
+    "value": -0.1668582529146879,
+    "printed": "\u22120.167",
+    "matches": true,
+    "source": "robustness_specs.csv exclusion band rows"
+  },
+  "concession_band_max_bp": {
+    "value": 0.1234597419813047,
+    "printed": "+0.123",
+    "matches": true,
+    "source": "robustness_specs.csv exclusion band rows"
+  },
+  "acm_dtp_r2_on_5_curve_pcs": {
+    "value": 0.9635313298742156,
+    "printed": "96",
+    "matches": true,
+    "source": "acm.csv + gsw.csv"
+  },
+  "tp_change_on_release_days_bp": {
+    "value": 0.7149345514903579,
+    "printed": "+0.7",
+    "matches": true,
+    "source": "acm.csv + macro_calendar.csv"
+  },
+  "dTP_2026_to_sep15_bp": {
+    "value": -8.570170683882907,
+    "printed": "\u22128.6",
+    "matches": true,
+    "source": "acm.csv"
+  },
+  "dRN_2026_to_sep15_bp": {
+    "value": 79.04955928839229,
+    "printed": "79",
+    "matches": true,
+    "source": "acm.csv"
+  },
+  "endpoint_grid_min_bp": {
+    "value": -28.647330528740014,
+    "printed": "\u221229",
+    "matches": true,
+    "source": "acm.csv, figures_blog.fig9_endpoints grid"
+  },
+  "endpoint_grid_max_bp": {
+    "value": 23.921013270232997,
+    "printed": "+24",
+    "matches": true,
+    "source": "same"
+  },
+  "endpoint_grid_n_positive": {
+    "value": 12.0,
+    "printed": "12",
+    "matches": true,
+    "source": "same"
+  },
+  "full_sample_d10y_bp": {
+    "value": 101.0,
+    "printed": "101",
+    "matches": true,
+    "source": "fred.csv DGS10"
+  },
+  "full_sample_dTP_bp": {
+    "value": 89.79885718945985,
+    "printed": "+90",
+    "matches": true,
+    "source": "acm.csv"
+  },
+  "long_ops_fill_to_max_share": {
+    "value": 0.75,
+    "printed": "75",
+    "matches": true,
+    "source": "buybacks.json"
+  },
+  "buyback_news_share": {
+    "value": 0.12384462331795006,
+    "printed": "12",
+    "matches": true,
+    "source": "buybacks.json"
+  },
+  "buyback_surprise_days": {
+    "value": 18.0,
+    "printed": "18",
+    "matches": true,
+    "source": "buybacks_daily.csv in LP panel"
+  },
+  "buyback_mean_abs_surprise_bn": {
+    "value": 1.194924694038117,
+    "printed": "1",
+    "matches": true,
+    "source": "buybacks_daily.csv"
+  },
+  "buyback_raw_h0_b": {
+    "value": -0.1966610715442272,
+    "printed": "\u22120.20",
+    "matches": true,
+    "source": "buyback_vs_ai_lp.csv"
+  },
+  "breakeven_h0_b": {
+    "value": 0.015124704932467054,
+    "printed": "+0.015",
+    "matches": true,
+    "source": "hedgeflow panel (DGS10 - DFII10)"
+  },
+  "breakeven_h0_t": {
+    "value": 0.8227569614153727,
+    "printed": "0.8",
+    "matches": true,
+    "source": "same"
+  },
+  "cmt_f20y10y_r2": {
+    "value": 0.6234900960364558,
+    "printed": "0.62",
+    "matches": true,
+    "source": "hedgeflow panel, CMT forwards"
+  },
+  "gsw_f20y10y_r2": {
+    "value": 0.06247348186233648,
+    "printed": "0.06",
+    "matches": true,
+    "source": "hedgeflow panel, GSW forwards"
+  },
+  "corr_gsw_cmt_20y10y": {
+    "value": 0.3836988684254589,
+    "printed": "0.38",
+    "matches": true,
+    "source": "hedgeflow panel"
+  },
+  "five_day_10y_sd_bp": {
+    "value": 11.368184044564137,
+    "printed": "11.4",
+    "matches": true,
+    "source": "gsw.csv 10Y, overlapping 5-day changes"
+  },
+  "five_day_price_sd_bp": {
+    "value": 90.9454723565131,
+    "printed": "91",
+    "matches": true,
+    "source": "same x ModDur 8"
+  },
+  "trade_pnl_sd_bp": {
+    "value": 62.082198414682615,
+    "printed": "62",
+    "matches": true,
+    "source": "variance.decompose"
+  },
+  "trade_window_dy10_sd_bp": {
+    "value": 7.760274801835327,
+    "printed": "7.8",
+    "matches": true,
+    "source": "variance.decompose"
+  },
+  "pnl_r2_on_size": {
+    "value": 0.011726312894901558,
+    "printed": "1.2",
+    "matches": true,
+    "source": "variance.decompose"
+  },
+  "spread_r2_on_size": {
+    "value": 0.21135083490073447,
+    "printed": "21.1",
+    "matches": true,
+    "source": "variance.decompose"
+  },
+  "signal_bp": {
+    "value": 2.5561710547330625,
+    "printed": "2.56",
+    "matches": true,
+    "source": "0.123 (10Y spot LP h0 minus h5, hard-coded in variance.py) x mean size"
+  },
+  "signal_to_noise": {
+    "value": 0.22485306753591247,
+    "printed": "0.22",
+    "matches": true,
+    "source": "same"
+  },
+  "events_for_t2": {
+    "value": 80.0,
+    "printed": "80",
+    "matches": true,
+    "source": "same"
+  },
+  "v1_sharpe": {
+    "value": 0.8728274441255722,
+    "printed": "+0.87",
+    "matches": true,
+    "source": "strategy.pnl_table, 5 days, 3bp cost"
+  },
+  "v1_sharpe_2d": {
+    "value": -0.8825980693770437,
+    "printed": "\u22120.88",
+    "matches": true,
+    "source": "strategy.pnl_table hold=2"
+  },
+  "v1_sharpe_10d": {
+    "value": -0.6870798209542439,
+    "printed": "\u22120.69",
+    "matches": true,
+    "source": "strategy.pnl_table hold=10"
+  },
+  "v2_sharpe": {
+    "value": -1.0974777950888908,
+    "printed": "\u22121.10",
+    "matches": true,
+    "source": "strategy2.trades, size-scaled steepener"
+  },
+  "japan_naive_pickup_t": {
+    "value": 8.23215833918847,
+    "printed": "8.2",
+    "matches": true,
+    "source": "japan.build, levels TP10 ~ pickup"
+  }
+}

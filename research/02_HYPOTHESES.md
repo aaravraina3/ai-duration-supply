@@ -205,8 +205,8 @@ confidence interval on magnitude, [0, 0.43], contains the AI coefficient of
 0.080. **The duration channel survives.**
 
 **Update 23 Sep.** Operation dates and maximum sizes are announced beforehand;
-75% of long-bucket operations fill exactly to the maximum, so 11.5% of the raw
-series was news. A surprise-only shock (fill minus expected fill) keeps the sign:
+75% of long-bucket operations fill exactly to the maximum, so 12.4% of the raw
+series was news (|surprise| over accepted 10y-equivalents; 11.5% if divided by expected fill). A surprise-only shock (fill minus expected fill) keeps the sign:
 h = 0 −0.39 (t −0.79), h = 2 −1.45 (t −2.46), 18 events. Anticipated flows can
 still move prices (Lou, Yan and Zhang 2013), so both versions are reported.
 
