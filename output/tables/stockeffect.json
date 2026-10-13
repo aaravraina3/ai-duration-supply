@@ -1,0 +1,38 @@
+{
+  "registered_in": "96cd725",
+  "months": 33,
+  "first": "2024-01-31",
+  "last": "2026-09-30",
+  "stationarity": {
+    "TP10 level": {
+      "adf_p": 0.012887472189443047,
+      "kpss_p": 0.01
+    },
+    "stock": {
+      "adf_p": 0.9981485926250606,
+      "kpss_p": 0.01
+    }
+  },
+  "engle_granger_p": 0.043073436954920115,
+  "johansen_trace_r0": {
+    "stat": 5.100464707230711,
+    "cv95": 15.4943,
+    "reject": false
+  },
+  "cointegrated": true,
+  "changes_on_issuance": {
+    "n": 32,
+    "b": -0.06719021151718767,
+    "permutation_p": 0.7102,
+    "permutation_sd": 0.17913431855620043,
+    "newey_west_t": -0.6756527266055505,
+    "newey_west_p": 0.49926115666958204,
+    "mde80_two_sided": 0.5018627068670511,
+    "implied_2026_bp": -13.055138924791066
+  },
+  "levels": {
+    "b": 0.20542959818732826,
+    "newey_west_t": 3.867792581682227,
+    "r2": 0.4050291072113159
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "registered_in": "96cd725",
+  "model": "sentence-transformers/all-mpnet-base-v2",
+  "sentence_transformers_version": "6.1.0",
+  "passages_before": 1831,
+  "passages_after_dedup": 729,
+  "filings": 97,
+  "filings_with_complete_target": 87,
+  "ladder": [
+    {
+      "rung": 0,
+      "oos_mse": 166.61471864572763,
+      "se": 34.44867033052361,
+      "n": 75
+    },
+    {
+      "rung": 1,
+      "oos_mse": 173.90497434813284,
+      "se": 35.76663535251072,
+      "n": 75
+    },
+    {
+      "rung": 2,
+      "oos_mse": 174.51327183360334,
+      "se": 35.88266279031768,
+      "n": 75
+    },
+    {
+      "rung": 3,
+      "oos_mse": 212.28140009602234,
+      "se": 42.00112635867684,
+      "n": 75
+    }
+  ],
+  "chosen_rung": 0,
+  "deals": [
+    {
+      "announce": "2024-08-07",
+      "issuer": "Meta",
+      "size": 15.30109100765233,
+      "expected": 0.0,
+      "source": "rung 0",
+      "surprise": 15.30109100765233
+    },
+    {
+      "announce": "2024-09-25",
+      "issuer": "Oracle",
+      "size": 8.343605689273563,
+      "expected": 0.0,
+      "source": "rung 0",
+      "surprise": 8.343605689273563
+    },
+    {
+      "announce": "2025-01-30",
+      "issuer": "Oracle",
+      "size": 8.008006631500765,
+      "expected": 1.4424365816510454,
+      "source": "rung 0",
+      "surprise": 6.565570049849719
+    },
+    {
+      "announce": "2025-04-28",
+      "issuer": "Alphabet",
+      "size": 7.603620973544545,
+      "expected": 1.585856332410434,
+      "source": "rung 0",
+      "surprise": 6.017764641134111
+    },
+    {
+      "announce": "2025-09-24",
+      "issuer": "Oracle",
+      "size": 21.24371431408341,
+      "expected": 1.2678134880566403,
+      "source": "rung 0",
+      "surprise": 19.97590082602677
+    },
+    {
+      "announce": "2025-10-30",
+      "issuer": "Meta",
+      "size": 38.90741872844377,
+      "expected": 1.3031861937320144,
+      "source": "rung 0",
+      "surprise": 37.604232534711755
+    },
+    {
+      "announce": "2025-11-03",
+      "issuer": "Alphabet",
+      "size": 22.254780042467914,
+      "expected": 1.3884870516673522,
+      "source": "rung 0",
+      "surprise": 20.866292990800563
+    },
+    {
+      "announce": "2025-11-17",
+      "issuer": "Amazon",
+      "size": 16.54661555528385,
+      "expected": 1.857872458472375,
+      "source": "rung 0",
+      "surprise": 14.688743096811475
+    },
+    {
+      "announce": "2026-02-02",
+      "issuer": "Oracle",
+      "size": 25.737990036096846,
+      "expected": 4.822288651785082,
+      "source": "rung 0",
+      "surprise": 20.915701384311763
+    },
+    {
+      "announce": "2026-02-09",
+      "issuer": "Alphabet",
+      "size": 21.881510860722457,
+      "expected": 9.384914739032595,
+      "source": "rung 0",
+      "surprise": 12.496596121689862
+    },
+    {
+      "announce": "2026-03-10",
+      "issuer": "Amazon",
+      "size": 38.41699275808221,
+      "expected": 6.972704326374948,
+      "source": "rung 0",
+      "surprise": 31.44428843170726
+    },
+    {
+      "announce": "2026-04-30",
+      "issuer": "Meta",
+      "size": 31.857326314884396,
+      "expected": 9.766976241985667,
+      "source": "rung 0",
+      "surprise": 22.09035007289873
+    },
+    {
+      "announce": "2026-05-05",
+      "issuer": "Alphabet",
+      "size": 9.959230117279885,
+      "expected": 12.162223244761964,
+      "source": "rung 0",
+      "surprise": -2.2029931274820793
+    },
+    {
+      "announce": "2026-06-08",
+      "issuer": "Amazon",
+      "size": 16.09968563528484,
+      "expected": 14.115393454293432,
+      "source": "rung 0",
+      "surprise": 1.9842921809914067
+    },
+    {
+      "announce": "2026-07-07",
+      "issuer": "Amazon",
+      "size": 25.07201977769628,
+      "expected": 5.3644035349135315,
+      "source": "rung 0",
+      "surprise": 19.70761624278275
+    },
+    {
+      "announce": "2026-08-06",
+      "issuer": "Alphabet",
+      "size": 25.27644745793875,
+      "expected": 18.27696205846086,
+      "source": "rung 0",
+      "surprise": 6.999485399477891
+    }
+  ],
+  "lp": {
+    "b_expected": -0.011946841095755532,
+    "b_surprise": 0.11042972551912902,
+    "p_expected": 0.93,
+    "p_surprise": 0.097,
+    "p_surprise_minus_expected": 0.487
+  }
+}

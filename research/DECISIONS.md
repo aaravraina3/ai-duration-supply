@@ -108,3 +108,42 @@ seeing results would be tuning.
 
 **D-16. sentence-transformers added as a dependency** for D1, as the plan named.
 Model download about 420MB. Reversible: easy.
+
+**NEEDS REVIEW. D-17. C3 stock effect: the registered rule selected the levels
+regression, and that result looks like a trend artifact.** Engle-Granger p 0.043
+says cointegrated; Johansen trace (5.10 against a 95% cutoff of 15.49) says not.
+The registration said "levels if either finds cointegration", so levels ran: +0.21
+bp per $bn of outstanding stock, Newey-West t 3.87, R² 0.41 on 33 months. But the
+stock is a near-deterministic ramp, the TP10 level is not clearly I(1) (ADF
+p 0.013, KPSS p 0.01), and the term premium rose over the sample, so a levels fit
+mostly measures two series both trending up. I added the Newey-West t (not in the
+registration) so the estimate is not reported bare. Chosen for the paper: report
+both, present the changes estimate (−0.067, permutation p 0.71, MDE 0.50) as the
+conservative reading, and state that the levels result is not evidence of a stock
+effect. Alternatives: report levels as the stock answer (rejected: this is the
+"number that looks too good" pattern the paper's six artifacts are about), or
+report only changes (rejected: hides a registered result). Prediction "no
+cointegration" was wrong under the either-test rule. Reversible: easy (wording).
+
+**D-18. D1 warm-up fallback.** For a deal whose latest filing has no
+out-of-sample forecast (filing inside the 12-filing warm-up), expected supply was
+set to the naive rate, trailing 365-day issuance × 90/365. In the run it was never
+triggered (every deal's filing had a forecast). Reversible: easy.
+
+**D-19. D1 filings whose 90-day target window runs past `SAMPLE_END` (10 of 97)
+are excluded from training and scoring but still produce forecasts.** Otherwise
+their targets would be truncated, which biases them toward zero. Reversible: easy.
+
+**D-20. D2 ladder stopped at rung 2.** Rule 5.0 says climb to rung 4 only if
+residuals show a pattern against an input or regime. Two checks were run:
+volatility on the squared rung-2 error (t 2.14 at h = 1, 1.77 at h = 3) and
+volatility on the error itself (t −0.90, −0.61). The first is a pattern in the
+error variance, which a better mean model cannot fix; the second, the one that
+bears on the forecast, is flat. Rung 3 needs correlated inputs or many features;
+VIFs are about 1 and there are 7 features. So neither condition is met. The
+mean-error check was added after seeing the first check; it is a diagnosis step
+the plan requires, not a model choice. Reversible: easy.
+
+**D-21. C5 power simulation details** (not specified by the plan): effect placed
+on the 10s2s slope, odds ratio 2 per sd, event probabilities rescaled to average
+16 events, 200 permutations per simulated sample. Reversible: easy.

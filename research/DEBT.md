@@ -14,3 +14,7 @@ Created during the upgrade. Severity: high (fix before finishing), medium, low.
 | 8 | Trailing 20-day volatility window (20) is hardcoded in four places instead of `config.py`. | `b3_tests`, `diagnostics_b48`, `placebo_matched` | high | open |
 | 9 | Placebo draw streams differ by script, so the same placebo test gives p 0.0705 in `speccurve.py` and 0.0825 in `placebo_matched.py`. Each test should own a dedicated generator. | `placebo_matched.py`, `speccurve.py` | medium | open |
 | 10 | `speccurve.py` fills the placebo shock matrix with a Python loop over 2000 draws per spec. Vectorisable. | `speccurve.py` | low | open |
+| 11 | `oos_forecast.py` aligns the volatility series to the forecast errors by position (`WARM:WARM+len(y)`), which assumes the valid-forecast mask is contiguous. Should align on the index. | `oos_forecast.py` | medium | open |
+| 12 | `altdv.panel()` is imported by `timing.py` and `tenorlocal.py`, and `speccurve` helpers (`deal_table`, `draw_assignments`, `fwl_b`) are imported by four modules. They belong in a shared module, not in the B9 script. | `speccurve.py` and importers | medium | open |
+| 13 | `expected_supply.py` re-embeds the whole corpus on every run (about 2 minutes plus a 420MB model). Cache the embeddings. | `expected_supply.py` | low | open |
+| 14 | `timing.py` power simulation runs about 200,000 logit fits. | `timing.py` | low | open |

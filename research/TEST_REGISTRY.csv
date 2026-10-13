@@ -28,3 +28,23 @@ B6-LAD,2026-10-12,B6,h0 effect robust to outliers,"median regression, V1 placebo
 B7-VIF,2026-10-12,B7,no multicollinearity,VIF,daily dD and lp h0,no,,all 1.01 to 1.27,,no
 B8-CHOW,2026-10-12,B8,coefficients stable across 2025-01-01,"Chow F test, all coefficients",lp h0,no,,"F 4.44, p 0.0002; pre-2025 has 2 deals",,no
 F1,2026-10-13,B9,h0 effect survives the specification family,"216-spec curve, matched placebo 2000 joint draws, Romano-Wolf stepdown, BH",see output/tables/speccurve.csv,yes,f304594,100% positive; raw p<0.05 in 9%; 0 specs survive RW or BH at 0.10; headline RW p 0.69,,yes
+C1-ACMTP10,2026-10-13,C1,effect not an ACM artifact,"h0 LP, matched placebo 2000 draws",ACM TP10,yes,96cd725,"b +0.081, p 0.071",,no
+C1-Kim-WrightTP10,2026-10-13,C1,effect not an ACM artifact,"h0 LP, matched placebo 2000 draws",Kim-Wright TP10,yes,96cd725,"b +0.038, p 0.048",,no
+C1-DGS2,2026-10-13,C1,effect not an ACM artifact,"h0 LP, matched placebo 2000 draws",DGS2,yes,96cd725,"b +0.058, p 0.254",,no
+C1-DGS5,2026-10-13,C1,effect not an ACM artifact,"h0 LP, matched placebo 2000 draws",DGS5,yes,96cd725,"b +0.076, p 0.112",,no
+C1-DGS7,2026-10-13,C1,effect not an ACM artifact,"h0 LP, matched placebo 2000 draws",DGS7,yes,96cd725,"b +0.093, p 0.051",,no
+C1-DGS10,2026-10-13,C1,effect not an ACM artifact,"h0 LP, matched placebo 2000 draws",DGS10,yes,96cd725,"b +0.097, p 0.025",,no
+C1-DGS20,2026-10-13,C1,effect not an ACM artifact,"h0 LP, matched placebo 2000 draws",DGS20,yes,96cd725,"b +0.106, p 0.014",,no
+C1-DGS30,2026-10-13,C1,effect not an ACM artifact,"h0 LP, matched placebo 2000 draws",DGS30,yes,96cd725,"b +0.115, p 0.007",,no
+C1-10s2s,2026-10-13,C1,effect not an ACM artifact,"h0 LP, matched placebo 2000 draws",10s2s,yes,96cd725,"b +0.040, p 0.279",,no
+C1-30s10s,2026-10-13,C1,effect not an ACM artifact,"h0 LP, matched placebo 2000 draws",30s10s,yes,96cd725,"b +0.018, p 0.378",,no
+C2,2026-10-13,C2,effect localized at issued tenors,"tenor x day panel, day and tenor FE, placebo",CMT 2-30Y,yes,96cd725,"beta +0.103, p 0.169",,no
+C3-EG,2026-10-13,C3,stock and TP cointegrated,Engle-Granger,monthly,yes,96cd725,p 0.043,,no
+C3-JOH,2026-10-13,C3,stock and TP cointegrated,Johansen trace,monthly,yes,96cd725,"5.10 vs cv 15.49, not rejected",,no
+C3-LEV,2026-10-13,C3,stock effect in levels,"TP level on stock, NW (t not registered)",monthly,partly,96cd725,"+0.21, t 3.87; read as trend artifact (D-17)",,no
+C3-CHG,2026-10-13,C3,stock effect in changes,"dTP on monthly issuance, permutation",monthly,yes,96cd725,"-0.067, p 0.71",,no
+C4,2026-10-13,C4,AI effect robust to MBS supply,"weekly, with and without dMBS, NW",weekly,yes,96cd725,AI coef -4.9%; MBS p 0.24,,no
+D1-LADDER,2026-10-13,D1,text forecasts issuance,"walk-forward ladder rungs 0-3, one-SE rule",filings,yes,96cd725,rung 0 chosen; text rungs worse,,no
+D1-LP,2026-10-13,D1,only surprise supply moves TP,"h0 LP expected + surprise, placebo",lp h0,yes,96cd725,surprise +0.110 p 0.097; expected p 0.93; diff p 0.49,,no
+D2-H1,2026-10-13,D2,supply improves OOS forecasts,"Clark-West, h=1",daily,yes,96cd725,p 0.86,,no
+D2-H3,2026-10-13,D2,supply improves OOS forecasts,"Clark-West, h=3",daily,yes,96cd725,p 0.81,,no

@@ -351,3 +351,59 @@ matched-on-lag placebo, 2000 draws, two-sided, one placebo date per deal per dra
   1; Diebold-Mariano for rung 1 vs zero.
 - **Prediction**: rung 2 does not beat rung 1 (Clark-West p > 0.10); every rung's
   out-of-sample R² is at or below zero; the ladder stops at rung 2.
+
+---
+
+# Phase C and D results
+
+**C1** (`output/tables/altdv.csv`). h = 0, matched-placebo p:
+
+| dependent | b | placebo p | NW t |
+|---|---|---|---|
+| ACM TP10 | +0.081 | 0.071 | 3.47 |
+| Kim-Wright TP10 | +0.038 | **0.048** | 3.16 |
+| DGS2 | +0.058 | 0.254 | 1.61 |
+| DGS5 | +0.076 | 0.112 | 2.35 |
+| DGS7 | +0.093 | 0.051 | 2.79 |
+| DGS10 | +0.097 | **0.025** | 3.48 |
+| DGS20 | +0.106 | **0.014** | 3.71 |
+| DGS30 | +0.115 | **0.007** | 3.93 |
+| 10s2s | +0.040 | 0.279 | 2.10 |
+| 30s10s | +0.018 | 0.378 | 1.70 |
+
+Predictions: Kim-Wright positive with p <= 0.15, held (0.048); 10, 20, 30Y
+positive, held; 2Y smaller than 10Y, held; 10s2s positive, held (not
+significant). Ten dependents were tested, so these are ten tests. The ACM p here
+(0.071) comes from the same draw stream as the spec curve (DECISIONS D-11).
+
+**C2** (`tenorlocal.json`). Localization beta +0.103 with day fixed effects,
+placebo p 0.169. Prediction (positive, p > 0.10) held. 54% of the deals' 10y-
+equivalent exposure sits at the 30Y point and 18% at 10Y.
+
+**C3** (`stockeffect.json`). 33 months. Engle-Granger p 0.043 (cointegrated at
+5%); Johansen trace 5.10 against 15.49 (not). The registered rule ran levels:
++0.21 bp per $bn of stock, Newey-West t 3.87, R² 0.41, but see DECISIONS D-17 for
+why this is not read as a stock effect. Changes on changes: −0.067 per $bn of
+monthly issuance, permutation p 0.71, MDE 0.50. Predictions: "no cointegration",
+wrong under the either-test rule; "changes coefficient positive", wrong (it is
+negative); "p > 0.10" and "MDE larger than the coefficient", held.
+
+**C4** (`mbs.json`). 141 weeks. AI coefficient +0.115 (NW t 2.61) without the MBS
+control, +0.109 (t 2.38) with it: −4.9%. MBS coefficient +0.14 per $bn (t 1.17,
+p 0.24). Fed MBS holdings fell $518bn over the sample. Predictions held.
+
+**D1** (`expected_supply.json`). 1831 passages, 729 after deduplication. 97
+filings, 87 with a complete 90-day target, 75 scored out of sample. Out-of-sample
+MSE: rung 0 166.6, rung 1 173.9, rung 2 174.5, rung 3 212.3. The one-standard-error
+rule picks **rung 0**: no text-based rung beats trailing issuance. Decomposition
+with rung 0: expected −0.012 (placebo p 0.93), surprise +0.110 (p 0.097),
+difference p 0.49. Plan's prediction (surprise positive and larger): held on
+point estimates, not significantly. My predictions (text does not beat rung 1;
+neither coefficient significant at 5%): held. Per plan D1.10, NLP stays off the
+resume.
+
+**D2** (`oos_forecast.json`). Out-of-sample R² against the historical mean, h = 1
+/ h = 3: zero forecast +0.004 / +0.014; macro −0.051 / −0.026; macro plus supply
+−0.061 / −0.038. Clark-West, supply vs macro: p 0.86 / 0.81. Ladder stopped at
+rung 2 (DECISIONS D-20). Predictions: supply does not help, held; every rung at or
+below zero, **wrong for the zero forecast**, which beats the mean by a hair.
