@@ -1,0 +1,13 @@
+spec,regressor,regressor_verdict,breaks_rule
+dTP10 ~ S x regime,S (retired text index),ambiguous,True
+dTP10 ~ S,S (retired text index),ambiguous,True
+dTP10 ~ D x regime,D (decayed stock),nonstationary,True
+dTP10 ~ D,D (decayed stock),nonstationary,True
+dTP10 ~ dS,dS,stationary,False
+dTP10 ~ dD,dD,stationary,False
+dRN10 ~ S x regime,S (retired text index),ambiguous,True
+dRN10 ~ S,S (retired text index),ambiguous,True
+dRN10 ~ D x regime,D (decayed stock),nonstationary,True
+dRN10 ~ D,D (decayed stock),nonstationary,True
+dRN10 ~ dS,dS,stationary,False
+dRN10 ~ dD,dD,stationary,False

@@ -73,6 +73,41 @@ def draw_matched(shocks, lt, rng, by_kind=False, excl=EXCL, tail=6):
     return pd.Series(dict(out)).groupby(level=0).sum()
 
 
+def add_vol_tercile(lt, panel):
+    """V1 (11_UPGRADE_PREREG.md): tercile of trailing 20-day TP10 realized
+    volatility, from t-20 to t-1 only. -1 where there is not enough history."""
+    vol = panel.TP10.diff().shift(1).rolling(20).std().reindex(lt.index)
+    lt = lt.copy()
+    lt["vol3"] = pd.qcut(vol, 3, labels=False).fillna(-1).astype(int)
+    return lt
+
+
+def draw_vol_matched(shocks, lt, rng, excl=EXCL, tail=6, stats=None):
+    """Same lag after the last release and same volatility tercile. Falls back to
+    lag only when the cell has no free date; `stats` counts how often."""
+    idx = lt.index
+    banned = set()
+    for d in shocks.index:
+        p = idx.get_loc(d)
+        banned |= set(range(max(0, p - excl), min(len(idx), p + excl + 1)))
+    ok = np.array([i not in banned and i < len(idx) - tail for i in range(len(idx))])
+    out, used = [], set()
+    for d, size in shocks.items():
+        p = idx.get_loc(d)
+        lag_ok = ok & (lt.lag.values == lt.lag.values[p])
+        cand = [i for i in np.flatnonzero(lag_ok & (lt.vol3.values == lt.vol3.values[p])) if i not in used]
+        if stats is not None:
+            stats["slots"] = stats.get("slots", 0) + 1
+        if not cand:
+            cand = [i for i in np.flatnonzero(lag_ok) if i not in used]
+            if stats is not None:
+                stats["fallback"] = stats.get("fallback", 0) + 1
+        j = rng.choice(cand)
+        used.add(j)
+        out.append((idx[j], size))
+    return pd.Series(dict(out)).groupby(level=0).sum()
+
+
 def draw_uniform(shocks, lt, rng, excl=EXCL, tail=6):
     idx = lt.index
     banned = set()

@@ -11,7 +11,8 @@ Tables: `output/tables/diagnostics_serial.csv`, `diagnostics_hac.csv`,
 `diagnostics_bandwidths.csv`, `diagnostics_b3.csv`. Figure:
 `output/figures/diagnostics_acf.png`.
 
-Status so far: B1 to B3 done. B4 to B10 not run yet.
+Status: B1 to B8 done, plus T1 to T4 testing the B3 claims (results in
+`11_UPGRADE_PREREG.md`). B9 is registered as F1 and not run. B10 not run.
 
 ---
 
@@ -108,3 +109,120 @@ explicitly in the Phase E rewrite.
 
 The daily regression on `dD` shows the same pattern (OLS t 1.97, HC0 3.58,
 Newey-West 3.75 to 3.88, EWC 3.89, fixed-b 4.10).
+
+---
+
+## B3 follow-ups: T1 to T4
+
+Registered in `f304594` before running. Full results in `11_UPGRADE_PREREG.md`.
+In short:
+- **T1**: the deal-day residual gap (2.80 vs 4.00bp) is **not distinguishable from
+  chance** (matched placebo p 0.13, Brown-Forsythe p 0.31).
+- **T2**: trailing 20-day TP volatility before deals is lower than on matched
+  placebo dates (p 0.015). Prior-day VIX is not lower; it is slightly higher.
+- **T3**: equalising the deal-day spread closes **52%** of the OLS-to-HAC log
+  variance gap. It does not explain all of it.
+- **T4**: 9 of 16 deals priced 1 to 3 trading days after a release, against a 33%
+  base rate (p 0.044); not significant at 1 or 2 days. The "8 of 11" is p 0.10
+  against the fair conditional base rate.
+
+So the B3 section above stands as arithmetic: the regressor lives on 16 days and
+robust SEs use those 16 residuals. **Why** those residuals are small is not
+established.
+
+---
+
+## Inference for B4 to B8: the volatility-matched placebo (V1)
+
+Placebo dates matched on lag after the last release and on the tercile of
+trailing 20-day TP10 volatility (t-20 to t-1). Every lag-by-tercile cell had a
+free date, so the fallback rate was **0%**. 2000 draws, two-sided.
+
+These estimates need 20 days of trailing volatility, so the sample starts 20 days
+later than the headline and the plain OLS estimate is **+0.0809**, not +0.0812.
+
+## B4. Heteroskedasticity and volatility clustering
+
+| target | Breusch-Pagan p | White p | ARCH LM (5) p |
+|---|---|---|---|
+| daily | 0.0001 | < 0.0001 | < 0.0001 |
+| lp h=0 | < 0.0001 | < 0.0001 | < 0.0001 |
+
+Both strongly heteroskedastic, with volatility clustering. Deal-day percentiles
+of prior-day VIX and trailing TP volatility are in `b3_tests.json` (T2). The
+2024-08-07 deal priced at the **97th** VIX percentile (the yen carry unwind week),
+and the 2025-04-28 deal at the 94th VIX percentile and the 100th trailing-TP-vol
+percentile (after the April 2025 tariff selloff). Four 2025-26 deals priced below
+the 10th trailing-vol percentile.
+
+**Corrected estimates** (`diagnostics_b4b6_estimates.csv`):
+
+| estimator | b | vol-matched placebo p | lag-only placebo p |
+|---|---|---|---|
+| OLS | +0.0809 | **0.053** | 0.098 |
+| OLS, dTP divided by trailing vol | +0.0253 (sd units) | 0.060 | 0.035 |
+| WLS, weights 1/vol² | +0.0695 | 0.100 | 0.172 |
+| Huber | +0.0804 | 0.039 | 0.066 |
+| median regression | +0.0769 | 0.054 | 0.096 |
+
+The sign and size hold under every correction. The vol-matched placebo gives a
+**lower** p than the lag-only one for the plain estimate (0.053 vs 0.098). Its
+draws are tighter (sd 0.039 vs 0.048) because placebo dates now come from the
+same volatility terciles as the deals, and more deals sit in low-volatility
+terciles. Against the V1 prediction (p between 0.08 and 0.20, at or above
+lag-only): **wrong**.
+
+Note the lag-only p here (0.098) differs from the headline 0.083 because the
+sample is 20 days shorter and the draws use a different seed.
+
+## B5. Stationarity
+
+ADF and KPSS (`diagnostics_b5_stationarity.csv`):
+
+| series | ADF p | KPSS p | verdict |
+|---|---|---|---|
+| TP10 level | 0.42 | 0.01 | nonstationary |
+| dTP10 | < 0.001 | 0.10 | stationary |
+| D, decayed stock | 0.076 | 0.01 | nonstationary |
+| dD | < 0.001 | 0.10 | stationary |
+| S, retired text index level | 0.001 | 0.01 | ambiguous |
+| dS | < 0.001 | 0.10 | stationary |
+| deal shock | < 0.001 | 0.01 | ambiguous |
+| dbe, doil, dvix, auc_10y, auc_surprise | < 0.001 | 0.10 | stationary |
+
+The deal shock reads "ambiguous" because KPSS rejects on a series that is zero
+except for 16 spikes; ADF rejects a unit root firmly. It is not a level series.
+
+**Specs that break the rule** (stationary dependent on a nonstationary or
+ambiguous regressor, `diagnostics_b5_specs.csv`): every `regression.py` spec on
+the level of D or S, with or without the regime interaction, for both dTP10 and
+dRN10. That is 8 of the 12 specs. None of them is a headline result (the headline
+is the local projection, and the daily regression headline uses dD). **Retired
+from any headline use**: the D-level and S-level specs, including the "30bp test"
+level arithmetic in `regression.py`.
+
+## B6. Fat tails and influential days
+
+h = 0 residuals: Jarque-Bera rejects (p < 1e-79), skew 0.70, kurtosis 6.3. The
+ten most influential days by Cook's distance include **no deal days**, for both
+targets; the top of the list is 2024-08-05 and 08-06 (the yen carry unwind) and
+April 2025 (the tariff selloff) (`diagnostics_b4_b8.json`,
+`diagnostics_tails.png`). Huber +0.080 and median regression +0.077 are both
+within 5% of OLS (table above).
+
+## B7. Multicollinearity
+
+All VIFs between 1.01 and 1.27 (`diagnostics_b7_vif.csv`). No issue.
+
+## B8. Structural stability
+
+Chow test at 2025-01-01 on the h = 0 local projection: F 4.44, **p 0.0002**. But
+the pre-2025 subsample has **2 deals**, so its shock coefficient (+0.50) rests on
+two observations, one of them in the yen carry unwind week; the post-2025
+coefficient is +0.068 on 14 deals. The test covers all coefficients, so it does
+not say which one breaks.
+
+Expanding-window h = 0 coefficient (`diagnostics_b8_expanding.csv`,
+`diagnostics_expanding.png`): +0.38 with 4 deals, falling to +0.13 by 7, then
+between +0.08 and +0.11 from deal 8 onward, ending at +0.079. The early large
+values are the 2024 and April 2025 deals.

@@ -1,0 +1,13 @@
+series,n,adf_p,kpss_p,verdict
+TP10 level,680,0.4200399194384635,0.01,nonstationary
+dTP10,680,2.803221253895494e-25,0.1,stationary
+D (decayed stock),680,0.07573728672139644,0.01,nonstationary
+dD,680,0.0,0.1,stationary
+S (retired text index),676,0.0008680939792959938,0.01,ambiguous
+dS,676,0.0,0.1,stationary
+deal shock,680,8.206363135892748e-30,0.01,ambiguous
+dbe,680,0.0,0.1,stationary
+doil,680,2.0316373918657897e-11,0.1,stationary
+dvix,680,8.77623372485903e-23,0.1,stationary
+auc_10y,680,2.416513980568997e-13,0.1,stationary
+auc_surprise,680,2.5547240395545428e-27,0.1,stationary

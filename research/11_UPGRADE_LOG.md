@@ -152,3 +152,27 @@ existing number changed.
   OLS SE, which is the argument for randomization as primary.
 - Still to do from B3: the paper statement that randomization is primary and HAC
   is comparison only, in the Phase E rewrite.
+
+**B3 claims tested (T1 to T4, registered `f304594`).** Interpretations removed
+first: the paper's "partly because deals tend to price in the quieter days after
+a release" and "They wait for the print, then bring the deal into the clean air
+behind it", and the matching sentences in `12_DIAGNOSTICS.md`. Results:
+T1 deal-day quietness not distinguishable from chance (p 0.13); T2 trailing TP
+vol lower before deals (p 0.015), VIX not; T3 the variance gap closes 52% of the
+OLS-to-HAC gap, not all; T4 9 of 16 within 3 days of a release (p 0.044), the old
+8 of 11 is p 0.10 against the conditional base rate. Two predictions wrong (T2,
+T3). **The paper's "8 of 11" sentence is still in and is now known to be weak;
+it waits for a decision.**
+
+**Test registry started**: `research/TEST_REGISTRY.csv`, 28 tests so far, with
+claim, preregistration commit and result.
+
+**B9 family registered** as F1 (216 specs), not run.
+
+**B4 to B8 done** with the volatility-matched placebo (V1, fallback 0%). No
+headline number changed. Corrected h = 0 estimates +0.070 to +0.081, vol-matched
+p 0.039 to 0.100. V1 prediction wrong: vol matching lowered p (0.053 vs 0.098).
+Strong heteroskedasticity and ARCH; fat tails (kurtosis 6.3); VIFs about 1; no
+deal day among the ten most influential observations; Chow rejects at 2025-01-01
+but with 2 deals before it. Retired from headline use: the 8 `regression.py`
+specs on the level of D or S (B5), including the level "30bp test".

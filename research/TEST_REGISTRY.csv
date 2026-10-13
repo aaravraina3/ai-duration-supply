@@ -1,8 +1,29 @@
 test_id,date,phase,claim_supported,test,target,preregistered,prereg_commit,result,result_commit,b9_family
 P1,2026-10-12,A2,effect persists beyond day 0,pooled mean of b0-b2 vs timing-matched placebo (2000 draws),lp h0-2,yes,e469395,"S=+0.091, p 0.081 two-sided",b196dc6,no
-B1-LB,2026-10-12,B1,residuals are serially independent,Ljung-Box lags 1/5/10,daily dD and lp h0-5,no,,"rejected in every target (h0 p 0.0003 at lag 1)",e039c09,no
+B1-LB,2026-10-12,B1,residuals are serially independent,Ljung-Box lags 1/5/10,daily dD and lp h0-5,no,,rejected in every target (h0 p 0.0003 at lag 1),e039c09,no
 B1-BG,2026-10-12,B1,residuals are serially independent,Breusch-Godfrey lags 1/5/10,daily dD and lp h0-5,no,,rejected in every target,e039c09,no
-B2-BW,2026-10-12,B2,headline t is robust to NW bandwidth,NW t at lags 0/2/5/10/20 and NW1994 automatic,daily dD and lp h0-5,no,,"h0 t 3.25 to 3.77; automatic 11 lags t 3.56",e039c09,no
+B2-BW,2026-10-12,B2,headline t is robust to NW bandwidth,NW t at lags 0/2/5/10/20 and NW1994 automatic,daily dD and lp h0-5,no,,h0 t 3.25 to 3.77; automatic 11 lags t 3.56,e039c09,no
 B3-EWC,2026-10-12,B3,HAC inference with better small-sample size,EWC B=30 with t(30) critical values (LLSW 2018),daily dD and lp h0-5,no,,"h0 t 3.94, p 0.0005",e039c09,no
 B3-FIXB,2026-10-12,B3,HAC inference with better small-sample size,Bartlett M=34 with simulated Kiefer-Vogelsang fixed-b critical values,daily dD and lp h0-5,no,,"h0 t 4.06, p 0.0004",e039c09,no
-B3-HC,2026-10-12,B3,leverage-robust SE,HC0/HC2/HC3,daily dD and lp h0-5,no,,"h0 t 3.26/3.15/3.03",e039c09,no
+B3-HC,2026-10-12,B3,leverage-robust SE,HC0/HC2/HC3,daily dD and lp h0-5,no,,h0 t 3.26/3.15/3.03,e039c09,no
+T1-BF,2026-10-12,B3,deal-day residuals are quieter,"Brown-Forsythe deal vs other days, controls-only residuals",lp h0,yes,f304594,p 0.31 (full-model residuals p 0.21),,no
+T1-PERM,2026-10-12,B3,deal-day residuals are quieter,"permutation: 16-date residual sd vs matched placebo, 10000 draws",lp h0,yes,f304594,one-sided p 0.129 (uniform 0.119; full-model 0.136),,no
+T2-VOL,2026-10-12,B3,deals come in calm windows,median trailing 20d TP vol before deals vs matched placebo,pre-deal,yes,f304594,"3.54 vs 4.27, one-sided p 0.015",,no
+T2-VIX,2026-10-12,B3,deals come in calm windows,median prior-day VIX vs matched placebo,pre-deal,yes,f304594,"17.6 vs 16.2, one-sided p 0.93 (wrong direction)",,no
+T3,2026-10-12,B3,OLS-HAC gap is the deal-day variance gap,counterfactual SE with deal-day residuals rescaled,lp h0,yes,f304594,"fails: closes 52% of log-variance gap, cf NW/OLS 0.74",,no
+T4-K1,2026-10-12,B3,deals priced just after releases,"exact binomial and permutation, 1 trading day after, all 16",timing,yes,f304594,"4/16 vs 0.125, p 0.130",,no
+T4-K2,2026-10-12,B3,deals priced just after releases,"same, within 2",timing,yes,f304594,"6/16 vs 0.237, p 0.156",,no
+T4-K3,2026-10-12,B3,deals priced just after releases,"same, within 3",timing,yes,f304594,"9/16 vs 0.326, binomial p 0.044, permutation 0.041",,no
+T4-SEC,2026-10-12,B3,8 of 11 priced just after releases,"binomial on the 11 dropped deals, conditional base rate",timing,yes,f304594,"8/11, p 0.099 conditional (0.008 unconditional)",,no
+V1,2026-10-12,B4-B8,h0 effect vs vol-and-timing-matched placebo,"placebo matched on lag and trailing-vol tercile, 2000 draws",lp h0 (20-day-shorter sample),yes,f304594,"b +0.0809, p 0.053 (lag-only 0.098)",,no
+B4-BP,2026-10-12,B4,residuals homoskedastic,Breusch-Pagan,daily dD and lp h0,no,,rejected (p < 0.001 both),,no
+B4-WHITE,2026-10-12,B4,residuals homoskedastic,White,daily dD and lp h0,no,,rejected (p < 0.001 both),,no
+B4-ARCH,2026-10-12,B4,no volatility clustering,"Engle ARCH LM, 5 lags",daily dD and lp h0,no,,rejected (p < 0.001 both),,no
+B4-VOLSCALE,2026-10-12,B4,h0 effect robust to vol scaling,"OLS on dTP / trailing 20d vol, V1 placebo",lp h0,no,,"b +0.0253 sd units, p 0.060 (lag-only 0.035)",,no
+B4-WLS,2026-10-12,B4,h0 effect robust to vol weighting,"WLS weights 1/vol^2, V1 placebo",lp h0,no,,"b +0.0695, p 0.100 (lag-only 0.172)",,no
+B5-ADF-KPSS,2026-10-12,B5,series stationarity,ADF and KPSS on 12 series,all specs,no,,TP10 level and D nonstationary; S ambiguous; 8 of 12 regression.py specs break the rule,,no
+B6-JB,2026-10-12,B6,residuals normal,Jarque-Bera,daily dD and lp h0,no,,"rejected, kurtosis 6.3",,no
+B6-HUBER,2026-10-12,B6,h0 effect robust to outliers,"Huber RLM, V1 placebo",lp h0,no,,"b +0.0804, p 0.039 (lag-only 0.066)",,no
+B6-LAD,2026-10-12,B6,h0 effect robust to outliers,"median regression, V1 placebo",lp h0,no,,"b +0.0769, p 0.054 (lag-only 0.096)",,no
+B7-VIF,2026-10-12,B7,no multicollinearity,VIF,daily dD and lp h0,no,,all 1.01 to 1.27,,no
+B8-CHOW,2026-10-12,B8,coefficients stable across 2025-01-01,"Chow F test, all coefficients",lp h0,no,,"F 4.44, p 0.0002; pre-2025 has 2 deals",,no

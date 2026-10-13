@@ -175,3 +175,47 @@ Bands are drawn with the repo rule (h + 5).
 
 Specs that cannot be estimated (for example, a filter leaving fewer than 5 deals)
 are reported as missing, not dropped silently.
+
+---
+
+## Results for T1 to T4 (`src/b3_tests.py`, `output/tables/b3_tests.json`)
+
+**T1. Not established.** Controls-only residual sd 2.80 on deal days against 4.00
+on others. Brown-Forsythe p 0.31. Matched placebo one-sided p 0.129 (uniform
+0.119). Full-model residuals: 2.84 against 4.00, Brown-Forsythe p 0.21, matched p
+0.136. Prediction: primary not significant, held; secondary marginal (0.02 to
+0.20), held. **The deal-day variance gap is not distinguishable from chance.**
+
+**T2. Mixed, and the prediction was wrong.** Trailing 20-day TP10 volatility
+before deal days: median 3.54 against a matched-placebo median of 4.27, one-sided p
+**0.015** (uniform 0.020). Prediction said not significant; it is. VIX on the
+prior close: median 17.6 against 16.2, p 0.93 for "calmer", so deal days came
+after *higher* VIX, if anything. The two pre-deal measures disagree. Two measures
+were tested, so 0.015 is one of two.
+
+**T3. Fails.** Equalising deal-day residual spread raises the Newey-West SE from
+0.0233 to 0.0325, against OLS 0.0441: ratio 0.74, outside the 10% band. It closes
+52% of the log variance gap. **The deal-day variance difference explains about
+half of the OLS-to-HAC gap, not all of it.** The rest has not been examined.
+
+**T4. Marginal for k = 3, not for 1 or 2.** All 16 deals, priced 1 to k trading
+days after a release:
+
+| k | count | base rate | binomial p | permutation p |
+|---|---|---|---|---|
+| 1 | 4 of 16 | 0.125 | 0.130 | 0.128 |
+| 2 | 6 of 16 | 0.237 | 0.156 | 0.153 |
+| 3 | 9 of 16 | 0.326 | **0.044** | **0.041** |
+
+Three windows were tested, so the k = 3 result is one of three. Secondary, the
+11 deals the ±3 rule dropped: 8 of 11, p 0.008 against the unconditional base
+rate, but **p 0.099 against the conditional base rate (0.489)**, which is the fair
+one because those 11 were selected for being within ±3 days of a release.
+Prediction held on both.
+
+## Result for V1 (`src/diagnostics_b48.py`, `output/tables/diagnostics_b4b6_estimates.csv`)
+
+Plain h = 0 OLS on the 20-day-shorter sample (+0.0809): vol-matched placebo p
+**0.053**, lag-only 0.098. Fallback rate 0%. Prediction (0.08 to 0.20, at or
+above lag-only): **wrong**. Matching on volatility tightened the placebo (sd 0.039
+vs 0.048) and lowered p.
