@@ -3,270 +3,952 @@
     "value": 103.0,
     "printed": "103",
     "matches": true,
-    "source": "tranches.csv rows"
+    "source": "tranches.csv rows",
+    "in_paper": true
   },
   "n_floating_tranches": {
     "value": 7.0,
     "printed": "7",
     "matches": true,
-    "source": "tranches.csv floating"
+    "source": "tranches.csv floating",
+    "in_paper": true
   },
   "largest_deal_usd_bn": {
     "value": 37.0,
     "printed": "37",
     "matches": true,
-    "source": "deals_all.csv, Amazon 2026-03-10"
+    "source": "deals_all.csv, Amazon 2026-03-10",
+    "in_paper": true
   },
   "largest_deal_tranches": {
     "value": 11.0,
     "printed": "11",
     "matches": true,
-    "source": "deals_all.csv n_tranches"
+    "source": "deals_all.csv n_tranches",
+    "in_paper": true
   },
   "mean_deal_10y_equiv_bn": {
     "value": 20.781878493764737,
     "printed": "21",
     "matches": true,
-    "source": "deals_all.csv tenyr_equiv"
+    "source": "deals_all.csv tenyr_equiv",
+    "in_paper": true
   },
   "share_bdays_clean_3day_rule": {
     "value": 0.3693820224719101,
     "printed": "37",
     "matches": true,
-    "source": "macro_calendar.csv, +/-3 bdays of FOMC/CPI/NFP"
+    "source": "macro_calendar.csv, +/-3 bdays of FOMC/CPI/NFP",
+    "in_paper": true
   },
   "jumbos_killed_by_3day_rule": {
     "value": 11.0,
     "printed": "11",
     "matches": true,
-    "source": "deals_all.csv + macro_calendar.csv"
+    "source": "deals_all.csv + macro_calendar.csv",
+    "in_paper": true
   },
   "killed_priced_1to3_after_release": {
     "value": 8.0,
     "printed": "8",
     "matches": true,
-    "source": "same"
+    "source": "same",
+    "in_paper": true
   },
   "all_deals_1to3_after_release": {
     "value": 9.0,
     "printed": "9",
     "matches": true,
-    "source": "same"
+    "source": "same",
+    "in_paper": true
   },
   "three_factor_variance_share": {
     "value": 0.9916398642223114,
     "printed": "99.2",
     "matches": true,
-    "source": "gsw.csv PCA, concession.loadings"
+    "source": "gsw.csv PCA, concession.loadings",
+    "in_paper": true
   },
   "concession_band_min_bp": {
     "value": -0.1668582529146879,
     "printed": "\u22120.167",
     "matches": true,
-    "source": "robustness_specs.csv exclusion band rows"
+    "source": "robustness_specs.csv exclusion band rows",
+    "in_paper": true
   },
   "concession_band_max_bp": {
     "value": 0.1234597419813047,
     "printed": "+0.123",
     "matches": true,
-    "source": "robustness_specs.csv exclusion band rows"
+    "source": "robustness_specs.csv exclusion band rows",
+    "in_paper": true
   },
   "acm_dtp_r2_on_5_curve_pcs": {
     "value": 0.9635313298742156,
     "printed": "96",
     "matches": true,
-    "source": "acm.csv + gsw.csv"
+    "source": "acm.csv + gsw.csv",
+    "in_paper": true
   },
   "tp_change_on_release_days_bp": {
     "value": 0.7149345514903579,
     "printed": "+0.7",
     "matches": true,
-    "source": "acm.csv + macro_calendar.csv"
+    "source": "acm.csv + macro_calendar.csv",
+    "in_paper": true
   },
   "dTP_2026_to_sep15_bp": {
     "value": -8.570170683882907,
     "printed": "\u22128.6",
     "matches": true,
-    "source": "acm.csv"
+    "source": "acm.csv",
+    "in_paper": true
   },
   "dRN_2026_to_sep15_bp": {
     "value": 79.04955928839229,
     "printed": "79",
     "matches": true,
-    "source": "acm.csv"
+    "source": "acm.csv",
+    "in_paper": true
   },
   "endpoint_grid_min_bp": {
     "value": -28.647330528740014,
     "printed": "\u221229",
     "matches": true,
-    "source": "acm.csv, figures_blog.fig9_endpoints grid"
+    "source": "acm.csv, figures_blog.fig9_endpoints grid",
+    "in_paper": true
   },
   "endpoint_grid_max_bp": {
     "value": 23.921013270232997,
     "printed": "+24",
     "matches": true,
-    "source": "same"
+    "source": "same",
+    "in_paper": true
   },
   "endpoint_grid_n_positive": {
     "value": 12.0,
     "printed": "12",
     "matches": true,
-    "source": "same"
+    "source": "same",
+    "in_paper": true
   },
   "full_sample_d10y_bp": {
     "value": 101.0,
     "printed": "101",
     "matches": true,
-    "source": "fred.csv DGS10"
+    "source": "fred.csv DGS10",
+    "in_paper": true
   },
   "full_sample_dTP_bp": {
     "value": 89.79885718945985,
     "printed": "+90",
     "matches": true,
-    "source": "acm.csv"
+    "source": "acm.csv",
+    "in_paper": true
   },
   "long_ops_fill_to_max_share": {
     "value": 0.75,
     "printed": "75",
     "matches": true,
-    "source": "buybacks.json"
+    "source": "buybacks.json",
+    "in_paper": true
   },
   "buyback_news_share": {
     "value": 0.12384462331795006,
     "printed": "12",
     "matches": true,
-    "source": "buybacks.json"
+    "source": "buybacks.json",
+    "in_paper": true
   },
   "buyback_surprise_days": {
     "value": 18.0,
     "printed": "18",
     "matches": true,
-    "source": "buybacks_daily.csv in LP panel"
+    "source": "buybacks_daily.csv in LP panel",
+    "in_paper": true
   },
   "buyback_mean_abs_surprise_bn": {
     "value": 1.194924694038117,
     "printed": "1",
     "matches": true,
-    "source": "buybacks_daily.csv"
+    "source": "buybacks_daily.csv",
+    "in_paper": true
   },
   "buyback_raw_h0_b": {
     "value": -0.1966610715442272,
     "printed": "\u22120.20",
     "matches": true,
-    "source": "buyback_vs_ai_lp.csv"
+    "source": "buyback_vs_ai_lp.csv",
+    "in_paper": true
   },
   "breakeven_h0_b": {
     "value": 0.015124704932467054,
     "printed": "+0.015",
     "matches": true,
-    "source": "hedgeflow panel (DGS10 - DFII10)"
+    "source": "hedgeflow panel (DGS10 - DFII10)",
+    "in_paper": true
   },
   "breakeven_h0_t": {
     "value": 0.8227569614153727,
     "printed": "0.8",
     "matches": true,
-    "source": "same"
+    "source": "same",
+    "in_paper": true
   },
   "cmt_f20y10y_r2": {
     "value": 0.6234900960364558,
     "printed": "0.62",
     "matches": true,
-    "source": "hedgeflow panel, CMT forwards"
+    "source": "hedgeflow panel, CMT forwards",
+    "in_paper": true
   },
   "gsw_f20y10y_r2": {
     "value": 0.06247348186233648,
     "printed": "0.06",
     "matches": true,
-    "source": "hedgeflow panel, GSW forwards"
+    "source": "hedgeflow panel, GSW forwards",
+    "in_paper": true
   },
   "corr_gsw_cmt_20y10y": {
     "value": 0.3836988684254589,
     "printed": "0.38",
     "matches": true,
-    "source": "hedgeflow panel"
+    "source": "hedgeflow panel",
+    "in_paper": true
   },
   "five_day_10y_sd_bp": {
     "value": 11.368184044564137,
     "printed": "11.4",
     "matches": true,
-    "source": "gsw.csv 10Y, overlapping 5-day changes"
+    "source": "gsw.csv 10Y, overlapping 5-day changes",
+    "in_paper": true
   },
   "five_day_price_sd_bp": {
     "value": 90.9454723565131,
     "printed": "91",
     "matches": true,
-    "source": "same x ModDur 8"
+    "source": "same x ModDur 8",
+    "in_paper": true
   },
   "trade_pnl_sd_bp": {
     "value": 62.082198414682615,
     "printed": "62",
     "matches": true,
-    "source": "variance.decompose"
+    "source": "variance.decompose",
+    "in_paper": true
   },
   "trade_window_dy10_sd_bp": {
     "value": 7.760274801835327,
     "printed": "7.8",
     "matches": true,
-    "source": "variance.decompose"
+    "source": "variance.decompose",
+    "in_paper": true
   },
   "pnl_r2_on_size": {
     "value": 0.011726312894901558,
     "printed": "1.2",
     "matches": true,
-    "source": "variance.decompose"
+    "source": "variance.decompose",
+    "in_paper": true
   },
   "spread_r2_on_size": {
     "value": 0.21135083490073447,
     "printed": "21.1",
     "matches": true,
-    "source": "variance.decompose"
+    "source": "variance.decompose",
+    "in_paper": true
   },
   "signal_bp": {
     "value": 2.5561710547330625,
     "printed": "2.56",
     "matches": true,
-    "source": "0.123 (10Y spot LP h0 minus h5, hard-coded in variance.py) x mean size"
+    "source": "0.123 (10Y spot LP h0 minus h5, hard-coded in variance.py) x mean size",
+    "in_paper": true
   },
   "signal_to_noise": {
     "value": 0.22485306753591247,
     "printed": "0.22",
     "matches": true,
-    "source": "same"
+    "source": "same",
+    "in_paper": true
   },
   "events_for_t2": {
     "value": 80.0,
     "printed": "80",
     "matches": true,
-    "source": "same"
+    "source": "same",
+    "in_paper": true
   },
   "v1_sharpe": {
     "value": 0.8728274441255722,
     "printed": "+0.87",
     "matches": true,
-    "source": "strategy.pnl_table, 5 days, 3bp cost"
+    "source": "strategy.pnl_table, 5 days, 3bp cost",
+    "in_paper": true
   },
   "v1_sharpe_2d": {
     "value": -0.8825980693770437,
     "printed": "\u22120.88",
     "matches": true,
-    "source": "strategy.pnl_table hold=2"
+    "source": "strategy.pnl_table hold=2",
+    "in_paper": true
   },
   "v1_sharpe_10d": {
     "value": -0.6870798209542439,
     "printed": "\u22120.69",
     "matches": true,
-    "source": "strategy.pnl_table hold=10"
+    "source": "strategy.pnl_table hold=10",
+    "in_paper": true
   },
   "v2_sharpe": {
     "value": -1.0974777950888908,
     "printed": "\u22121.10",
     "matches": true,
-    "source": "strategy2.trades, size-scaled steepener"
+    "source": "strategy2.trades, size-scaled steepener",
+    "in_paper": true
   },
   "japan_naive_pickup_t": {
     "value": 8.23215833918847,
     "printed": "8.2",
     "matches": true,
-    "source": "japan.build, levels TP10 ~ pickup"
+    "source": "japan.build, levels TP10 ~ pickup",
+    "in_paper": true
+  },
+  "persist_upper95_placebo": {
+    "value": 40.88066017409798,
+    "printed": "41",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "persist_upper95_nw": {
+    "value": 28.127953310756393,
+    "printed": "28",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "t4_count": {
+    "value": 9.0,
+    "printed": "9",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "t4_base_rate": {
+    "value": 0.3264705882352941,
+    "printed": "33",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "t4_p": {
+    "value": 0.04394658382918171,
+    "printed": "0.04",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "t4_holm": {
+    "value": 0.13183975148754512,
+    "printed": "0.13",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "t1_p": {
+    "value": 0.1289,
+    "printed": "0.13",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "t2_vol_p": {
+    "value": 0.0153,
+    "printed": "0.015",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "ewc_t": {
+    "value": 3.937473957354368,
+    "printed": "3.94",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "fixedb_t": {
+    "value": 4.056135713085386,
+    "printed": "4.06",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "nw0_t": {
+    "value": 3.2476104550980667,
+    "printed": "3.25",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "nw20_t": {
+    "value": 3.767675713876765,
+    "printed": "3.77",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "nwauto_t": {
+    "value": 3.5617563440121045,
+    "printed": "3.56",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "nwauto_lags": {
+    "value": 11.0,
+    "printed": "11",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "hc3_t": {
+    "value": 3.030294443418871,
+    "printed": "3.03",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "v1_p": {
+    "value": 0.053,
+    "printed": "0.05",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "v1_p_table": {
+    "value": 0.053,
+    "printed": "0.053",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "est_volscale_b": {
+    "value": 0.0252907483389328,
+    "printed": "0.025",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "est_volscale_p": {
+    "value": 0.0595,
+    "printed": "0.059",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "est_wls_b": {
+    "value": 0.0695213385983655,
+    "printed": "0.070",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "est_wls_p": {
+    "value": 0.0995,
+    "printed": "0.100",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "est_huber_b": {
+    "value": 0.0804412245862012,
+    "printed": "0.080",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "est_huber_p": {
+    "value": 0.039,
+    "printed": "0.039",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "est_lad_b": {
+    "value": 0.0769156216614275,
+    "printed": "0.077",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "est_lad_p": {
+    "value": 0.0535,
+    "printed": "0.053",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "spec_n": {
+    "value": 216.0,
+    "printed": "216",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "spec_p10": {
+    "value": 0.37962962962962965,
+    "printed": "38",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "spec_p05": {
+    "value": 0.09259259259259259,
+    "printed": "9",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "spec_rw": {
+    "value": 0.6895,
+    "printed": "0.69",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "mde80_16": {
+    "value": 0.11576777904008252,
+    "printed": "0.116",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "power_16": {
+    "value": 0.539817213948717,
+    "printed": "54",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "power_32": {
+    "value": 0.7946618837607835,
+    "printed": "79",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "tenor_beta": {
+    "value": 0.10336430049591963,
+    "printed": "0.103",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "tenor_p": {
+    "value": 0.169,
+    "printed": "0.17",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "tenor_share30": {
+    "value": 0.5427329971708038,
+    "printed": "54",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "tenor_share10": {
+    "value": 0.17973915605701465,
+    "printed": "18",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "stock_months": {
+    "value": 33.0,
+    "printed": "33",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "stock_eg": {
+    "value": 0.043073436954920115,
+    "printed": "0.043",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "stock_joh": {
+    "value": 5.100464707230711,
+    "printed": "5.10",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "stock_joh_cv": {
+    "value": 15.4943,
+    "printed": "15.49",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "stock_lev_b": {
+    "value": 0.20542959818732826,
+    "printed": "0.21",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "stock_lev_t": {
+    "value": 3.867792581682227,
+    "printed": "3.87",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "stock_lev_r2": {
+    "value": 0.4050291072113159,
+    "printed": "0.41",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "stock_chg_b": {
+    "value": -0.06719021151718767,
+    "printed": "\u22120.067",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "stock_chg_p": {
+    "value": 0.7102,
+    "printed": "0.71",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "stock_chg_mde": {
+    "value": 0.5018627068670511,
+    "printed": "0.50",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "mbs_drop": {
+    "value": 518.2500000000002,
+    "printed": "518",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "mbs_ai_change": {
+    "value": 4.913818255046087,
+    "printed": "4.9",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "mbs_p": {
+    "value": 0.24158298382075927,
+    "printed": "0.24",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c5_joint_p": {
+    "value": 0.0734,
+    "printed": "0.07",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c5_slope_p": {
+    "value": 0.03573961818600778,
+    "printed": "0.04",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c5_power": {
+    "value": 0.388,
+    "printed": "39",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_before": {
+    "value": 1831.0,
+    "printed": "1831",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_after": {
+    "value": 729.0,
+    "printed": "729",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_scored": {
+    "value": 75.0,
+    "printed": "75",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_mse0": {
+    "value": 166.61471864572763,
+    "printed": "166.6",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_mse1": {
+    "value": 173.90497434813284,
+    "printed": "173.9",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_mse2": {
+    "value": 174.51327183360334,
+    "printed": "174.5",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_mse3": {
+    "value": 212.28140009602234,
+    "printed": "212.3",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_surprise_b": {
+    "value": 0.11042972551912902,
+    "printed": "0.110",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_surprise_p": {
+    "value": 0.097,
+    "printed": "0.097",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_expected_b": {
+    "value": -0.011946841095755532,
+    "printed": "\u22120.012",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_expected_p": {
+    "value": 0.93,
+    "printed": "0.93",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d1_diff_p": {
+    "value": 0.487,
+    "printed": "0.49",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d2_r2_supply": {
+    "value": -0.06087991134975468,
+    "printed": "\u22120.061",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d2_r2_macro": {
+    "value": -0.05075076246543886,
+    "printed": "\u22120.051",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "d2_cw_p": {
+    "value": 0.8600064658246602,
+    "printed": "0.86",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "lb_p": {
+    "value": 0.0002541468208606,
+    "printed": "0.0003",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "kurtosis": {
+    "value": 6.312265575648795,
+    "printed": "6.3",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "vif_min": {
+    "value": 1.0062058022176097,
+    "printed": "1.01",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "vif_max": {
+    "value": 1.2666377208676405,
+    "printed": "1.27",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "chow_p": {
+    "value": 0.0002050802389595979,
+    "printed": "0.0002",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "chow_pre_deals": {
+    "value": 2.0,
+    "printed": "2",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_b_ACM TP10": {
+    "value": 0.0812373911964188,
+    "printed": "0.081",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_p_ACM TP10": {
+    "value": 0.0705,
+    "printed": "0.070",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_b_Kim-Wright TP10": {
+    "value": 0.0381447861524788,
+    "printed": "0.038",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_p_Kim-Wright TP10": {
+    "value": 0.0475,
+    "printed": "0.048",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_b_DGS2": {
+    "value": 0.0575144032893661,
+    "printed": "0.058",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_p_DGS2": {
+    "value": 0.2535,
+    "printed": "0.254",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_b_DGS5": {
+    "value": 0.0755398866893758,
+    "printed": "0.076",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_p_DGS5": {
+    "value": 0.1115,
+    "printed": "0.112",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_b_DGS7": {
+    "value": 0.092514400864601,
+    "printed": "0.093",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_p_DGS7": {
+    "value": 0.051,
+    "printed": "0.051",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_b_DGS10": {
+    "value": 0.0970541998312089,
+    "printed": "0.097",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_p_DGS10": {
+    "value": 0.025,
+    "printed": "0.025",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_b_DGS20": {
+    "value": 0.1059779566760987,
+    "printed": "0.106",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_p_DGS20": {
+    "value": 0.014,
+    "printed": "0.014",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_b_DGS30": {
+    "value": 0.1151135228999306,
+    "printed": "0.115",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_p_DGS30": {
+    "value": 0.007,
+    "printed": "0.007",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_b_10s2s": {
+    "value": 0.0395397965418427,
+    "printed": "0.040",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
+  },
+  "c1_p_10s2s": {
+    "value": 0.279,
+    "printed": "0.279",
+    "matches": true,
+    "source": "upgrade table (see key)",
+    "in_paper": true
   }
 }

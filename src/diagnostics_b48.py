@@ -18,7 +18,7 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 from statsmodels.stats.stattools import jarque_bera
 from statsmodels.tsa.stattools import adfuller, kpss
 from statsmodels.regression.quantile_regression import QuantReg
-from config import TAB, FIG, RANDOM_SEED
+from config import TAB, FIG, RANDOM_SEED, VOL_WINDOW
 import localproj as L, placebo_matched as PM, regression as R
 
 warnings.filterwarnings("ignore")
@@ -29,7 +29,7 @@ N_DRAW = 2000
 def design(P, sh):
     """h = 0 design with the trailing-volatility scale (t-20 .. t-1 only)."""
     y = P.TP10 - P.TP10.shift(1)
-    sig = P.TP10.diff().shift(1).rolling(20).std()
+    sig = P.TP10.diff().shift(1).rolling(VOL_WINDOW).std()
     X = sm.add_constant(pd.DataFrame({"shock": sh.reindex(P.index).fillna(0.0), **{c: P[c] for c in CTRL}}))
     ok = y.notna() & X.notna().all(axis=1) & sig.notna()
     return y[ok], X[ok], sig[ok]

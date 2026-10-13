@@ -32,6 +32,10 @@ and `src/verify_vintage.py` checks them against the hashes below.
 | `data/raw/fred_T10YIE.csv` | FRED `T10YIE` | 2026-09-23 17:27 ET | as downloaded | `dc1be0f45ccb2b4215d1b5cf1213842c9b060e73a0f659b9ca432611fa69b6fa` |
 | `data/raw/fred_T5YIE.csv` | FRED `T5YIE` | 2026-09-23 17:27 ET | as downloaded | `c04bc345b0649676fdf9c2d28ecb156ec58b52dd1ebcfea5cfc5eeff456f0e15` |
 | `data/raw/fred_VIXCLS.csv` | FRED `VIXCLS` | 2026-09-23 17:27 ET | as downloaded | `675f9bcb86ee88799f8f7a8b7ee9c30f7a0be26a26df8f9549bddf9e84c4a598` |
+| `data/processed/fred_extra.csv` | merged by `src/data_pull.py fred_extra()`; used only through `SAMPLE_END` | 2026-10-13 16:36 ET | runs past `SAMPLE_END`; cut in code | `22802333934cf25cd809f90bc2cbfb9617e262e5329d99aae2549f2f45459a59` |
+| `data/raw/fred_THREEFYTP10.csv` | FRED `THREEFYTP10` | 2026-10-13 16:36 ET | runs past `SAMPLE_END`; cut in code | `63935c995156c181028cc56fa71f62b1a32c0e720012964231425fc112d54565` |
+| `data/raw/fred_WSHOMCB.csv` | FRED `WSHOMCB` | 2026-10-13 16:36 ET | runs past `SAMPLE_END`; cut in code | `b904c87cfcdf813fdeaeb27463c7f0de8470f5c7e5dbb87a9eef4e2eaf1d57fd` |
+| `data/raw/fred_BAA10Y.csv` | FRED `BAA10Y` | 2026-10-13 16:36 ET | runs past `SAMPLE_END`; cut in code | `d68146535f8f2951a29f2854a1bd5eeac1bc67c4d92f4a471eaa9ba8dff68aed` |
 
 The dependent variable is `ACMTP10` from `acm.csv`. A comparison against a
 2026-09-17 download found no revisions to overlapping dates

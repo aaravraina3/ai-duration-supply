@@ -407,3 +407,10 @@ resume.
 −0.061 / −0.038. Clark-West, supply vs macro: p 0.86 / 0.81. Ladder stopped at
 rung 2 (DECISIONS D-20). Predictions: supply does not help, held; every rung at or
 below zero, **wrong for the zero forecast**, which beats the mean by a hair.
+
+**C5** (`timing.json`). 674 days, 16 deals. Joint likelihood-ratio permutation p
+**0.073**. Per coefficient (Wald): 10s2s slope +1.08 per sd, p 0.036; auction day
+p 0.57; 5-day 10Y change p 0.38; Baa spread p 0.58. Power against odds ratio 2
+per sd on the slope: 0.39. Predictions: joint p > 0.10, **wrong** (0.073); power
+below 50%, held. Both issuance and the slope rose over 2025 to 2026; the test does
+not separate that trend from day-to-day timing.

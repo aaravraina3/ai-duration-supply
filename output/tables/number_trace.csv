@@ -1,7 +1,12 @@
 number,where,source,context
-23,PAPER.pdf,headline.X_pca.placebo_sd_bp,Aarav Raina · 23 min read
-15,PAPER.pdf,headline.auction_lp.7-10y only (selected)|h0.b,On September 15 the 10-year Treasury yield closed at 5.00% for the first time since July 2007. A week
-10,PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,On September 15 the 10-year Treasury yield closed at 5.00% for the first time since July 2007. A week
+35,PAPER.pdf,power_mde.csv:n[19],Aarav Raina · 35 min read
+10,PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,"spenders. There is a flow effect: on the day a deal prices, the 10-year term premium rises about"
+0.08bp,PAPER.pdf,paper_numbers.est_huber_b,"0.08bp per $1bn of 10-year-equivalent duration, the same sign shows up in another term premium"
+$1,PAPER.pdf,paper_numbers.three_factor_variance_share,"0.08bp per $1bn of 10-year-equivalent duration, the same sign shows up in another term premium"
+0.08,PAPER.pdf,paper_numbers.est_huber_b,about 0.08) and does not survive a correction across 216 specifications. The stock effect I cannot
+216,PAPER.pdf,paper_numbers.spec_n,about 0.08) and does not survive a correction across 216 specifications. The stock effect I cannot
+33,PAPER.pdf,paper_numbers.t4_base_rate,measure: 33 months of data cannot tell a stock effect from two series that both trended up.
+15,PAPER.pdf,paper_numbers.stock_joh_cv,On September 15 the 10-year Treasury yield closed at 5.00% for the first time since July 2007. A week
 5.00%,PAPER.pdf,headline.Y.crossing_pct,On September 15 the 10-year Treasury yield closed at 5.00% for the first time since July 2007. A week
 5.10%,PAPER.pdf,"CONSTANT: press report of the 2026-09-23 intraday print, noted in headline.json Y.note",later it hit 5.10%. Around the same time I read a sell-side estimate that roughly 30 basis points of the
 30,PAPER.pdf,CONSTANT: the sell-side claim / 10-to-30-year bucket,later it hit 5.10%. Around the same time I read a sell-side estimate that roughly 30 basis points of the
@@ -9,35 +14,39 @@ $179.5,PAPER.pdf,headline.issuance_face_usd_bn.2026,"Meanwhile the five big AI s
 $92.8 billion,PAPER.pdf,headline.issuance_face_usd_bn.2025,"billion of dollar bonds in 2026, up from $92.8 billion in 2025 and close to nothing before that. Every"
 4.94%,PAPER.pdf,CONSTANT: bp explainer,Basis point (bp). One hundredth of a percentage point. A yield going from 4.94% to 5.00% moved 6bp.
 6bp,PAPER.pdf,CONSTANT: bp explainer,Basis point (bp). One hundredth of a percentage point. A yield going from 4.94% to 5.00% moved 6bp.
+1,PAPER.pdf,paper_numbers.three_factor_variance_share,1
 424B,PAPER.pdf,CONSTANT: form name 424B,The preliminary prospectus (form 424B) is filed the morning of the deal. It lists the tranches but
 "$5,000,000,000",PAPER.pdf,CONSTANT: cover-page example,"$5,000,000,000 4.250% NOTES DUE 2031, one line per tranche."
 4.250%,PAPER.pdf,CONSTANT: cover-page example,"$5,000,000,000 4.250% NOTES DUE 2031, one line per tranche."
 16,PAPER.pdf,headline.N_usd_deals_total,silently passing. All 16 deals matched at 1.00.
 1.00,PAPER.pdf,headline.macro_excl_bdays,silently passing. All 16 deals matched at 1.00.
-1,PAPER.pdf,paper_numbers.three_factor_variance_share,1
-+0.081,PAPER.pdf,headline.term_premium.impact_b0_bp_per_bn,"priced, the day-0 estimate is +0.081 (Newey-West t 3.47). Dated by the final prospectus filing day"
++0.081,PAPER.pdf,paper_numbers.c1_b_ACM TP10,"priced, the day-0 estimate is +0.081 (Newey-West t 3.47). Dated by the final prospectus filing day"
 3.47,PAPER.pdf,headline.term_premium.impact_t,"priced, the day-0 estimate is +0.081 (Newey-West t 3.47). Dated by the final prospectus filing day"
 −0.022,PAPER.pdf,headline.announcement_timing.b0_dated_by_final_filing,"instead, it is −0.022 (t −0.69), nothing at all. The effect sits on the day the deal actually priced, and"
 −0.69,PAPER.pdf,paper_numbers.v1_sharpe_10d,"instead, it is −0.022 (t −0.69), nothing at all. The effect sits on the day the deal actually priced, and"
 $34.8 billion,PAPER.pdf,localproj_all.csv:t[22],"dollar one. $34.8 billion equivalent of the total is non-dollar, and that supplies duration to bunds"
 $37B,PAPER.pdf,paper_numbers.largest_deal_usd_bn,"Amazon's $37B March deal has 11 tranches, two of them floating rate. A floater resets its coupon"
 11,PAPER.pdf,paper_numbers.largest_deal_tranches,"Amazon's $37B March deal has 11 tranches, two of them floating rate. A floater resets its coupon"
+2,PAPER.pdf,CONSTANT: maturity or horizon label,2
 $5B,PAPER.pdf,CONSTANT: duration example,"risk."" A $5B 30-year tranche is worth roughly twice a $5B 10-year. The floaters turned out not to"
 7,PAPER.pdf,paper_numbers.n_floating_tranches,"matter much here: only 7 of 103 tranches are floating, and treating them as anything from zero to two"
 103,PAPER.pdf,paper_numbers.n_tranches,"matter much here: only 7 of 103 tranches are floating, and treating them as anything from zero to two"
 "8,",PAPER.pdf,paper_numbers.killed_priced_1to3_after_release,"Duration. How much a bond's price moves when yields move. A 10-year note has duration around 8,"
 1%,PAPER.pdf,CONSTANT: duration explainer,"meaning a 1% rise in yields costs you about 8% of the price. It is the natural unit for ""how much"
 8%,PAPER.pdf,CONSTANT: duration explainer,"meaning a 1% rise in yields costs you about 8% of the price. It is the natural unit for ""how much"
-2,PAPER.pdf,CONSTANT: maturity or horizon label,2
 $92.75 billion,PAPER.pdf,headline.issuance_face_usd_bn.2025,One number gave me confidence the parser was right: my 2025 total came out at $92.75 billion
-$93 billion,PAPER.pdf,headline.issuance_face_usd_bn.2025,"against a widely quoted figure of about $93 billion. My 2026 number, $179.5 billion, is well above the"
+$93 billion,PAPER.pdf,paper_numbers.d1_expected_p,"against a widely quoted figure of about $93 billion. My 2026 number, $179.5 billion, is well above the"
 $179.5 billion,PAPER.pdf,headline.issuance_face_usd_bn.2026,"against a widely quoted figure of about $93 billion. My 2026 number, $179.5 billion, is well above the"
 $132 billion,PAPER.pdf,CONSTANT: quoted 2026 total (external),"~$132 billion I have seen quoted, and I think the quoted figure is just older. My own count through"
 $129.5 billion,PAPER.pdf,headline.issuance_face_usd_bn.2026_through_2026-06-08,"early June is $129.5 billion, which matches it. The gap is the two $25 billion deals in July and August."
-$25 billion,PAPER.pdf,b3_tests.T2.trailing_20d_tp_vol.deal_percentiles.2024-09-25,"early June is $129.5 billion, which matches it. The gap is the two $25 billion deals in July and August."
+$25 billion,PAPER.pdf,paper_numbers.c1_p_DGS2,"early June is $129.5 billion, which matches it. The gap is the two $25 billion deals in July and August."
 $10 billion,PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,"The event study only uses the jumbo deals, $10 billion or more, which is 12 of the 16. Applied"
 12,PAPER.pdf,paper_numbers.concession_band_max_bp,"The event study only uses the jumbo deals, $10 billion or more, which is 12 of the 16. Applied"
 37%,PAPER.pdf,paper_numbers.largest_deal_usd_bn,"this. Under a three-day rule, 37% of business days in my sample are clean, so random timing should"
+9,PAPER.pdf,paper_numbers.all_deals_1to3_after_release,"Part of the reason is timing. Across all 16 deals, 9 priced within three trading days after a macro"
+33%,PAPER.pdf,paper_numbers.t4_base_rate,"release, against 33% of trading days in general (p 0.04). That was one of three windows I tested,"
+0.04,PAPER.pdf,paper_numbers.t4_p,"release, against 33% of trading days in general (p 0.04). That was one of three windows I tested,"
+0.13,PAPER.pdf,paper_numbers.t4_holm,"though (one, two and three days), and after correcting for that it isn't significant (Holm p 0.13)."
 3,PAPER.pdf,CONSTANT: horizon label,3
 6,PAPER.pdf,paper_numbers.gsw_f20y10y_r2,±2 business days 6
 99.2%,PAPER.pdf,paper_numbers.three_factor_variance_share,"together explain 99.2% of daily variation). Fit that on the far-away maturities, predict at the deal's"
@@ -45,7 +54,7 @@ $10 billion,PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,"The event study only u
 0.69,PAPER.pdf,paper_numbers.v1_sharpe_10d,"I ran it. The answer was +0.075bp, with a placebo p-value of 0.69. Nothing."
 1.000,PAPER.pdf,"CONSTANT: R2 of the control fit, see research/05_METHODS.md",maturities had an R-squared of 1.000. Not 0.999.
 0.999,PAPER.pdf,CONSTANT: rhetorical,maturities had an R-squared of 1.000. Not 0.999.
-4,PAPER.pdf,headline.X_pca.nw_se,4
+4,PAPER.pdf,paper_numbers.t4_p,4
 5bp,PAPER.pdf,CONSTANT: size of the injected bump,"Rather than argue about this, I tested it. I took real daily curve moves, injected a known 5bp bump at"
 77.7%,PAPER.pdf,headline.model_dependence.injection_recovered_residualisation_only,The three-factor step alone 77.7%
 −10.7%,PAPER.pdf,headline.X_pca.recovery,After the Fed's curve-fitting is applied first −10.7%
@@ -58,7 +67,7 @@ $10 billion,PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,"The event study only u
 +0.078,PAPER.pdf,headline.explained_share.via_concession_scaled.share_of_Y,1 +0.078 0.217 1.97
 0.217,PAPER.pdf,diagnostics_hac.csv:p[20],1 +0.078 0.217 1.97
 1.97,PAPER.pdf,headline.lp_table.h1.t,1 +0.078 0.217 1.97
-+0.115,PAPER.pdf,headline.lp_table.h2.b,2 +0.115 0.127 3.24
++0.115,PAPER.pdf,paper_numbers.c1_b_DGS30,2 +0.115 0.127 3.24
 0.127,PAPER.pdf,headline.placebo_matched_h2.matched on lag.p,2 +0.115 0.127 3.24
 3.24,PAPER.pdf,headline.lp_table.h2.t,2 +0.115 0.127 3.24
 +0.064,PAPER.pdf,headline.lp_table.h3.b,3 +0.064 0.445 1.18
@@ -70,33 +79,44 @@ $10 billion,PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,"The event study only u
 20,PAPER.pdf,CONSTANT: maturity or horizon label,20 −0.045 not run −0.34
 −0.045,PAPER.pdf,headline.lp_table.h20.b,20 −0.045 not run −0.34
 −0.34,PAPER.pdf,headline.X_abnormal.nw_p,20 −0.045 not run −0.34
-0.08,PAPER.pdf,headline.X_pca.value_bp,"explained below), it is marginal on day 0 only: p 0.08, then 0.22 on day 1. Under Newey-West, for"
 0.22,PAPER.pdf,paper_numbers.signal_to_noise,"explained below), it is marginal on day 0 only: p 0.08, then 0.22 on day 1. Under Newey-West, for"
 +0.091,PAPER.pdf,headline.explained_share.via_concession_X_abn.sum_2026_bp,"response over days 0 to 2 is +0.091, with a matched-placebo p of 0.08, the same as day 0 alone."
 $194 billion,PAPER.pdf,headline.term_premium.supply_2026_10y_equiv_bn,"Scaled by 2026 issuance, $194 billion in 10-year equivalents (the $179.5 billion face value weighted"
-16bp,PAPER.pdf,headline.N_usd_deals_total,"by duration), that is about 16bp of announcement-day effect across the whole year and roughly"
-96%,PAPER.pdf,paper_numbers.acm_dtp_r2_on_5_curve_pcs,"One caveat on the measure. The ACM term premium is a model estimate, and 96% of its daily moves"
-+0.097,PAPER.pdf,headline.flow_tests.spot10_b,"The effect there is +0.097 (t 3.48), and Figures 6 and 8 use observed yields throughout."
-3.48,PAPER.pdf,headline.flow_tests.spot10_t,"The effect there is +0.097 (t 3.48), and Figures 6 and 8 use observed yields throughout."
-8,PAPER.pdf,paper_numbers.killed_priced_1to3_after_release,"The effect there is +0.097 (t 3.48), and Figures 6 and 8 use observed yields throughout."
-30bp,PAPER.pdf,CONSTANT: the sell-side claim being tested,"That already answers the 30bp claim, at least for this slice of supply. Whatever moved the long end in"
+16bp,PAPER.pdf,headline.N_usd_deals_total,"by duration), that is about 16bp of announcement-day effect across the whole year, and a point"
+30bp,PAPER.pdf,CONSTANT: the sell-side claim being tested,"That doesn't settle the 30bp claim, though. The day-5 estimate implies about 2bp of 2026's supply"
+2bp,PAPER.pdf,CONSTANT: maturity or horizon label,"That doesn't settle the 30bp claim, though. The day-5 estimate implies about 2bp of 2026's supply"
+41bp,PAPER.pdf,paper_numbers.persist_upper95_placebo,"effect persists, but the placebo band at day 5 is wide: the 95% upper bound is about 41bp (28bp under"
+28bp,PAPER.pdf,paper_numbers.persist_upper95_nw,"effect persists, but the placebo band at day 5 is wide: the 95% upper bound is about 41bp (28bp under"
 1.84,PAPER.pdf,headline.h0_inference.ols.t,"1.84 (p = 0.066), and a randomization test (shuffle the event dates two thousand times, keep the deal"
 0.066,PAPER.pdf,headline.h0_inference.ols.p,"1.84 (p = 0.066), and a randomization test (shuffle the event dates two thousand times, keep the deal"
 0.078,PAPER.pdf,headline.explained_share.via_concession_scaled.share_of_Y,"sizes, see how often you get a coefficient this big) gives p = 0.078."
 0.0234,PAPER.pdf,headline.h0_inference.newey_west.se,"smaller than the OLS one, 0.0234 against 0.0441. Newey-West is a correction for correlated errors."
 0.0441,PAPER.pdf,headline.h0_inference.ols.se,"smaller than the OLS one, 0.0234 against 0.0441. Newey-West is a correction for correlated errors."
 679,PAPER.pdf,headline.h0_inference.n,"The regressor has 679 daily observations, but it is zero on all but 16 of them. The effective sample size"
-9,PAPER.pdf,paper_numbers.all_deals_1to3_after_release,is about 9.
-+0.7bp,PAPER.pdf,paper_numbers.tp_change_on_release_days_bp,"term premium does tend to drift up in those days, about +0.7bp on the release day itself. So maybe"
+3.94,PAPER.pdf,paper_numbers.ewc_t,3.94 and 4.06 (appendix).
+4.06,PAPER.pdf,paper_numbers.fixedb_t,3.94 and 4.06 (appendix).
++0.7bp,PAPER.pdf,paper_numbers.tp_change_on_release_days_bp,"+0.7bp on the release day itself. So maybe my ""effect"" was just deals inheriting post-release drift."
 +0.001,PAPER.pdf,headline.explained_share.via_concession_X_abn.share_of_Y,uniform +0.001 0.078
-+0.000,PAPER.pdf,headline.merges_applied,same lag after a release +0.000 0.083
++0.000,PAPER.pdf,paper_numbers.lb_p,same lag after a release +0.000 0.083
 +0.008,PAPER.pdf,headline.placebo_matched_h0.matched on lag and release type.mean,same lag and same release type +0.008 0.110
-0.110,PAPER.pdf,headline.placebo_matched_h0.matched on lag and release type.p,same lag and same release type +0.008 0.110
+0.110,PAPER.pdf,paper_numbers.d1_surprise_b,same lag and same release type +0.008 0.110
+0.05,PAPER.pdf,paper_numbers.v1_p,0.05 on a sample 20 days shorter. I keep the timing-only placebo as the headline because it was
+8,PAPER.pdf,paper_numbers.killed_priced_1to3_after_release,8
+1.96,PAPER.pdf,power_mde.csv:se[74],"Figure 5. Every specification, sorted by its estimate. Bars are ±1.96 placebo standard deviations; blue"
+0.10,PAPER.pdf,paper_numbers.est_wls_p,points have a raw placebo p below 0.10. The panel shows which choices produced each estimate. The
+38%,PAPER.pdf,paper_numbers.corr_gsw_cmt_20y10y,All 216 estimates are positive. 38% have a raw p below 0.10 and 9% below 0.05. After correcting
+9%,PAPER.pdf,paper_numbers.all_deals_1to3_after_release,All 216 estimates are positive. 38% have a raw p below 0.10 and 9% below 0.05. After correcting
++0.070,PAPER.pdf,paper_numbers.est_wls_b,regressions that discount outliers all give +0.070 to +0.081. None of the ten most influential days in
+80%,PAPER.pdf,paper_numbers.events_for_t2,"detects with 80% power is 0.116, above the estimate itself. Power against the estimate is about 54%."
+0.116,PAPER.pdf,paper_numbers.mde80_16,"detects with 80% power is 0.116, above the estimate itself. Power against the estimate is about 54%."
+54%,PAPER.pdf,paper_numbers.power_16,"detects with 80% power is 0.116, above the estimate itself. Power against the estimate is about 54%."
+32,PAPER.pdf,headline.preregistration.n_min,"At 32 deals, the held-out test's gate, it would be 79%."
+79%,PAPER.pdf,paper_numbers.dRN_2026_to_sep15_bp,"At 32 deals, the held-out test's gate, it would be 79%."
 8.6bp,PAPER.pdf,paper_numbers.dTP_2026_to_sep15_bp,The endpoint result was wrong. I had written that the 2026 term premium fell 8.6bp while
 79bp,PAPER.pdf,paper_numbers.dRN_2026_to_sep15_bp,"expected short rates rose 79bp, so the selloff could not be a supply story. Then I varied the start and"
 −29bp,PAPER.pdf,paper_numbers.endpoint_grid_min_bp,It ranges from −29bp to +24bp and is positive in 12 of the 25 windows. Moving the end date forward
 +24bp,PAPER.pdf,CONSTANT: holdout start day,It ranges from −29bp to +24bp and is positive in 12 of the 25 windows. Moving the end date forward
-25,PAPER.pdf,b3_tests.T2.trailing_20d_tp_vol.deal_percentiles.2024-09-25,It ranges from −29bp to +24bp and is positive in 12 of the 25 windows. Moving the end date forward
+25,PAPER.pdf,paper_numbers.c1_p_DGS2,It ranges from −29bp to +24bp and is positive in 12 of the 25 windows. Moving the end date forward
 −8.6bp,PAPER.pdf,paper_numbers.dTP_2026_to_sep15_bp,"one week, past the Fed's 16 September hike, takes it from −8.6bp to −21.9bp. And over the full 2024"
 −21.9bp,PAPER.pdf,headline.term_premium.realised_2026_dTP_bp,"one week, past the Fed's 16 September hike, takes it from −8.6bp to −21.9bp. And over the full 2024"
 101bp,PAPER.pdf,paper_numbers.full_sample_d10y_bp,to 2026 sample the 10-year rose 101bp of which +90bp is term premium. The exact opposite of the
@@ -105,6 +125,39 @@ $194 billion,PAPER.pdf,headline.term_premium.supply_2026_10y_equiv_bn,"Scaled by
 +0.094,PAPER.pdf,headline.h0_inference.leave_one_out.b_max,"+0.068 and +0.094, and dropping all three pairs of deals that overlap gives +0.091. The p-value I"
 0.015,PAPER.pdf,paper_numbers.breakeven_h0_b,"0.015, but it only asks whether the coefficient is noise within these 16 windows, which is a narrower"
 0.0005,PAPER.pdf,headline.h0_inference.newey_west.p,"question. So this is the one result I still stand behind, at p around 0.08 rather than the 0.0005 I"
+96%,PAPER.pdf,paper_numbers.acm_dtp_r2_on_5_curve_pcs,"The ACM term premium is a model estimate, and 96% of its daily moves are explained by five shapes"
+0.070,PAPER.pdf,paper_numbers.est_wls_b,ACM term premium +0.081 0.070
++0.038,PAPER.pdf,paper_numbers.c1_b_Kim-Wright TP10,Kim-Wright term premium +0.038 0.048
+0.048,PAPER.pdf,paper_numbers.c1_p_Kim-Wright TP10,Kim-Wright term premium +0.038 0.048
++0.058,PAPER.pdf,paper_numbers.c1_b_DGS2,2-year yield +0.058 0.254
+0.254,PAPER.pdf,paper_numbers.c1_p_DGS2,2-year yield +0.058 0.254
++0.076,PAPER.pdf,paper_numbers.c1_b_DGS5,5-year yield +0.076 0.112
+0.112,PAPER.pdf,paper_numbers.c1_p_DGS5,5-year yield +0.076 0.112
++0.093,PAPER.pdf,paper_numbers.spec_p05,7-year yield +0.093 0.051
+0.051,PAPER.pdf,paper_numbers.d2_r2_macro,7-year yield +0.093 0.051
++0.097,PAPER.pdf,paper_numbers.d1_surprise_p,10-year yield +0.097 0.025
+0.025,PAPER.pdf,paper_numbers.est_volscale_b,10-year yield +0.097 0.025
++0.106,PAPER.pdf,paper_numbers.c1_b_DGS20,20-year yield +0.106 0.014
+0.014,PAPER.pdf,paper_numbers.c1_p_DGS20,20-year yield +0.106 0.014
+0.007,PAPER.pdf,paper_numbers.c1_p_DGS30,30-year yield +0.115 0.007
++0.040,PAPER.pdf,paper_numbers.c1_b_10s2s,10s minus 2s +0.040 0.279
+0.279,PAPER.pdf,paper_numbers.c1_p_10s2s,10s minus 2s +0.040 0.279
+"2,",PAPER.pdf,CONSTANT: maturity or horizon label,"across the 2, 5, 7, 10, 20 and 30-year points. 54% of all the deals' duration sits at the 30-year point"
+"5,",PAPER.pdf,CONSTANT: horizon label,"across the 2, 5, 7, 10, 20 and 30-year points. 54% of all the deals' duration sits at the 30-year point"
+"7,",PAPER.pdf,paper_numbers.n_floating_tranches,"across the 2, 5, 7, 10, 20 and 30-year points. 54% of all the deals' duration sits at the 30-year point"
+"10,",PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,"across the 2, 5, 7, 10, 20 and 30-year points. 54% of all the deals' duration sits at the 30-year point"
+18%,PAPER.pdf,paper_numbers.buyback_surprise_days,and 18% at the 10-year.
++0.103,PAPER.pdf,paper_numbers.tenor_beta,"answer is +0.103 per $bn of exposure, with a placebo p of 0.17. Positive, and not distinguishable from"
+0.17,PAPER.pdf,paper_numbers.concession_band_min_bp,"answer is +0.103 per $bn of exposure, with a placebo p of 0.17. Positive, and not distinguishable from"
+0.043,PAPER.pdf,paper_numbers.stock_eg,"0.043), Johansen says no (5.10 against a 15.49 cutoff). By the rule I registered, either test was"
+5.10,PAPER.pdf,paper_numbers.stock_joh,"0.043), Johansen says no (5.10 against a 15.49 cutoff). By the rule I registered, either test was"
+15.49,PAPER.pdf,paper_numbers.stock_joh_cv,"0.043), Johansen says no (5.10 against a 15.49 cutoff). By the rule I registered, either test was"
++0.21bp,PAPER.pdf,paper_numbers.spread_r2_on_size,"enough, so the levels regression ran: +0.21bp per $bn outstanding, with a Newey-West t of 3.87 and"
+3.87,PAPER.pdf,paper_numbers.stock_lev_t,"enough, so the levels regression ran: +0.21bp per $bn outstanding, with a Newey-West t of 3.87 and"
+0.41,PAPER.pdf,paper_numbers.stock_lev_r2,"R² 0.41. I don't read that as a stock effect. The stock is a near-straight ramp, the term premium also"
+−0.067,PAPER.pdf,paper_numbers.stock_chg_b,The version that doesn't depend on the levels is monthly changes on monthly new issuance: −0.067
+0.71,PAPER.pdf,paper_numbers.tp_change_on_release_days_bp,"per $bn, permutation p 0.71, with a minimum detectable effect of 0.50. That is no evidence either"
+0.50,PAPER.pdf,paper_numbers.stock_chg_mde,"per $bn, permutation p 0.71, with a minimum detectable effect of 0.50. That is no evidence either"
 −0.20,PAPER.pdf,paper_numbers.buyback_raw_h0_b,"written down first: the coefficient should be negative. It is, −0.20 per $bn."
 12%,PAPER.pdf,paper_numbers.concession_band_max_bp,"and three quarters of long-end operations fill exactly to that maximum, so only about 12% of what I"
 −1.45,PAPER.pdf,headline.buyback_surprise.h2.b,"filled than expected, the sign holds: −1.45 per $bn two days later (t −2.46), on 18 operations. That's"
@@ -114,12 +167,27 @@ $1 billion,PAPER.pdf,paper_numbers.three_factor_variance_share,"about 18 times t
 $21 billion,PAPER.pdf,paper_numbers.mean_deal_10y_equiv_bn,on average against about $21 billion for a typical AI deal. So I trust the sign more than the size. The
 1.81,PAPER.pdf,headline.auction_lp.all tenors|h0.t,"rises (t 1.81 across all auctions). That one is consistent with the Lou, Yan and Zhang result, though at"
 0.06,PAPER.pdf,paper_numbers.gsw_f20y10y_r2,"fitted curve it barely moved with the cash 10-year at all (R² 0.06), and the effect still showed up"
+13,PAPER.pdf,paper_numbers.t4_holm,13
 0.62,PAPER.pdf,paper_numbers.cmt_f20y10y_r2,"R² of 0.62, not 0.06. The two versions of ""the 20y10y forward"" only correlate with each other at 0.38."
 0.38,PAPER.pdf,paper_numbers.corr_gsw_cmt_20y10y,"R² of 0.62, not 0.06. The two versions of ""the 20y10y forward"" only correlate with each other at 0.38."
-4%,PAPER.pdf,headline.X_pca.nw_se,"It barely moves: 4% of the yield move. Whatever happened on deal days, it happened to on-the-run"
+4%,PAPER.pdf,paper_numbers.t4_p,"It barely moves: 4% of the yield move. Whatever happened on deal days, it happened to on-the-run"
 0.87,PAPER.pdf,paper_numbers.v1_sharpe,"push nominal yields more than inflation-protected ones, but real yields move 0.87 times as much as"
 +0.015bp,PAPER.pdf,paper_numbers.breakeven_h0_b,"nominals, and breakevens, the gap between them, barely move (+0.015bp per $bn, t 0.8)."
 0.8,PAPER.pdf,paper_numbers.long_ops_fill_to_max_share,"nominals, and breakevens, the gap between them, barely move (+0.015bp per $bn, t 0.8)."
+14,PAPER.pdf,headline.strategy_v3_clean.n,14
+90,PAPER.pdf,paper_numbers.full_sample_dTP_bp,should move on the day. So I tried to forecast each issuer's next 90 days of issuance from its own 10-
+"1,831",PAPER.pdf,paper_numbers.d1_before,"The text didn't help. After removing near-duplicate passages, 1,831 became 729. Scored out of sample"
+729,PAPER.pdf,paper_numbers.d1_after,"The text didn't help. After removing near-duplicate passages, 1,831 became 729. Scored out of sample"
+75,PAPER.pdf,paper_numbers.long_ops_fill_to_max_share,"on 75 filings, the plain baseline, each issuer's issuance over the past year, had the lowest error"
+166.6,PAPER.pdf,paper_numbers.d1_mse0,"(166.6). Adding a count of the filing's passages (173.9), the capital spending figures it states (174.5),"
+173.9,PAPER.pdf,paper_numbers.d1_mse1,"(166.6). Adding a count of the filing's passages (173.9), the capital spending figures it states (174.5),"
+174.5,PAPER.pdf,paper_numbers.d1_mse2,"(166.6). Adding a count of the filing's passages (173.9), the capital spending figures it states (174.5),"
+212.3,PAPER.pdf,paper_numbers.d1_mse3,or a ridge regression on sentence embeddings of the text (212.3) all did worse. So the forecast I used
++0.110,PAPER.pdf,paper_numbers.d1_surprise_b,"With that forecast, most of every deal counts as surprise. The surprise part comes out at +0.110"
+0.097,PAPER.pdf,paper_numbers.d1_surprise_p,"(placebo p 0.097) and the expected part at −0.012 (p 0.93). That is the predicted pattern, but the"
+−0.012,PAPER.pdf,paper_numbers.pnl_r2_on_size,"(placebo p 0.097) and the expected part at −0.012 (p 0.93). That is the predicted pattern, but the"
+0.93,PAPER.pdf,paper_numbers.d1_expected_p,"(placebo p 0.097) and the expected part at −0.012 (p 0.93). That is the predicted pattern, but the"
+0.49,PAPER.pdf,paper_numbers.d1_diff_p,"difference between them isn't significant (p 0.49), so this can't tell anticipated from surprise supply."
 11.4bp,PAPER.pdf,paper_numbers.five_day_10y_sd_bp,"of 11.4bp, which is 91bp of price. My realized P&L standard deviation was 62bp, lower mostly by luck:"
 91bp,PAPER.pdf,paper_numbers.five_day_price_sd_bp,"of 11.4bp, which is 91bp of price. My realized P&L standard deviation was 62bp, lower mostly by luck:"
 62bp,PAPER.pdf,paper_numbers.cmt_f20y10y_r2,"of 11.4bp, which is 91bp of price. My realized P&L standard deviation was 62bp, lower mostly by luck:"
@@ -132,22 +200,47 @@ $21 billion,PAPER.pdf,paper_numbers.mean_deal_10y_equiv_bn,on average against ab
 −1.10,PAPER.pdf,paper_numbers.v2_sharpe,size-scaled 2s10s steepener −1.10
 +0.27,PAPER.pdf,headline.strategy_v3_clean.sharpe,size-demeaned spread +0.27
 −0.88,PAPER.pdf,paper_numbers.v1_sharpe_2d,"−0.88 at two days, +0.87 at five, −0.69 at ten, with no pattern."
+−0.061,PAPER.pdf,paper_numbers.d2_r2_supply,hadn't seen. Adding supply made the forecast slightly worse (out-of-sample R² −0.061 against −0.051
+−0.051,PAPER.pdf,paper_numbers.d2_r2_macro,hadn't seen. Adding supply made the forecast slightly worse (out-of-sample R² −0.061 against −0.051
+0.86,PAPER.pdf,paper_numbers.d2_cw_p,"at one day), and the test for whether it adds anything gives p 0.86. Even the market-variables forecast"
 2.6bp,PAPER.pdf,paper_numbers.signal_bp,The volatility is not a bug to engineer away. It is the honest width of the uncertainty around a 2.6bp
 24,PAPER.pdf,CONSTANT: holdout start day,"and it only runs on deals announced after 24 September. It needs 32 of them for decent power,"
-32,PAPER.pdf,headline.preregistration.n_min,"and it only runs on deals announced after 24 September. It needs 32 of them for decent power,"
-13,PAPER.pdf,headline.placebo_matched_h2.matched on lag.p,13
+0.081,PAPER.pdf,paper_numbers.c1_b_ACM TP10,estimate is 0.081. A true effect of this size would be missed about half the time.
+$518 billion,PAPER.pdf,paper_numbers.mbs_drop,"Fed's mortgage holdings, which fell $518 billion over the sample, to a weekly version of the"
+4.9%,PAPER.pdf,paper_numbers.mbs_ai_change,regression. The AI coefficient moved by 4.9% and the mortgage term wasn't significant (p 0.24).
+0.24,PAPER.pdf,paper_numbers.mbs_p,regression. The AI coefficient moved by 4.9% and the mortgage term wasn't significant (p 0.24).
+17,PAPER.pdf,paper_numbers.concession_band_min_bp,17
+0.07,PAPER.pdf,paper_numbers.est_wls_b,"jointly (permutation p 0.07), driven by the slope: deals are more likely when the curve is steeper"
+39%,PAPER.pdf,paper_numbers.c5_power,that from day-to-day timing. Its power against an odds ratio of 2 per standard deviation is 39%.
 8.2,PAPER.pdf,paper_numbers.japan_naive_pickup_t,a t-statistic of 8.2 with the wrong sign.
-14,PAPER.pdf,headline.strategy_v3_clean.n,14
+3.25,PAPER.pdf,paper_numbers.nw0_t,"Newey-West, 0 lags (heteroskedasticity only) 3.25"
+3.77,PAPER.pdf,paper_numbers.nw20_t,"Newey-West, 20 lags 3.77"
+3.56,PAPER.pdf,paper_numbers.nwauto_t,"Newey-West, automatic bandwidth (11 lags) 3.56"
+3.03,PAPER.pdf,paper_numbers.hc3_t,HC3 3.03
+0.053,PAPER.pdf,paper_numbers.v1_p,OLS +0.081 0.053
++0.025,PAPER.pdf,paper_numbers.est_volscale_b,Term premium change divided by trailing volatility +0.025 (in sd units) 0.059
+0.059,PAPER.pdf,paper_numbers.est_volscale_p,Term premium change divided by trailing volatility +0.025 (in sd units) 0.059
+0.100,PAPER.pdf,paper_numbers.est_wls_p,Weighted by inverse volatility +0.070 0.100
++0.080,PAPER.pdf,paper_numbers.est_huber_b,Huber robust regression +0.080 0.039
+0.039,PAPER.pdf,paper_numbers.est_huber_p,Huber robust regression +0.080 0.039
++0.077,PAPER.pdf,paper_numbers.est_lad_b,Median regression +0.077 0.053
+0.0003,PAPER.pdf,paper_numbers.lb_p,"Other checks. Residuals are serially correlated (Ljung-Box p 0.0003 at one lag), heteroskedastic"
+0.0001,PAPER.pdf,headline.placebo_matched_h0.matched on lag.mean,"(White p below 0.0001), and fat-tailed (kurtosis 6.3). Variance inflation factors run from 1.01 to 1.27."
+6.3,PAPER.pdf,paper_numbers.kurtosis,"(White p below 0.0001), and fat-tailed (kurtosis 6.3). Variance inflation factors run from 1.01 to 1.27."
+1.01,PAPER.pdf,paper_numbers.vif_min,"(White p below 0.0001), and fat-tailed (kurtosis 6.3). Variance inflation factors run from 1.01 to 1.27."
+1.27,PAPER.pdf,paper_numbers.vif_max,"(White p below 0.0001), and fat-tailed (kurtosis 6.3). Variance inflation factors run from 1.01 to 1.27."
+0.0002,PAPER.pdf,paper_numbers.chow_p,"(p 0.0002), but only 2 deals come before the break."
+19,PAPER.pdf,headline.term_premium.b_h5_t,19
 03,README.md,paper_numbers.signal_bp,Canonical numbers live in [`research/03_FINDINGS.md`](research/03_FINDINGS.md);
 680,README.md,headline.sample.lp_n,"On one sample, 2024-01-03 to 2026-09-22, n = 680 trading days:"
 10,README.md,CONSTANT: 10-year maturity / 10 Hz,- Announced USD duration from the five AI hyperscalers raises the 10Y term
-+0.081,README.md,headline.term_premium.impact_b0_bp_per_bn,premium by **+0.081 bp per $bn of 10-year equivalents on the announcement
++0.081,README.md,paper_numbers.c1_b_ACM TP10,premium by **+0.081 bp per $bn of 10-year equivalents on the announcement
 3.47,README.md,headline.term_premium.impact_t,"day**. Newey-West t 3.47, plain OLS t 1.84 (p 0.066), randomization p 0.078, and"
 1.84,README.md,headline.h0_inference.ols.t,"day**. Newey-West t 3.47, plain OLS t 1.84 (p 0.066), randomization p 0.078, and"
 0.066,README.md,headline.h0_inference.ols.p,"day**. Newey-West t 3.47, plain OLS t 1.84 (p 0.066), randomization p 0.078, and"
 0.078,README.md,headline.explained_share.via_concession_scaled.share_of_Y,"day**. Newey-West t 3.47, plain OLS t 1.84 (p 0.066), randomization p 0.078, and"
-0.08,README.md,headline.X_pca.value_bp,**p 0.08 to 0.11 against placebo dates matched on timing after macro
-0.11,README.md,headline.X_pca.recovery,**p 0.08 to 0.11 against placebo dates matched on timing after macro
+0.08,README.md,paper_numbers.est_huber_b,**p 0.08 to 0.11 against placebo dates matched on timing after macro
+0.11,README.md,paper_numbers.d1_surprise_b,**p 0.08 to 0.11 against placebo dates matched on timing after macro
 2.63,README.md,headline.h0_inference.leave_one_out.t_min,releases**. Survives leave-one-out (min t 2.63) and a wild cluster bootstrap
 0.015,README.md,paper_numbers.breakeven_h0_b,(p 0.015).
 0,README.md,CONSTANT: horizon label,"- **It is short-lived**: under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); und"
@@ -158,7 +251,10 @@ $21 billion,PAPER.pdf,paper_numbers.mean_deal_10y_equiv_bn,on average against ab
 +0.013,README.md,headline.placebo_matched_h0.matched on lag.mean,"- **It is short-lived**: under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); und"
 15.8,README.md,headline.term_premium.implied_impact_bp,issuance that is 15.8 bp of one-day impacts and about 2.4 bp that persists.
 2.4,README.md,headline.term_premium.implied_persistent_bp,issuance that is 15.8 bp of one-day impacts and about 2.4 bp that persists.
-30,README.md,CONSTANT: the sell-side claim / 10-to-30-year bucket,- So it cannot be a persistent 30 bp supply effect from this slice of issuance.
+30,README.md,CONSTANT: the sell-side claim / 10-to-30-year bucket,- It does not rule out a persistent 30 bp effect. The day-5 point estimate implies
+95%,README.md,b3_tests.T2.vix_prior_close.deal_percentiles.2026-03-10,"about 2.4 bp persists from 2026 supply, but the 95% upper bound is about 41 bp under"
+41,README.md,paper_numbers.persist_upper95_placebo,"about 2.4 bp persists from 2026 supply, but the 95% upper bound is about 41 bp under"
+28,README.md,paper_numbers.persist_upper95_nw,the timing-matched placebo (28 bp under Newey-West). Persistence is the stock
 0.87,README.md,paper_numbers.v1_sharpe,0.87 times as much as nominals.
 09,README.md,paper_numbers.all_deals_1to3_after_release,"Full review in [`research/09_ADVERSARIAL_REVIEW.md`](research/09_ADVERSARIAL_REVIEW.md),"
 20,README.md,CONSTANT: maturity or horizon label,"| F1 | The forward-curve test that ""ruled out"" hedging used a Svensson-fitted 20y10y forward | Refuted. On observed CMT "
@@ -169,11 +265,11 @@ $21 billion,PAPER.pdf,paper_numbers.mean_deal_10y_equiv_bn,on average against ab
 1.81,README.md,headline.auction_lp.all tenors|h0.t,"| M8 | Auction LP used a tenor bucket chosen after the fact | All-tenor LP is primary: t 1.81, not 2.59 |"
 2.59,README.md,headline.auction_lp.7-10y only (selected)|h0.t,"| M8 | Auction LP used a tenor bucket chosen after the fact | All-tenor LP is primary: t 1.81, not 2.59 |"
 16,README.md,headline.N_usd_deals_total,"| Announcement effect, persistence | 16 USD deals, 680 days | `localproj.py` |"
-68,README.md,localproj_all.csv:p[56],"| Buybacks | 68 long-bucket operations, 18 with non-zero surprise | `buybacks.py` |"
+68,README.md,stockeffect.changes_on_issuance.newey_west_t,"| Buybacks | 68 long-bucket operations, 18 with non-zero surprise | `buybacks.py` |"
 18,README.md,paper_numbers.buyback_surprise_days,"| Buybacks | 68 long-bucket operations, 18 with non-zero surprise | `buybacks.py` |"
 220,README.md,headline.auction_lp.all tenors|h0.n,"| Auctions | 220 auction days, all tenors | `auctions.py` |"
 14,README.md,headline.strategy_v3_clean.n,"| Strategy | 16 deals, 14 after warm-up for v3 | `strategy2.py` |"
-26,README.md,diagnostics_b3.csv:resid_acf3[5],"- Lou, Yan and Zhang (2013), *Review of Financial Studies* 26(8): Treasury prices"
+26,README.md,b3_tests.T4.primary_all_16.within_1.holm_p,"- Lou, Yan and Zhang (2013), *Review of Financial Studies* 26(8): Treasury prices"
 8,README.md,paper_numbers.killed_priced_1to3_after_release,"- Lou, Yan and Zhang (2013), *Review of Financial Studies* 26(8): Treasury prices"
 424B,README.md,CONSTANT: form name 424B,"Jan 2024 and Sep 2026, built from SEC 424B2/424B5 cover pages with announcement"
 $92.75B,README.md,headline.issuance_face_usd_bn.2025,term sheet on the full set of coupons. 2025 USD issuance totals $92.75B against a
@@ -182,7 +278,7 @@ $179.5B,README.md,headline.issuance_face_usd_bn.2026,quoted ~$93B; 2026 year to 
 $34.8B,README.md,localproj_all.csv:t[22],"- Non-USD tranches (EUR, GBP, JPY): $34.8B equivalent, which supplies duration to"
 100%,README.md,headline.macro_excl_bdays,"> (announcement-dated, 100% term-sheet coupon match, validated at $92.8B 2025"
 $92.8B,README.md,headline.issuance_face_usd_bn.2025,"> (announcement-dated, 100% term-sheet coupon match, validated at $92.8B 2025"
-+0.08bp,README.md,headline.X_pca.value_bp,> announced 10-year-equivalent duration: +0.08bp per $bn on the announcement day
++0.08bp,README.md,paper_numbers.est_huber_b,> announced 10-year-equivalent duration: +0.08bp per $bn on the announcement day
 30bp,README.md,CONSTANT: the sell-side claim being tested,"> persistent effect, against sell-side estimates of 30bp"
 00,README.md,paper_numbers.share_bdays_clean_3day_rule,00_PLAN.md ... 10_PREREGISTRATION.md
 "36,000",README.md,"CONSTANT: run-time note, 6 horizons x 3 placebos x 2000 draws","is believed. `placebo_matched.py` runs 36,000 local projections and takes a while."

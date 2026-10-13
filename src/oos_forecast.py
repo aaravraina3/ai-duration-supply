@@ -5,7 +5,7 @@ changes? Registered in commit 96cd725. Model ladder rungs 0 to 2 (UPGRADE_PLAN
 import json
 import numpy as np, pandas as pd, statsmodels.api as sm
 from scipy import stats
-from config import TAB
+from config import TAB, VOL_WINDOW
 import localproj as L, regression as R
 
 WARM = 250
@@ -64,7 +64,7 @@ def main():
         dm_t, dm_p = diebold_mariano(y, p["zero"], p["macro"], h)
         # residual check for climbing to rung 4: do rung-2 errors depend on the volatility regime?
         e = y - p["macro+supply"]
-        vol = df.dTP.shift(1).rolling(20).std().values[WARM:WARM + len(y)]
+        vol = df.dTP.shift(1).rolling(VOL_WINDOW).std().values[WARM:WARM + len(y)]
         okv = ~np.isnan(vol)
         res = sm.OLS(e[okv] ** 2, sm.add_constant(vol[okv])).fit(cov_type="HAC", cov_kwds={"maxlags": 5})
         out[f"h{h}"] = dict(n=int(len(y)), mse=mse, oos_r2_vs_mean=r2, clark_west_t=cw_t, clark_west_p=cw_p,

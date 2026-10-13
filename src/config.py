@@ -53,6 +53,7 @@ NLP_HALFLIFE_DAYS = 30    # §4.6 exponential decay half-life, set a priori
 HMM_K = 3                 # §4.7
 HMM_RESTARTS = 20
 N_PLACEBO = 2000          # randomized event dates
+VOL_WINDOW = 20           # trailing days for realized volatility, t-20 .. t-1 (upgrade B3, B4, V1)
 
 # FRED tenor grid (par yields)
 FRED_TENORS = {

@@ -28,7 +28,7 @@ Primary match is on lag alone. Secondary match is on (lag, type of the most
 recent release), which is stricter but leaves fewer candidate dates per cell.
 """
 import numpy as np, pandas as pd
-from config import PROC, RANDOM_SEED
+from config import PROC, RANDOM_SEED, VOL_WINDOW
 import localproj as L
 
 N_DRAW = 2000
@@ -76,7 +76,7 @@ def draw_matched(shocks, lt, rng, by_kind=False, excl=EXCL, tail=6):
 def add_vol_tercile(lt, panel):
     """V1 (11_UPGRADE_PREREG.md): tercile of trailing 20-day TP10 realized
     volatility, from t-20 to t-1 only. -1 where there is not enough history."""
-    vol = panel.TP10.diff().shift(1).rolling(20).std().reindex(lt.index)
+    vol = panel.TP10.diff().shift(1).rolling(VOL_WINDOW).std().reindex(lt.index)
     lt = lt.copy()
     lt["vol3"] = pd.qcut(vol, 3, labels=False).fillna(-1).astype(int)
     return lt

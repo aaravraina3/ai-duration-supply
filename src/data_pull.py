@@ -98,4 +98,4 @@ def auctions():
     return d
 
 if __name__ == "__main__":
-    fred(); gsw(); acm(); auctions()
+    fred(); fred_extra(); gsw(); acm(); auctions()

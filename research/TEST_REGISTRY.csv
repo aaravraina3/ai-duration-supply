@@ -48,3 +48,4 @@ D1-LADDER,2026-10-13,D1,text forecasts issuance,"walk-forward ladder rungs 0-3, 
 D1-LP,2026-10-13,D1,only surprise supply moves TP,"h0 LP expected + surprise, placebo",lp h0,yes,96cd725,surprise +0.110 p 0.097; expected p 0.93; diff p 0.49,,no
 D2-H1,2026-10-13,D2,supply improves OOS forecasts,"Clark-West, h=1",daily,yes,96cd725,p 0.86,,no
 D2-H3,2026-10-13,D2,supply improves OOS forecasts,"Clark-West, h=3",daily,yes,96cd725,p 0.81,,no
+C5,2026-10-13,C5,deal timing independent of prior market conditions,"logit, LR permutation 10000 draws",daily,yes,96cd725,joint p 0.073; slope Wald p 0.036; power 0.39,,no

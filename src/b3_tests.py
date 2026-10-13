@@ -10,7 +10,7 @@ Writes output/tables/b3_tests.json.
 import json
 import numpy as np, pandas as pd, statsmodels.api as sm
 from scipy import stats
-from config import PROC, TAB, RANDOM_SEED, JUMBO_USD
+from config import PROC, TAB, RANDOM_SEED, JUMBO_USD, VOL_WINDOW
 import localproj as L, placebo_matched as PM, diagnostics as D
 
 N_DRAW = 10_000
@@ -52,7 +52,7 @@ def t1(P, sh, lt):
 def t2(P, sh, lt):
     fred = pd.read_csv(PROC / "fred.csv", parse_dates=["date"]).set_index("date")
     dtp = P.TP10.diff()
-    vol = dtp.shift(1).rolling(20).std()                    # t-20 .. t-1 only
+    vol = dtp.shift(1).rolling(VOL_WINDOW).std()                    # t-20 .. t-1 only
     vix = fred.VIXCLS.reindex(P.index).ffill().shift(1)      # close on t-1
     out = {}
     for name, s in [("trailing_20d_tp_vol", vol), ("vix_prior_close", vix)]:
