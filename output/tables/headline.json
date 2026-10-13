@@ -18,6 +18,12 @@
     "2026-02-09",
     "2026-07-07"
   ],
+  "issuance_face_usd_bn": {
+    "2024": 16.75,
+    "2025": 92.75,
+    "2026": 179.5,
+    "2026_through_2026-06-08": 129.5
+  },
   "event_total_usd_bn": 130.5,
   "event_10y_equiv_bn": 148.0377215940031,
   "X_pca": {
@@ -313,6 +319,34 @@
     }
   },
   "lp_first_h_not_significant_5pct": 3,
+  "persistence": {
+    "point_estimate": {
+      "h0": 0.0812373911964188,
+      "h1": 0.077704693631585,
+      "h2": 0.1147842937414648,
+      "h3": 0.0635482837986525,
+      "h4": 0.0380781097742283,
+      "h5": 0.0124915312195927
+    },
+    "newey_west_p": {
+      "h0": 0.0005205085216241,
+      "h1": 0.0490143579531974,
+      "h2": 0.001209069670427,
+      "h3": 0.2370322931565009,
+      "h4": 0.5958574831652899,
+      "h5": 0.853152738665363
+    },
+    "matched_placebo_p": {
+      "h0": 0.0825,
+      "h1": 0.2165,
+      "h2": 0.127,
+      "h3": 0.4445,
+      "h4": 0.6855,
+      "h5": 0.91
+    },
+    "first_h_not_sig_newey_west_5pct": 3,
+    "first_h_not_sig_matched_placebo_10pct": 1
+  },
   "coupon_duration_share": {
     "cutoff": "2026-09-22",
     "note": "both legs in $bn 10y-equivalent; Treasury leg is coupon auctions from Jan 1 of each year through the cutoff (full year before 2026)",
@@ -331,5 +365,19 @@
       "treasury_coupon_10y_bn": 2108.859463639661,
       "share": 0.09213568106745387
     }
+  },
+  "model_dependence": {
+    "injection_recovered_residualisation_only": 0.7769637704952524,
+    "injection_recovered_after_svensson_refit": -0.1069276220821366,
+    "acm_dtp_r2_on_5_curve_pcs": 0.9635313298742156
+  },
+  "announcement_timing": {
+    "pricing_to_final_filing_bdays": {
+      "1": 8,
+      "2": 8
+    },
+    "b0_dated_by_pricing": 0.0812373911964188,
+    "b0_dated_by_final_filing": -0.022295292093142065,
+    "t0_dated_by_final_filing": -0.6911165807801603
   }
 }

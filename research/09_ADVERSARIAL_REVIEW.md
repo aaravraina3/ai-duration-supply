@@ -433,8 +433,8 @@ Every item below was worked in `src/` on one unified sample, 2024-01-03 to
 | M1 | **Fixed** | `placebo_matched.py`: placebo dates drawn at the same business-day lag after the last FOMC/CPI/NFP release, and separately at the same lag and release type | Post-release drift exists (+0.72 bp on release days). It does not produce the day-0 coefficient: matched placebo mean +0.0001. p goes 0.078 (uniform) to 0.0825 (lag) to 0.1095 (lag and type). About half the h = 2 response is reproduced by the lag-and-type placebo |
 | M2 | **Fixed** | `strategy2.beta_asof()` re-estimates the hedge at each trade on prior windows; v3 promoted from an ad-hoc script to `trades_v3()`, which also removed a second look-ahead in its position scaling; `signal_live.py` computes β at run time | β runs 0.574 to 0.682. v2 Sharpe −1.10 either way. v3 +0.27 after costs (previously reported +0.31) |
 | M3 | **Fixed** | One `SAMPLE_END` in `config.py`; hard-coded end dates removed from five modules; retired inputs left-joined so they can never truncate the core | Regression and local projections both run 2024-01-03 to 2026-09-22, n = 680. Regression coefficient +0.0872 (t 3.80) |
-| M4 | **Fixed, with a caveat** | `buybacks.build_surprise()`: expected fill from prior operations in the same bucket, shock = accepted minus expected | 75% of long-bucket operations fill to the announced maximum; 11.5% of the raw series was news. Surprise shock: h = 2 −1.45 (t −2.46), 18 events. Caveat: Lou, Yan and Zhang (2013) show anticipated Treasury flows still move prices, so the raw series is not simply wrong, it measures the whole flow |
-| M5 | **Fixed** | Related work added to README and `POST.md` | Lou, Yan and Zhang (2013, RFS 26(8)) verified; the auction result replicates it |
+| M4 | **Fixed, with a caveat** | `buybacks.build_surprise()`: expected fill from prior operations in the same bucket, shock = accepted minus expected | 75% of long-bucket operations fill to the announced maximum; 12.4% of the raw series was news. Surprise shock: h = 2 −1.45 (t −2.46), 18 events. Caveat: Lou, Yan and Zhang (2013) show anticipated Treasury flows still move prices, so the raw series is not simply wrong, it measures the whole flow |
+| M5 | **Fixed** | Related work added to README and `POST.md` | Lou, Yan and Zhang (2013, RFS 26(8)) verified; the auction result is consistent with it (all-tenor t 1.81) |
 | M6 | **Partly addressed** | Same as F1 | On-the-run and TIPS evidence narrow the alternatives. Not closed without swap or intraday data |
 | M7 | **Addressed by F2** | Held-out test | Nothing to report until 32 new deals |
 | M8 | **Fixed** | All-tenor auction LP made primary | +4.50 (t 1.81), against +14.76 (t 2.59) for the selected 7-10y bucket |
@@ -472,7 +472,7 @@ to +0.095 (t 4.93). The headline keeps the pre-specified control.
 5. **β out of sample.** Now yes, at every trade.
 6. **Why 11 September.** A stale HMM posterior file; fixed.
 7. **Which sample.** Table in the README.
-8. **Relation to auction literature.** H11 replicates Lou, Yan and Zhang (2013).
+8. **Relation to auction literature.** H11 is consistent with Lou, Yan and Zhang (2013); at t 1.81 it is not a replication.
 9. **Free swap or intraday data.** Daily swap rates exist at BlueGamma behind an
    account signup, which this project did not create. No free intraday Treasury
    source was found. So flow versus premium remains partly open.

@@ -377,7 +377,7 @@ The AI coefficient is unchanged when auction demand is included: +0.0802
 
 **Update 23 Sep.** The 7-10y bucket was chosen after seeing the cross-section.
 The all-tenor local projection is now the primary: h = 0 **+4.50 (t 1.81)**,
-n = 220, against +14.76 (t 2.59) for the selected bucket. This replicates the
+n = 220, against +14.76 (t 2.59) for the selected bucket. This is consistent with the
 auction price-pressure result of Lou, Yan and Zhang (2013).
 
 **Status: WEAK.** Supersedes H4. Detail in `08_LOG_2026-09-23.md`.

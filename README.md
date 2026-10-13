@@ -43,7 +43,7 @@ with an author response section giving the fix and result for each item.
 | M2 | Strategy hedge ratio used future data | Expanding-window β. Real but immaterial, Sharpe unchanged |
 | M3 | Main regression silently stopped at 2026-09-11 | One `SAMPLE_END`, every module reads it |
 | M4 | Buyback dates and sizes are pre-announced | Surprise-only shock built. 12.4% of the raw series (|surprise| over accepted 10y-equivalents) was news |
-| M5 | No literature | Cited below. The auction result replicates Lou, Yan and Zhang (2013) |
+| M5 | No literature | Cited below. The auction result is consistent with Lou, Yan and Zhang (2013) |
 | M8 | Auction LP used a tenor bucket chosen after the fact | All-tenor LP is primary: t 1.81, not 2.59 |
 
 The same mistake turned up six times: a confident number that came from the
@@ -80,7 +80,8 @@ it to a new supply source rather than discovering it.
   the aggregate demand for Treasury debt.
 - Lou, Yan and Zhang (2013), *Review of Financial Studies* 26(8): Treasury prices
   fall before auctions and recover after, even though auctions are announced in
-  advance. The auction result here is a replication of that.
+  advance. The auction result here is consistent with that (t 1.81 on the
+  all-tenor local projection, so not a replication).
 
 ## What is in the sample
 
@@ -161,7 +162,7 @@ cd src && for m in data_pull edgar_list edgar_fetch macro_cal eventlist curve te
 ```
 
 Raw downloads are cached. `test_curve.py` must pass before any downstream result
-is believed. `placebo_matched.py` runs 18,000 local projections and takes a while.
+is believed. `placebo_matched.py` runs 36,000 local projections and takes a while.
 
 ## Deviations from the brief
 

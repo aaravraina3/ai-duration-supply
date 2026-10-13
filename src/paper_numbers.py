@@ -27,6 +27,19 @@ def put(key, value, printed, source, scale=1.0, nd=None):
     OUT[key] = dict(value=float(value), printed=printed, matches=ok, source=source)
 
 
+def acm_pc_r2():
+    """R^2 of the daily ACM 10Y term premium change on five principal components
+    of the same day's change in the GSW zero curve."""
+    z = C.load_gsw(start="2024-01-01")
+    acm = pd.read_csv(PROC / "acm.csv", parse_dates=["date"]).set_index("date")
+    dz = z.diff().dropna()
+    u, s, _ = np.linalg.svd((dz - dz.mean()).values, full_matrices=False)
+    pcs = pd.DataFrame(u[:, :5] * s[:5], index=dz.index)
+    dtp = (acm.ACMTP10 * 100).diff().reindex(pcs.index)
+    ok = dtp.notna()
+    return sm.OLS(dtp[ok], sm.add_constant(pcs[ok])).fit().rsquared
+
+
 def bdays_between(a, b):
     return int(np.busday_count(np.datetime64(a.date()), np.datetime64(b.date())))
 
@@ -72,18 +85,10 @@ def main():
     put("concession_band_min_bp", bands.min(), "−0.167", "robustness_specs.csv exclusion band rows")
     put("concession_band_max_bp", bands.max(), "+0.123", "robustness_specs.csv exclusion band rows")
 
-    # ACM TP10 against five PCs of the same curve
-    acm = pd.read_csv(PROC / "acm.csv", parse_dates=["date"]).set_index("date")
-    dz = z.diff().dropna()
-    X = dz - dz.mean()
-    u, s, vt = np.linalg.svd(X.values, full_matrices=False)
-    pcs = pd.DataFrame(u[:, :5] * s[:5], index=dz.index)
-    dtp = (acm.ACMTP10 * 100).diff().reindex(pcs.index)
-    ok = dtp.notna()
-    r2 = sm.OLS(dtp[ok], sm.add_constant(pcs[ok])).fit().rsquared
-    put("acm_dtp_r2_on_5_curve_pcs", r2, "96", "acm.csv + gsw.csv", scale=100)
+    put("acm_dtp_r2_on_5_curve_pcs", acm_pc_r2(), "96", "acm.csv + gsw.csv", scale=100)
 
     # post-release drift: mean day-0 change in TP on release days
+    acm = pd.read_csv(PROC / "acm.csv", parse_dates=["date"]).set_index("date")
     P = L.panel()
     d0 = P.TP10 - P.TP10.shift(1)
     put("tp_change_on_release_days_bp", d0[d0.index.isin(rel)].mean(), "+0.7", "acm.csv + macro_calendar.csv")

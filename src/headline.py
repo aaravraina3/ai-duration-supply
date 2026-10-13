@@ -21,6 +21,10 @@ def main():
     out["merges_applied"] = int(len(ev) - ((allg.total_usd >= JUMBO_USD) &
                                            (~allg.macro_conflict)).sum())
     out["event_dates"] = [str(d.date()) for d in ev.announce]
+    out["issuance_face_usd_bn"] = {str(y): float(g.total_usd.sum() / 1e9)
+                                   for y, g in allg.groupby(allg.announce.dt.year)}
+    out["issuance_face_usd_bn"]["2026_through_2026-06-08"] = float(
+        allg[(allg.announce >= "2026-01-01") & (allg.announce <= "2026-06-08")].total_usd.sum() / 1e9)
     out["event_total_usd_bn"] = float(ev.total_usd.sum() / 1e9)
     out["event_10y_equiv_bn"] = float(ev.tenyr_equiv.sum() / 1e9)
 
@@ -189,6 +193,14 @@ def main():
     out["lp_table"] = {f"h{int(r.h)}": dict(b=float(r.b), se=float(r.se), t=float(r.t), p=float(r.p))
                        for _, r in lpt[lpt.h.isin([0, 1, 2, 3, 4, 5, 10, 20])].iterrows()}
     out["lp_first_h_not_significant_5pct"] = int(lpt[lpt.p > 0.05].h.min())
+    # upgrade A2: "gone" under each inference, plus the point-estimate path
+    pmh = pm[pm.placebo == "matched on lag"].set_index("h")
+    out["persistence"] = dict(
+        point_estimate={f"h{h}": float(lpt[lpt.h == h].b.iloc[0]) for h in range(6)},
+        newey_west_p={f"h{h}": float(lpt[lpt.h == h].p.iloc[0]) for h in range(6)},
+        matched_placebo_p={f"h{int(h)}": float(r.p) for h, r in pmh.iterrows()},
+        first_h_not_sig_newey_west_5pct=int(lpt[lpt.p > 0.05].h.min()),
+        first_h_not_sig_matched_placebo_10pct=int(pmh[pmh.p > 0.10].index.min()))
 
     # -------------- AI share of Treasury coupon duration supply, cutoff explicit
     import regression as R
@@ -202,6 +214,27 @@ def main():
         a_ = float(ai[ai.index.year == yr].sum()); t_ = float(auc[auc.index.year == yr].sum())
         share[str(yr)] = dict(ai_10y_bn=a_, treasury_coupon_10y_bn=t_, share=a_ / t_)
     out["coupon_duration_share"] = share
+    pd.DataFrame([dict(year=int(y), cutoff=SAMPLE_END, **v) for y, v in share.items()
+                  if y.isdigit()]).to_csv(TAB / "supply_share.csv", index=False)
+
+    # ---------------- upgrade A7: what the fitted curve can and cannot see
+    rec = np.load(PROC / "recovery.npy")
+    import paper_numbers as PN
+    out["model_dependence"] = dict(
+        injection_recovered_residualisation_only=float(rec[0]),
+        injection_recovered_after_svensson_refit=float(rec[1]),
+        acm_dtp_r2_on_5_curve_pcs=float(PN.acm_pc_r2()))
+
+    # ------- upgrade A8: what dating by filing instead of pricing would do
+    trd = pd.read_csv(PROC / "tranches.csv", parse_dates=["announce", "final_filing"])
+    dd = trd.groupby(["issuer", "announce"]).final_filing.first().reset_index()
+    dd["lag"] = [int(np.busday_count(a.date(), f.date())) for a, f in zip(dd.announce, dd.final_filing)]
+    by_filing = (allg.merge(dd, on=["issuer", "announce"]).groupby("final_filing").tenyr_equiv.sum() / 1e9)
+    fb = L.project(P, by_filing[by_filing.index.isin(P.index)], hmax=0).iloc[0]
+    out["announcement_timing"] = dict(
+        pricing_to_final_filing_bdays={str(k): int(v) for k, v in dd.lag.value_counts().sort_index().items()},
+        b0_dated_by_pricing=float(lpt[lpt.h == 0].b.iloc[0]),
+        b0_dated_by_final_filing=float(fb.b), t0_dated_by_final_filing=float(fb.t))
     return out
 
 

@@ -128,7 +128,8 @@ if __name__ == "__main__":
         print(f"    lag {k}: mean {s.mean():+.3f} bp  sd {s.std():.2f}  n={len(s)}")
 
     rows = []
-    for h in (0, 2, 5):
+    # every horizon to h=5, so 'gone' can be defined on the placebo too (upgrade A2)
+    for h in range(6):
         b_obs, res, _, _ = run(h=h)
         print("\n" + "=" * 76)
         print(f"PLACEBO COMPARISON, h = {h}   observed b = {b_obs:+.4f}")
