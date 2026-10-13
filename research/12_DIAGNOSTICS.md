@@ -65,8 +65,8 @@ at lag 0, which corrects nothing for autocorrelation, already gives 0.0250.
 
 **Heteroskedasticity is.** The regressor is zero on all but 16 days (100% of its
 sum of squares; 97% after partialling out the controls). So the coefficient's
-variance depends only on the residuals of those 16 days. They are unusually
-quiet:
+variance depends only on the residuals of those 16 days. In this sample they are
+smaller than on other days:
 
 | | residual sd, 16 deal days | residual sd, other days |
 |---|---|---|
@@ -75,9 +75,10 @@ quiet:
 
 OLS assumes every day has the average variance. A heteroskedasticity-robust SE
 uses the deal days' own residuals, which are about 30% smaller, so its variance is
-about half. This fits a pattern found earlier: deals price in the calm days after
-macro releases, and the 16 trade windows were quieter than usual (7.8bp against
-11.4bp of five-day 10Y noise, `paper_numbers.json`).
+about half. **Untested so far:** whether that gap is more than chance with 16 days,
+whether deals are timed into calm windows, and whether the gap fully accounts for
+the OLS-to-HAC difference. These are T1 to T3 in `11_UPGRADE_PREREG.md`, and nothing
+below is interpreted until they run.
 
 **The corrections agree with Newey-West, and that is the problem.**
 
@@ -99,10 +100,10 @@ numbers. With 16 numbers, a run of quiet days is enough to make it look precise.
 **What randomization does differently.** The placebo asks how large the coefficient
 gets on other dates with the same timing after a macro release. Its standard
 deviation is 0.0466 (matched on lag), close to the OLS SE of 0.0441 and nearly
-double the robust SEs. So comparably timed days are not as quiet as the 16 deal
-days happened to be. The spread of the coefficient across real alternative dates is
-the honest measure of its noise. That is why randomization is the primary
-inference and every HAC number is for comparison only. The paper will say this
+double the robust SEs. The two measures of noise disagree by about a factor of two,
+and the reason is not established yet (T1 to T3). Randomization is the primary
+inference because it does not depend on estimating a variance from 16 residuals;
+every HAC number is for comparison only. The paper will say this
 explicitly in the Phase E rewrite.
 
 The daily regression on `dD` shows the same pattern (OLS t 1.97, HC0 3.58,

@@ -50,3 +50,128 @@ Against the prediction: p is inside the predicted 0.05 to 0.15 band. The second
 half of the prediction, that pooling would not get below the day-0 p of 0.083, is
 off by a hair: 0.081. Read as the same as day 0. Pooling did not sharpen the
 result, which says the day-1 and day-2 moves add little beyond day 0.
+
+---
+
+## Tests of the B3 claims (registered 2026-10-12, before running)
+
+Common pieces:
+- **Deal days**: the 16 announcement dates in `localproj.shocks()`.
+- **Matched placebo**: `placebo_matched.draw_matched`, 16 dates at the same lag
+  after the last FOMC/CPI/NFP release, five-session exclusion around real deals,
+  `RANDOM_SEED`, **10,000 draws** (no refit needed, so more draws are cheap).
+- All p-values are one-sided in the direction of the claim unless stated.
+
+### T1. Are deal-day residuals quieter than chance?
+
+Claim tested: "deal-day residuals are quieter" (B3).
+
+- **Residuals, primary**: from the controls-only model at h = 0,
+  `TP(t) - TP(t-1)` on const, dbe, doil, dvix, auc_10y, **without the shock**.
+  Reason: with the shock in the model, OLS fits the 16 deal days and mechanically
+  shrinks their residuals, so the full-model residuals would bias the test toward
+  "quieter".
+- **Residuals, secondary**: the full h = 0 model with the shock (the residuals B3
+  actually used).
+- **Statistic**: sd of the residuals on the 16 deal days.
+- **Test 1**: Brown-Forsythe (Levene with median centring), deal days vs all other
+  days, two-sided.
+- **Test 2**: permutation. p = share of 10,000 matched-placebo draws whose 16-date
+  residual sd is <= the deal-day sd. Uniform-placebo version reported too.
+- **Prediction**: on the primary residuals the gap shrinks and is **not**
+  significant at 5% under the matched placebo. On the secondary residuals it is
+  smaller than placebo but marginal (p between 0.02 and 0.20).
+
+### T2. Calm before the deal
+
+Claim tested: "issuers choose calm windows". Uses only data strictly before each
+day, so the deal cannot cause the measure.
+
+- **Measures** for each day t: (a) trailing realized volatility, the sd of daily
+  ACM TP10 changes over t-20 to t-1; (b) VIX close on t-1.
+- **Statistic**: median of each measure across the 16 deal days.
+- **Test**: p = share of 10,000 matched-placebo draws with median <= the deal-day
+  median. Uniform version reported too. Each deal's percentile of each measure
+  against all sample days is reported (the B4 check).
+- **Prediction**: both medians below the placebo median, neither significant at 5%.
+
+### T3. Does the deal-day variance gap explain OLS vs HAC?
+
+Claim tested: "the OLS-to-Newey-West gap is the deal-day variance difference".
+
+- From the h = 0 local projection, compute the OLS, HC0 and Newey-West (5 lags)
+  standard errors on the shock.
+- **Counterfactual**: rescale the full-model residuals on the 16 deal days by
+  `sd(other days) / sd(deal days)`, so deal days have the same residual spread as
+  every other day, and recompute HC0 and Newey-West from the rescaled residuals.
+- **Claim holds if** the counterfactual Newey-West SE is within 10% of the OLS
+  SE. Also reported: the share of the log variance gap closed,
+  `(log V_cf - log V_nw) / (log V_ols - log V_nw)`.
+- **Prediction**: holds (counterfactual within 10% of OLS).
+
+### T4. Are deals priced just after macro releases more often than chance?
+
+Claim tested: "8 of 11 priced within three business days after a release".
+
+- **Lag**: `placebo_matched.lag_table` on the local-projection trading days, so
+  lag = trading days since the most recent FOMC/CPI/NFP release on or before the
+  day (0 = release day).
+- **Primary, all 16 deals**: for k = 1, 2, 3, count deals with 1 <= lag <= k.
+  Base rate = share of all sample trading days with 1 <= lag <= k. Exact binomial
+  test, one-sided greater. Permutation: 100,000 draws of 16 distinct random
+  sample trading days, p = share with count >= observed.
+- **Secondary, the 11 deals the ±3 rule dropped**: same test. Those 11 were
+  selected *because* they sit within ±3 business days of a release, so a fair base
+  rate is the share of days within ±3 of a release that are 1 to 3 days after one.
+  Both the unconditional and this conditional base rate are reported.
+- **Prediction**: all 16, k = 3: share above base rate, binomial p between 0.02
+  and 0.15. Secondary: the 8 of 11 is not significant against the conditional base
+  rate.
+
+### V1. Volatility-matched placebo (for B4 to B8)
+
+- Placebo dates matched on **lag after the last release and on the tercile of
+  trailing 20-day TP10 realized volatility** (t-20 to t-1; terciles over all
+  sample days). If a lag-by-tercile cell has no free date, fall back to lag only;
+  the fallback rate is reported.
+- Used as the randomization inference for the headline coefficient under each
+  B4 to B8 correction, with 2000 draws, two-sided, alongside the existing
+  lag-only placebo.
+- **Prediction** for the plain h = 0 coefficient: p between 0.08 and 0.20, at or
+  above the lag-only 0.083.
+
+---
+
+## F1. The B9 specification family (registered 2026-10-12, not yet run)
+
+Every combination below is one specification. All use the local-projection
+design, all 16 deals unless a choice says otherwise, and `SAMPLE_END`.
+
+| Dimension | Choices |
+|---|---|
+| Dependent variable | ACM TP10; observed 10Y yield (DGS10) |
+| Horizon | h = 0; pooled mean of h = 0, 1, 2 (P1's statistic) |
+| Controls | dbe, doil, dvix, auc_10y (headline); none; headline without auc_10y |
+| Shock | 10y-equivalent duration ($bn); face value ($bn); 10y-equivalent, jumbo deals (>= $10B) only |
+| Sample start | 2024-01-03; 2025-01-02 |
+| Macro filter | none; drop deals priced on a release day (lag 0); drop deals with a release inside the t-1 to t+1 window |
+
+2 x 2 x 3 x 3 x 2 x 3 = **216 specifications**. The Newey-West lag rule is not a
+dimension: it changes bands, not estimates, and inference here is by placebo.
+Bands are drawn with the repo rule (h + 5).
+
+- **Per-spec p**: matched-on-lag placebo, 2000 draws, two-sided. The same 2000
+  placebo date sets are used for every spec, so the joint null distribution across
+  specs is preserved.
+- **Romano-Wolf**: stepdown adjusted p-values from that joint placebo
+  distribution, using the studentised statistic `|b| / sd_placebo`.
+- **Benjamini-Hochberg**: FDR-adjusted p across the 216.
+- **Reported**: the specification curve (estimates sorted, bands, choice panel),
+  share with a positive sign, share with raw p < 0.10 and < 0.05, and the adjusted
+  p of the headline spec (ACM TP10, h = 0, headline controls, 10y-equivalent, full
+  sample, no filter).
+- **Prediction**: more than 90% of specs positive; under 30% with raw p < 0.05;
+  headline Romano-Wolf p above 0.10.
+
+Specs that cannot be estimated (for example, a filter leaving fewer than 5 deals)
+are reported as missing, not dropped silently.

@@ -1,0 +1,8 @@
+test_id,date,phase,claim_supported,test,target,preregistered,prereg_commit,result,result_commit,b9_family
+P1,2026-10-12,A2,effect persists beyond day 0,pooled mean of b0-b2 vs timing-matched placebo (2000 draws),lp h0-2,yes,e469395,"S=+0.091, p 0.081 two-sided",b196dc6,no
+B1-LB,2026-10-12,B1,residuals are serially independent,Ljung-Box lags 1/5/10,daily dD and lp h0-5,no,,"rejected in every target (h0 p 0.0003 at lag 1)",e039c09,no
+B1-BG,2026-10-12,B1,residuals are serially independent,Breusch-Godfrey lags 1/5/10,daily dD and lp h0-5,no,,rejected in every target,e039c09,no
+B2-BW,2026-10-12,B2,headline t is robust to NW bandwidth,NW t at lags 0/2/5/10/20 and NW1994 automatic,daily dD and lp h0-5,no,,"h0 t 3.25 to 3.77; automatic 11 lags t 3.56",e039c09,no
+B3-EWC,2026-10-12,B3,HAC inference with better small-sample size,EWC B=30 with t(30) critical values (LLSW 2018),daily dD and lp h0-5,no,,"h0 t 3.94, p 0.0005",e039c09,no
+B3-FIXB,2026-10-12,B3,HAC inference with better small-sample size,Bartlett M=34 with simulated Kiefer-Vogelsang fixed-b critical values,daily dD and lp h0-5,no,,"h0 t 4.06, p 0.0004",e039c09,no
+B3-HC,2026-10-12,B3,leverage-robust SE,HC0/HC2/HC3,daily dD and lp h0-5,no,,"h0 t 3.26/3.15/3.03",e039c09,no
