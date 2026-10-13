@@ -131,3 +131,24 @@ business day, 8 at two) and both estimates (+0.081, t 3.47 by pricing date;
 
 Checks after these edits: `paper_numbers.py` 45 of 45 match; `verify_numbers.py`
 190 numbers, 0 untraced (now also reads every `output/tables/*.json`).
+
+## Phase B
+
+**B1 to B3 done** (`src/diagnostics.py`, write-up in `12_DIAGNOSTICS.md`). No
+existing number changed.
+
+- B1: residuals serially correlated in every target. At h = 0, lag-1
+  autocorrelation is −0.14 (Ljung-Box p 0.0003). At h > 0 it is +0.30 to +0.75,
+  by construction from overlapping windows.
+- B2: bandwidth barely matters. h = 0 t is 3.25 at 0 lags and 3.77 at 20. The
+  NW (1994) automatic selector picks 11 lags, t 3.56. Repo rule (5) gives 3.47.
+- B3: **the plan's hypothesis was wrong.** HAC < OLS is not from negative
+  autocorrelation. The score's autocorrelation is about zero, and Newey-West at
+  lag 0 (heteroskedasticity only) already gives se 0.0250 against OLS 0.0441. The
+  cause is heteroskedasticity: residual sd on the 16 deal days is 2.84bp against
+  4.00bp elsewhere, and every analytical SE estimates the variance from those 16
+  residuals. EWC (t 3.94) and Kiefer-Vogelsang fixed-b (t 4.06) agree with
+  Newey-West; HC3 gives 3.03. The matched placebo's sd (0.0466) sits next to the
+  OLS SE, which is the argument for randomization as primary.
+- Still to do from B3: the paper statement that randomization is primary and HAC
+  is comparison only, in the Phase E rewrite.
