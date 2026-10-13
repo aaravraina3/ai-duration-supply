@@ -1,0 +1,17 @@
+{
+  "registered_in": "f304594",
+  "n_specs": 216,
+  "n_estimated": 216,
+  "n_missing": 0,
+  "share_positive": 1.0,
+  "share_p_raw_below_10": 0.37962962962962965,
+  "share_p_raw_below_05": 0.09259259259259259,
+  "share_rw_below_10": 0.0,
+  "share_bh_below_10": 0.0,
+  "headline": {
+    "b": 0.0812373911964191,
+    "p_raw": 0.0705,
+    "p_romano_wolf": 0.6895,
+    "p_bh": 0.2416271186440678
+  }
+}

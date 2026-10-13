@@ -12,3 +12,5 @@ Created during the upgrade. Severity: high (fix before finishing), medium, low.
 | 6 | No unit tests for any upgrade module (`diagnostics`, `b3_tests`, `cumulative`, `verify_numbers`). The only test file is `test_curve.py`. | src | high | open |
 | 7 | `paper_numbers.py` hardcodes `0.123` (the LP reversion) inherited from `variance.py`. | `paper_numbers.py`, `variance.py`, `figures_blog2.py` | medium | open |
 | 8 | Trailing 20-day volatility window (20) is hardcoded in four places instead of `config.py`. | `b3_tests`, `diagnostics_b48`, `placebo_matched` | high | open |
+| 9 | Placebo draw streams differ by script, so the same placebo test gives p 0.0705 in `speccurve.py` and 0.0825 in `placebo_matched.py`. Each test should own a dedicated generator. | `placebo_matched.py`, `speccurve.py` | medium | open |
+| 10 | `speccurve.py` fills the placebo shock matrix with a Python loop over 2000 draws per spec. Vectorisable. | `speccurve.py` | low | open |

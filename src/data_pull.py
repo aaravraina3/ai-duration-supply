@@ -31,6 +31,27 @@ def fred():
     print(f"FRED: {df.shape}, {df.index.min().date()} -> {df.index.max().date()}")
     return df
 
+# ------------------------------------------- series added by the upgrade plan (C1, C4, C5)
+EXTRA = {"THREEFYTP10": "Kim-Wright 10Y term premium (Fed Board three-factor model), percent",
+         "WSHOMCB": "Fed holdings of MBS, Wednesday level, $ millions",
+         "BAA10Y": "Moody's Baa yield minus 10Y Treasury, percent"}
+
+
+def fred_extra():
+    """Kept out of fred.csv so the committed vintage of that file never changes."""
+    frames = {}
+    for sid in EXTRA:
+        p = _cache(f"fred_{sid}.csv", f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}")
+        d = pd.read_csv(p)
+        d.columns = ["date", sid]
+        d["date"] = pd.to_datetime(d["date"])
+        frames[sid] = pd.to_numeric(d[sid], errors="coerce").set_axis(d.date)
+    df = pd.DataFrame(frames).sort_index()
+    df.to_csv(PROC / "fred_extra.csv")
+    print(f"FRED extra: {df.shape}, last obs " + ", ".join(f"{c} {df[c].dropna().index.max().date()}" for c in df))
+    return df
+
+
 # --------------------------------------------------------------- GSW zero-coupon
 def gsw():
     p = _cache("feds200628.csv", "https://www.federalreserve.gov/data/yield-curve-tables/feds200628.csv")

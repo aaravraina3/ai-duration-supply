@@ -27,3 +27,4 @@ B6-HUBER,2026-10-12,B6,h0 effect robust to outliers,"Huber RLM, V1 placebo",lp h
 B6-LAD,2026-10-12,B6,h0 effect robust to outliers,"median regression, V1 placebo",lp h0,no,,"b +0.0769, p 0.054 (lag-only 0.096)",,no
 B7-VIF,2026-10-12,B7,no multicollinearity,VIF,daily dD and lp h0,no,,all 1.01 to 1.27,,no
 B8-CHOW,2026-10-12,B8,coefficients stable across 2025-01-01,"Chow F test, all coefficients",lp h0,no,,"F 4.44, p 0.0002; pre-2025 has 2 deals",,no
+F1,2026-10-13,B9,h0 effect survives the specification family,"216-spec curve, matched placebo 2000 joint draws, Romano-Wolf stepdown, BH",see output/tables/speccurve.csv,yes,f304594,100% positive; raw p<0.05 in 9%; 0 specs survive RW or BH at 0.10; headline RW p 0.69,,yes

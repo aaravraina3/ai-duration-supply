@@ -219,3 +219,135 @@ Plain h = 0 OLS on the 20-day-shorter sample (+0.0809): vol-matched placebo p
 **0.053**, lag-only 0.098. Fallback rate 0%. Prediction (0.08 to 0.20, at or
 above lag-only): **wrong**. Matching on volatility tightened the placebo (sd 0.039
 vs 0.048) and lowered p.
+
+## Result for F1 (`src/speccurve.py`, `output/tables/speccurve.csv`, `speccurve_summary.json`, `output/figures/speccurve.png`)
+
+216 specs, all estimable (none missing). **100% positive.** Raw placebo p below
+0.10 in 38% of specs, below 0.05 in 9%. After correction across the family,
+**no spec has Romano-Wolf p or BH p below 0.10.** Headline spec: b +0.0812 (equals
+`headline.json`), raw p 0.0705, Romano-Wolf p **0.69**, BH p 0.24.
+
+Predictions: more than 90% positive, held (100%); under 30% with raw p < 0.05,
+held (9%); headline Romano-Wolf p above 0.10, held (0.69). Deviations: bands drawn
+from the placebo sd, not Newey-West (DECISIONS D-09); one dimension degenerate
+(D-10).
+
+---
+
+# Phase C and D registrations (2026-10-13, before any of them ran)
+
+Shared across C1 to C5 unless stated: sample `SAMPLE_START` to `SAMPLE_END`
+(every series cut there, including the new FRED pulls, which run past the holdout
+start); headline controls (dbe, doil, dvix, auc_10y); primary inference the
+matched-on-lag placebo, 2000 draws, two-sided, one placebo date per deal per draw
+(as in F1); Newey-West (h + 5) for comparison.
+
+## C1. Alternative dependent variables (`src/altdv.py`)
+
+- Dependents: Kim-Wright 10Y term premium (FRED `THREEFYTP10`, the Fed Board's
+  three-factor model); CMT 2, 5, 7, 10, 20, 30Y (FRED `DGS*`); slopes 10s2s
+  (DGS10 - DGS2) and 30s10s (DGS30 - DGS10). All in bp.
+- Local projections h = 0 to 5. Placebo p at h = 0 and for the pooled h = 0 to 2
+  statistic; Newey-West at every h.
+- Already known before running: DGS10 at h = 0 is +0.097 (t 3.48, `flow_tests`).
+- **Predictions**: Kim-Wright h = 0 positive with placebo p <= 0.15; 10, 20 and 30Y
+  h = 0 all positive; the 2Y response smaller than the 10Y; 10s2s positive. If
+  Kim-Wright disagrees with ACM in sign, the ACM result is model-dependent.
+
+## C2. Maturity localization on observed yields (`src/tenorlocal.py`)
+
+- Exposure: each tranche's 10y-equivalent duration is split between the two
+  neighbouring CMT tenors in {2, 5, 7, 10, 20, 30} by linear weights in years to
+  maturity (all to 2Y below 2 years, all to 30Y above 30). Exposure at tenor k on
+  day t is the sum over deals announced on t.
+- Test: panel of the six tenors by day, `dy(k,t) = day FE + tenor FE + beta x
+  exposure(k,t) + e`, h = 0. With day fixed effects, beta is identified only from
+  how the move differs across tenors on deal days, so a curve-wide move cannot
+  produce it. Placebo: each deal moves to its matched date carrying its exposure
+  profile.
+- Fitted curves are not used.
+- **Prediction**: beta positive but not significant (placebo p > 0.10), i.e. the
+  response looks curve-wide rather than localized. Reported whichever way it goes.
+
+## C3. Stock effect (`src/stockeffect.py`)
+
+- Monthly (month-end), 2024-01 to the month of `SAMPLE_END`. Stock = cumulative
+  outstanding AI 10y-equivalent duration announced since 2024-01-01, no decay.
+  Dependent = ACM TP10 month-end level.
+- Steps: ADF and KPSS on both levels; Engle-Granger and Johansen (trace, one lag)
+  cointegration. If neither finds cointegration at 5%, the estimate is changes on
+  changes: monthly dTP on monthly new issuance, with monthly controls (change in
+  breakeven, oil log change, change in VIX, monthly coupon 10y-equivalent supply).
+- Inference: permutation of monthly issuance across months, 10,000 draws,
+  two-sided (primary); Newey-West, 2 lags, for comparison. MDE at 80% from the
+  permutation sd.
+- **Prediction**: no cointegration; the changes coefficient positive with
+  permutation p > 0.10; MDE larger than the coefficient. Low power is expected and
+  will be stated with the B10 numbers.
+
+## C4. MBS supply bound (`src/mbs.py`)
+
+- Weekly, Wednesday to Wednesday. dTP10 weekly on the week's AI shock (deals
+  announced Thursday to Wednesday), weekly controls (change in breakeven, oil log
+  change, change in VIX, weekly coupon 10y-equivalent supply), with and without
+  the weekly change in Fed MBS holdings (FRED `WSHOMCB`, $bn). Series ID verified
+  by the downloaded file's header.
+- Reported: AI coefficient both ways and the percentage change; MBS coefficient.
+  Newey-West (4 lags) only, since this is a sensitivity bound, not a test of the
+  AI effect.
+- **Prediction**: the AI coefficient changes by less than 20%; the MBS coefficient
+  is not significant at 5%.
+
+## C5. Reverse causality: does deal timing depend on market conditions? (`src/timing.py`)
+
+- Daily, all sample trading days. Outcome: 1 if a deal is announced that day.
+  Regressors, all known before the day: a coupon auction scheduled that day
+  (auc_10y > 0), 5-day change in DGS10 ending t-1, 10s2s slope at t-1, Baa minus
+  10Y spread (FRED `BAA10Y`) at t-1.
+- Logit. Joint test by permutation of the 16 deal days across all trading days,
+  10,000 draws, likelihood-ratio statistic (primary); per-coefficient Wald p
+  reported.
+- Power: simulated, 1000 samples of 16 events from a logit with odds ratio 2 per
+  sd on one regressor; share rejecting at 5% with the same permutation test (200
+  permutations per sample).
+- **Prediction**: joint permutation p > 0.10; power below 50%.
+
+## D1. Anticipated versus surprise supply (`src/expected_supply.py`)
+
+- Corpus: `nlp_corpus.csv` (archived MD&A, liquidity and capex passages, 10-K and
+  10-Q), dated by filing date. Deduplicate first: sentence embeddings, greedy,
+  cosine > 0.90, keeping the earliest-filed copy. Counts before and after reported.
+- Embeddings: `sentence-transformers/all-mpnet-base-v2`, version recorded.
+- Unit: one filing. Target: the issuer's realized 10y-equivalent USD issuance in
+  the 90 days after the filing date.
+- Ladder: rung 0 trailing 365-day issuance; rung 1 adds the filing's
+  decayed passage count (30-day half-life, `NLP_HALFLIFE_DAYS`); rung 2 adds the
+  largest capital-expenditure dollar figure stated in the filing's passages
+  (regex); rung 3 ridge on the mean filing embedding plus rung 2 inputs, penalty
+  chosen inside an inner walk-forward on training filings only.
+- Validation: expanding walk-forward by filing date; a training filing is used
+  only if its 90-day target window ends before the test filing date (purge plus
+  embargo). The first 12 filings are warm-up. Score: out-of-sample MSE; one
+  standard error rule against the rung below.
+- Decomposition: for each deal, expected = the chosen rung's forecast from the
+  issuer's latest filing before the deal, minus that issuer's issuance between
+  that filing and the deal, floored at 0. Surprise = deal size minus expected.
+- Test: h = 0 local projection with expected and surprise as two regressors,
+  headline controls, placebo moving both together.
+- **Predictions**: the plan's: surprise coefficient positive and larger than the
+  expected coefficient. Mine: the text rungs do not beat rung 1 out of sample, and
+  neither coefficient is significant.
+
+## D2. Out-of-sample value (`src/oos_forecast.py`)
+
+- Targets: TP10(t+h) - TP10(t), h = 1 and 3 trading days.
+- Features at the close of t: dTP10, dbe, doil, dvix, auc_10y (rung 1); plus the
+  day's deal shock and the decayed stock change dD (rung 2).
+- Rungs: 0 historical mean and zero; 1 OLS macro; 2 OLS macro plus supply. Climb
+  to 3 or higher only if the 5.0 rules are met, with the diagnosis written first.
+- Validation: expanding window, first 250 days training, refit daily, the last h
+  training labels purged, embargo h.
+- Metrics: out-of-sample R² against the historical mean; Clark-West for rung 2 vs
+  1; Diebold-Mariano for rung 1 vs zero.
+- **Prediction**: rung 2 does not beat rung 1 (Clark-West p > 0.10); every rung's
+  out-of-sample R² is at or below zero; the ladder stops at rung 2.

@@ -58,3 +58,53 @@ withdrawn 30bp claim (D-06), the Newey-West explanation (B3 showed it is not
 autocorrelation), "replicates" to "is consistent with" (A9), and 8 of 11 to the
 all-16 result. A final sync happens at the end of the run. The guide is a local
 file outside the repo. Reversible: easy.
+
+**NEEDS REVIEW. D-09. Spec-curve bands deviate from the registration.** F1 said
+bands would use Newey-West with the h + 5 rule. A Newey-West band is not defined
+for the pooled-horizon statistic, and Newey-West is comparison-only. Chosen: draw
+every band as ±1.96 placebo sd, the same quantity the p-values come from.
+Alternative: Newey-West for h = 0 specs and placebo for pooled specs (mixed units
+in one figure). This is a deviation from a preregistered display choice; the
+estimates and p-values follow the registration exactly. Reversible: easy.
+
+**D-10. One F1 dimension turned out degenerate.** No deal priced on a release day,
+so "drop release-day deals" equals "none" for every spec (72 duplicate specs).
+Kept, as registered. Effect: Romano-Wolf is unaffected by duplicates; BH counts
+m = 216 instead of 144, which makes BH slightly more conservative. Reversible:
+easy (drop the level).
+
+**D-11. Headline raw placebo p differs across scripts (0.0705 vs 0.0825).** Both
+are the matched-on-lag placebo with 2000 draws and the same seed, but
+`placebo_matched.run` draws the uniform placebo first, so its matched draws come
+from a different part of the random stream. The gap (0.012) is larger than one
+Monte Carlo standard error (about 0.006). Chosen: the headline keeps 0.083 from
+the registered `placebo_matched.py`; the spec curve reports its own 0.0705. Not
+increasing draws to shrink the gap, since choosing the draw count after seeing
+p-values would be tuning. Logged in DEBT.md. Reversible: easy.
+
+**D-12. The test registry counts the B9 family as one row.** 216 rows would make
+the registry unreadable; the per-spec results are in
+`output/tables/speccurve.csv`, which the row points to. Reversible: easy.
+
+**D-13. B10 uses one-sided 5%, anchored on the matched-placebo sd at 16 deals,
+scaled by sqrt(16/n).** Same convention as the holdout power table, so the two
+agree (power 0.79 at 32). Alternative: two-sided, which would raise every MDE by
+about 12%. Not a hypothesis test, so no registry row. Reversible: easy.
+
+**D-14. New FRED series go to `fred_extra.csv`, not `fred.csv`.** Keeps the
+committed vintage of `fred.csv` unchanged. The new files run past `SAMPLE_END`
+and the holdout start (2026-09-24); every use cuts at `SAMPLE_END`. The holdout
+does not read these series. Reversible: easy.
+
+**D-15. Choices inside the C and D specs the plan left open** (all registered
+before running): C2 key-rate allocation by linear weights between neighbouring
+CMT tenors; C3 monthly frequency and Johansen with one lag; C4 Wednesday weeks
+and a 4-lag Newey-West; C5 logit with Baa minus 10Y as the credit spread (the
+plan said "credit spreads", no series named; BAA10Y has the longest free daily
+history); D1 deduplication on the sentence embeddings, keeping the earliest copy
+so information is dated when it first appeared; D1 capex feature by regex; D2
+feature set and 250-day warm-up. Reversible: easy for each, but each change after
+seeing results would be tuning.
+
+**D-16. sentence-transformers added as a dependency** for D1, as the plan named.
+Model download about 420MB. Reversible: easy.
