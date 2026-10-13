@@ -200,7 +200,11 @@ def main():
         newey_west_p={f"h{h}": float(lpt[lpt.h == h].p.iloc[0]) for h in range(6)},
         matched_placebo_p={f"h{int(h)}": float(r.p) for h, r in pmh.iterrows()},
         first_h_not_sig_newey_west_5pct=int(lpt[lpt.p > 0.05].h.min()),
-        first_h_not_sig_matched_placebo_10pct=int(pmh[pmh.p > 0.10].index.min()))
+        first_h_not_sig_matched_placebo_10pct=int(pmh[pmh.p > 0.10].index.min()),
+        # what the day-5 response implies for 2026 supply, with 95% bounds
+        implied_persistent_2026_bp=float(lpt[lpt.h == 5].b.iloc[0] * d26),
+        upper95_persistent_2026_bp_placebo=float((lpt[lpt.h == 5].b.iloc[0] + 1.96 * pmh.loc[5, "sd"]) * d26),
+        upper95_persistent_2026_bp_newey_west=float((lpt[lpt.h == 5].b.iloc[0] + 1.96 * lpt[lpt.h == 5].se.iloc[0]) * d26))
 
     # -------------- AI share of Treasury coupon duration supply, cutoff explicit
     import regression as R

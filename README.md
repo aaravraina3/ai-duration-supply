@@ -22,7 +22,10 @@ On one sample, 2024-01-03 to 2026-09-22, n = 680 trading days:
 - **It is short-lived**: under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); under Newey-West, for comparison, it is significant through day 2; the point estimate is near zero by day 5 (+0.013).
   Across 2026
   issuance that is 15.8 bp of one-day impacts and about 2.4 bp that persists.
-- So it cannot be a persistent 30 bp supply effect from this slice of issuance.
+- It does not rule out a persistent 30 bp effect. The day-5 point estimate implies
+  about 2.4 bp persists from 2026 supply, but the 95% upper bound is about 41 bp under
+  the timing-matched placebo (28 bp under Newey-West). Persistence is the stock
+  question, tested separately.
 - Treasury buybacks and weak Treasury auctions move the term premium in the
   directions duration absorption predicts. Individually marginal.
 - Whether the day-0 move is a change in required compensation or dealer hedging

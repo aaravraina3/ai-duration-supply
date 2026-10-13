@@ -109,6 +109,13 @@ def t4(P, sh, lt):
             count=n_obs, n=16, share=n_obs / 16, base_rate=base,
             binom_p=float(stats.binomtest(n_obs, 16, base, alternative="greater").pvalue),
             perm_p=float(np.mean(perm >= n_obs)))
+    # three windows were tested: Holm and Bonferroni across k = 1, 2, 3 (decision 1, 2026-10-13)
+    raw = [out["primary_all_16"][f"within_{kk}"]["binom_p"] for kk in (1, 2, 3)]
+    order = np.argsort(raw); holm = np.empty(3); run = 0.0
+    for rank, i in enumerate(order):
+        run = max(run, min(1.0, (3 - rank) * raw[i])); holm[i] = run
+    for j, kk in enumerate((1, 2, 3)):
+        out["primary_all_16"][f"within_{kk}"].update(holm_p=float(holm[j]), bonferroni_p=float(min(1.0, 3 * raw[j])))
     # the 11 jumbos within +/-3 business days of a release
     near = lambda d: any(abs(np.busday_count(np.datetime64(r.date()), np.datetime64(d.date()))) <= 3 for r in rel)
     jumbo = deals[deals.total_usd >= JUMBO_USD].announce
