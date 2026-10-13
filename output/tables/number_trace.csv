@@ -34,7 +34,7 @@ $93 billion,PAPER.pdf,headline.issuance_face_usd_bn.2025,"against a widely quote
 $179.5 billion,PAPER.pdf,headline.issuance_face_usd_bn.2026,"against a widely quoted figure of about $93 billion. My 2026 number, $179.5 billion, is well above the"
 $132 billion,PAPER.pdf,CONSTANT: quoted 2026 total (external),"~$132 billion I have seen quoted, and I think the quoted figure is just older. My own count through"
 $129.5 billion,PAPER.pdf,headline.issuance_face_usd_bn.2026_through_2026-06-08,"early June is $129.5 billion, which matches it. The gap is the two $25 billion deals in July and August."
-$25 billion,PAPER.pdf,localproj_all.csv:h[25],"early June is $129.5 billion, which matches it. The gap is the two $25 billion deals in July and August."
+$25 billion,PAPER.pdf,b3_tests.T2.trailing_20d_tp_vol.deal_percentiles.2024-09-25,"early June is $129.5 billion, which matches it. The gap is the two $25 billion deals in July and August."
 $10 billion,PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,"The event study only uses the jumbo deals, $10 billion or more, which is 12 of the 16. Applied"
 12,PAPER.pdf,paper_numbers.concession_band_max_bp,"The event study only uses the jumbo deals, $10 billion or more, which is 12 of the 16. Applied"
 37%,PAPER.pdf,paper_numbers.largest_deal_usd_bn,"this. Under a three-day rule, 37% of business days in my sample are clean, so random timing should"
@@ -52,11 +52,11 @@ $10 billion,PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,"The event study only u
 −0.167bp,PAPER.pdf,paper_numbers.concession_band_min_bp,the control definition. It does. The measured concession swings from −0.167bp to +0.123bp as I
 +0.123bp,PAPER.pdf,paper_numbers.concession_band_max_bp,the control definition. It does. The measured concession swings from −0.167bp to +0.123bp as I
 5,PAPER.pdf,CONSTANT: horizon label,5
-95%,PAPER.pdf,localproj_all.csv:p[27],"Figure 3. The term premium response to announced AI duration supply, with 95% Newey-West bands."
+95%,PAPER.pdf,b3_tests.T2.vix_prior_close.deal_percentiles.2026-03-10,"Figure 3. The term premium response to announced AI duration supply, with 95% Newey-West bands."
 0,PAPER.pdf,CONSTANT: horizon label,"Marginal on day 0 under the timing-matched placebo, significant through day 2 under Newey-West, near"
 0.083,PAPER.pdf,headline.placebo_matched_h0.matched on lag.p,0 +0.081 0.083 3.47
 +0.078,PAPER.pdf,headline.explained_share.via_concession_scaled.share_of_Y,1 +0.078 0.217 1.97
-0.217,PAPER.pdf,localproj_all.csv:se[40],1 +0.078 0.217 1.97
+0.217,PAPER.pdf,diagnostics_hac.csv:p[20],1 +0.078 0.217 1.97
 1.97,PAPER.pdf,headline.lp_table.h1.t,1 +0.078 0.217 1.97
 +0.115,PAPER.pdf,headline.lp_table.h2.b,2 +0.115 0.127 3.24
 0.127,PAPER.pdf,headline.placebo_matched_h2.matched on lag.p,2 +0.115 0.127 3.24
@@ -96,7 +96,7 @@ $194 billion,PAPER.pdf,headline.term_premium.supply_2026_10y_equiv_bn,"Scaled by
 79bp,PAPER.pdf,paper_numbers.dRN_2026_to_sep15_bp,"expected short rates rose 79bp, so the selloff could not be a supply story. Then I varied the start and"
 −29bp,PAPER.pdf,paper_numbers.endpoint_grid_min_bp,It ranges from −29bp to +24bp and is positive in 12 of the 25 windows. Moving the end date forward
 +24bp,PAPER.pdf,CONSTANT: holdout start day,It ranges from −29bp to +24bp and is positive in 12 of the 25 windows. Moving the end date forward
-25,PAPER.pdf,localproj_all.csv:h[25],It ranges from −29bp to +24bp and is positive in 12 of the 25 windows. Moving the end date forward
+25,PAPER.pdf,b3_tests.T2.trailing_20d_tp_vol.deal_percentiles.2024-09-25,It ranges from −29bp to +24bp and is positive in 12 of the 25 windows. Moving the end date forward
 −8.6bp,PAPER.pdf,paper_numbers.dTP_2026_to_sep15_bp,"one week, past the Fed's 16 September hike, takes it from −8.6bp to −21.9bp. And over the full 2024"
 −21.9bp,PAPER.pdf,headline.term_premium.realised_2026_dTP_bp,"one week, past the Fed's 16 September hike, takes it from −8.6bp to −21.9bp. And over the full 2024"
 101bp,PAPER.pdf,paper_numbers.full_sample_d10y_bp,to 2026 sample the 10-year rose 101bp of which +90bp is term premium. The exact opposite of the
@@ -123,7 +123,7 @@ $21 billion,PAPER.pdf,paper_numbers.mean_deal_10y_equiv_bn,on average against ab
 11.4bp,PAPER.pdf,paper_numbers.five_day_10y_sd_bp,"of 11.4bp, which is 91bp of price. My realized P&L standard deviation was 62bp, lower mostly by luck:"
 91bp,PAPER.pdf,paper_numbers.five_day_price_sd_bp,"of 11.4bp, which is 91bp of price. My realized P&L standard deviation was 62bp, lower mostly by luck:"
 62bp,PAPER.pdf,paper_numbers.cmt_f20y10y_r2,"of 11.4bp, which is 91bp of price. My realized P&L standard deviation was 62bp, lower mostly by luck:"
-7.8bp,PAPER.pdf,paper_numbers.trade_window_dy10_sd_bp,"the 10-year happened to move less than usual across these 16 windows (7.8bp sd), partly because"
+7.8bp,PAPER.pdf,paper_numbers.trade_window_dy10_sd_bp,the 10-year happened to move less than usual across these 16 windows (7.8bp sd). For five days you
 2.56bp,PAPER.pdf,paper_numbers.signal_bp,The signal is a quarter the size of the noise. A mean-size deal moves the 10-year about 2.56bp.
 80,PAPER.pdf,paper_numbers.events_for_t2,Five-day noise is 11.4bp. Signal-to-noise is 0.22. To see that at t = 2 you need about 80 events. I have
 1.2%,PAPER.pdf,paper_numbers.buyback_mean_abs_surprise_bn,I also found a real bug. Deal size explained 1.2% of the outright P&L. Hedge out the 2-year and it
@@ -173,7 +173,7 @@ $21 billion,PAPER.pdf,paper_numbers.mean_deal_10y_equiv_bn,on average against ab
 18,README.md,paper_numbers.buyback_surprise_days,"| Buybacks | 68 long-bucket operations, 18 with non-zero surprise | `buybacks.py` |"
 220,README.md,headline.auction_lp.all tenors|h0.n,"| Auctions | 220 auction days, all tenors | `auctions.py` |"
 14,README.md,headline.strategy_v3_clean.n,"| Strategy | 16 deals, 14 after warm-up for v3 | `strategy2.py` |"
-26,README.md,localproj_all.csv:h[26],"- Lou, Yan and Zhang (2013), *Review of Financial Studies* 26(8): Treasury prices"
+26,README.md,diagnostics_b3.csv:resid_acf3[5],"- Lou, Yan and Zhang (2013), *Review of Financial Studies* 26(8): Treasury prices"
 8,README.md,paper_numbers.killed_priced_1to3_after_release,"- Lou, Yan and Zhang (2013), *Review of Financial Studies* 26(8): Treasury prices"
 424B,README.md,CONSTANT: form name 424B,"Jan 2024 and Sep 2026, built from SEC 424B2/424B5 cover pages with announcement"
 $92.75B,README.md,headline.issuance_face_usd_bn.2025,term sheet on the full set of coupons. 2025 USD issuance totals $92.75B against a
