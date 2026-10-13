@@ -19,8 +19,8 @@ On one sample, 2024-01-03 to 2026-09-22, n = 680 trading days:
   **p 0.08 to 0.11 against placebo dates matched on timing after macro
   releases**. Survives leave-one-out (min t 2.63) and a wild cluster bootstrap
   (p 0.015).
-- **It is gone within three days**: +0.064 at h=3 (t 1.18), +0.013 at h=5 (t 0.19).
-  h=2 is the last horizon significant at 5%. Across 2026
+- **It is short-lived**: under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); under Newey-West, for comparison, it is significant through day 2; the point estimate is near zero by day 5 (+0.013).
+  Across 2026
   issuance that is 15.8 bp of one-day impacts and about 2.4 bp that persists.
 - So it cannot be a persistent 30 bp supply effect from this slice of issuance.
 - Treasury buybacks and weak Treasury auctions move the term premium in the

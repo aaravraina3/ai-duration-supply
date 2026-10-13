@@ -69,8 +69,7 @@ tenors under a ±2y band, so it is not an escape.
 **Falsified if** the coefficient decays to zero within a month.
 
 **Result.** h=0: +0.080 (p = 0.069). h=2: +0.113 (p = 0.116). h=5: **+0.011,
-p = 0.918**. Gone within three days. On the unified sample (to 2026-09-22) h=3 is
-+0.064 (t 1.18), the first horizon not significant at 5% (`output/tables/headline.json`, `lp_table`).
+p = 0.918**. Short-lived. On the unified sample (to 2026-09-22), under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); under Newey-West, for comparison, it is significant through day 2; the point estimate is near zero by day 5 (`output/tables/headline.json`, `persistence`).
 
 **Status: REJECTED.** The effect is transitory. This is the strongest single
 finding in the project and the one that most directly contradicts a persistent

@@ -24,7 +24,7 @@ is too small and short-lived to explain the 2026 long-end selloff.
 | ID | Claim | Falsified by | Evidence | Strength |
 |---|---|---|---|---|
 | C1 | Maturity-localized concession is not identifiable from published curves | Recovery of an injected bump on GSW | Injection: 77.7% then −10.7% | Strong |
-| C2 | Effect is transitory, gone by ~3 days | Persistent coefficient at h≥5 | LP h5 +0.011, p=0.918 | Moderate |
+| C2 | Effect is transitory: marginal on day 0 only (matched placebo), through day 2 (Newey-West) | Persistent coefficient at h≥5 | LP h5 +0.011, p=0.918 | Moderate |
 | C3 | Buybacks move TP the opposite way | Zero or positive buyback coefficient | −0.180, t=−1.39, rand p=0.34 | Weak |
 | C4 | Effect sits in forwards orthogonal to cash 10Y, ruling out hedging flow | 20y10y correlated with 10Y on observed data | GSW R²=0.063 | **Refuted in this review** |
 | C5 | Weak auction demand raises TP | Wrong-signed btc coefficient | −4.49, rand p=0.0705 | Weak |
@@ -370,7 +370,8 @@ gets written.
 
 Announced USD duration supply from five AI hyperscalers is associated with a
 transitory rise in long-end Treasury yields of roughly 0.08 to 0.13 bp per $bn of
-10-year equivalents, present on the announcement day and gone within three days. The
+10-year equivalents, present on the announcement day, marginal on day 0 only under the timing-matched placebo and
+significant through day 2 under Newey-West. The
 coefficient survives leave-one-out, a wild cluster bootstrap and construction of
 the forward curve from observed CMT points, with randomization p ≈ 0.07. Treasury
 buybacks and weak auction demand show consistent signs. The effect is too small

@@ -53,6 +53,9 @@ def pool():
     pn = json.loads((TAB / "paper_numbers.json").read_text())
     out = [(f"paper_numbers.{k}", v["value"]) for k, v in pn.items()]
     out += list(leaves(json.loads((TAB / "headline.json").read_text()), "headline"))
+    for f in sorted(TAB.glob("*.json")):
+        if f.name not in ("headline.json", "paper_numbers.json"):
+            out += list(leaves(json.loads(f.read_text()), f.stem))
     tabs = [TAB / f for f in sorted(p.name for p in TAB.glob("*.csv")) if f != "number_trace.csv"]
     for f in tabs + [PROC / f for f in POOL_FILES]:
         d = pd.read_csv(f)

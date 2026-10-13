@@ -2,7 +2,8 @@
 
 THE TRADE, AND WHERE IT COMES FROM
 The local projections say a jumbo announcement pushes long-end yields up on the
-day and the effect is indistinguishable from zero from about three business days. Cumulatively,
+day and the effect is short-lived: marginal on day 0 only under the timing-matched
+placebo, significant through day 2 under Newey-West, near zero by day 5. Cumulatively,
 from h=0 to h=5:
 
     10Y spot:  b(5) - b(0)  =  -0.028 - 0.095  =  -0.123 bp per $bn 10y-equiv

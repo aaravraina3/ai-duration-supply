@@ -36,5 +36,17 @@ post-FOMC drift that the matched placebo reproduces.
 replace the day-0 test as the headline, and it is exploratory like everything
 else outside `holdout.py`.
 
-Registration commit: (filled in after commit)
-Result commit: (filled in after run)
+Registration commit: `e469395`
+Result commit: the commit that adds this block (see `git log -- research/11_UPGRADE_PREREG.md`)
+
+**Result** (`src/cumulative.py`, `output/tables/pooled_early_response.json`):
+
+| Placebo | S_obs | placebo mean | placebo sd | p two-sided | p one-sided |
+|---|---|---|---|---|---|
+| matched on lag (primary) | +0.0912 | +0.0107 | 0.0512 | **0.081** | 0.065 |
+| uniform | +0.0912 | +0.0023 | 0.0544 | 0.098 | 0.057 |
+
+Against the prediction: p is inside the predicted 0.05 to 0.15 band. The second
+half of the prediction, that pooling would not get below the day-0 p of 0.083, is
+off by a hair: 0.081. Read as the same as day 0. Pooling did not sharpen the
+result, which says the day-1 and day-2 moves add little beyond day 0.

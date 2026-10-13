@@ -1,0 +1,19 @@
+{
+  "statistic": "mean of b_0, b_1, b_2",
+  "registered_in": "e469395",
+  "S_obs": 0.0912421261898229,
+  "matched on lag": {
+    "draws": 2000,
+    "mean": 0.010693253348651222,
+    "sd": 0.05122885530274224,
+    "p_two_sided": 0.081,
+    "p_one_sided": 0.0645
+  },
+  "uniform": {
+    "draws": 2000,
+    "mean": 0.002255365425912481,
+    "sd": 0.05441584850885559,
+    "p_two_sided": 0.0975,
+    "p_one_sided": 0.0565
+  }
+}

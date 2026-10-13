@@ -72,8 +72,9 @@ Matching placebo dates on that lag leaves the placebo centred at +0.0001, so
 post-release drift does not produce the day-0 coefficient. It does move the
 p-value from 0.078 to 0.08-0.11. **B**
 
-**B2. The effect is transitory.** h = 2: +0.115 (t 3.24). h = 3: +0.064 (t 1.18),
-the first horizon not significant at 5%, so it is gone within three days. h = 5: **+0.0125
+**B2. The effect is transitory.** Primary inference: under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); under Newey-West, for comparison, it is significant through day 2. The point estimate is near zero by day 5. Per-horizon matched-placebo p for h = 0 to 5: 0.083, 0.217, 0.127, 0.445, 0.686, 0.910;
+Newey-West p: 0.0005, 0.049, 0.001, 0.237, 0.596, 0.853 (`headline.json`, `persistence`).
+h = 5: **+0.0125
 (t 0.19)**. Against the timing-matched baseline the h = 5 response is below zero
 (placebo mean +0.041 matched on lag, +0.099 on lag and type), so the effect does
 not merely decay, it is gone relative to comparably timed days. Part of the h = 2

@@ -107,3 +107,27 @@ updated to 36,000 local projections.
 
 **Numbers changed in Phase A:** none of the existing `headline.json` values
 changed (verified by diff). New values only.
+
+## Phase A follow-ups (approved 2026-10-12)
+
+**A2, wording.** Approved and applied. One phrase everywhere, timing-matched
+placebo first: marginal on day 0 only (p 0.08, then 0.22 on day 1); significant
+through day 2 under Newey-West, for comparison; point estimate near zero by day 5.
+Changed in the paper (Figure 3 caption, table now carries the placebo p, the
+paragraph below it), README headline bullet, `03_FINDINGS` B2, `02_HYPOTHESES`,
+`06_STRATEGY`, `strategy.py` docstring, `09_ADVERSARIAL_REVIEW` C2 and summary.
+Old wording: "gone within three days" (Newey-West definition). **Not changed:**
+the README "Summary bullet", which is a resume claim and waits for Section 7.
+
+**A2, pooled test.** Registered as P1 in `11_UPGRADE_PREREG.md` (commit
+`e469395`) before running. Average of b_0, b_1, b_2 is +0.091, matched-placebo p
+0.081 (one-sided 0.065), uniform p 0.098. Same as day 0 alone. One sentence in the
+paper. Note recorded there: each b_h is already cumulative, so b_2 alone is the
+cumulative response to day 2 (placebo p 0.127); P1 pools the path.
+
+**A8, expanded.** Paper paragraph now gives the lag distribution (8 deals at one
+business day, 8 at two) and both estimates (+0.081, t 3.47 by pricing date;
+−0.022, t −0.69 by filing date).
+
+Checks after these edits: `paper_numbers.py` 45 of 45 match; `verify_numbers.py`
+190 numbers, 0 untraced (now also reads every `output/tables/*.json`).
