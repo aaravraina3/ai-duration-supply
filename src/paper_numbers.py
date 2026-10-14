@@ -157,8 +157,8 @@ def main():
     put("three_factor_variance_share", np.sum(evr[:3]), "99.2", "gsw.csv PCA, concession.loadings", scale=100)
     rob = pd.read_csv(TAB / "robustness_specs.csv")
     bands = rob[rob.spec.str.startswith("exclusion band")].X_pca
-    put("concession_band_min_bp", bands.min(), "−0.167", "robustness_specs.csv exclusion band rows")
-    put("concession_band_max_bp", bands.max(), "+0.123", "robustness_specs.csv exclusion band rows")
+    put("concession_band_min_bp", bands.min(), "−0.165", "robustness_specs.csv exclusion band rows")
+    put("concession_band_max_bp", bands.max(), "+0.122", "robustness_specs.csv exclusion band rows")
 
     put("acm_dtp_r2_on_5_curve_pcs", acm_pc_r2(), "96", "acm.csv + gsw.csv", scale=100)
 

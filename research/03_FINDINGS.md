@@ -142,9 +142,9 @@ Coherent, not strong. **C**
 ## C. What cannot be established here
 
 **C1. Maturity-localized concession is not identifiable from published curves.**
-An injected 5 bp bump is recovered at 77.7% by the three-factor step alone and at
-−10.7% after the Svensson re-fit GSW applies. The measured concession flips from
-−0.167 bp to +0.123 bp as the exclusion band moves. Excluding event days from
+An injected 5 bp bump is recovered at 78.0% by the three-factor step alone and at
+−10.0% after the Svensson re-fit GSW applies. The measured concession flips from
+−0.165 bp to +0.122 bp as the exclusion band moves. Excluding event days from
 the PCA changes nothing (loadings correlate at 0.99996). Needs TRACE or CRSP. **X**
 
 **C2. The seven-event study is underpowered.** Placebo sd 1.74 bp gives a minimum

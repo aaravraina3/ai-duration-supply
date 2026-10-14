@@ -36,7 +36,7 @@
     "placebo_sd_bp": 0.22796417386331133,
     "placebo_p": 0.6865,
     "mde95_bp": 0.4468097807720902,
-    "recovery": -0.1069276220821366
+    "recovery": -0.09959897667288296
   },
   "X_abnormal": {
     "value_bp": 0.8555453835482599,
@@ -370,8 +370,8 @@
     }
   },
   "model_dependence": {
-    "injection_recovered_residualisation_only": 0.7769637704952524,
-    "injection_recovered_after_svensson_refit": -0.1069276220821366,
+    "injection_recovered_residualisation_only": 0.7799237933922191,
+    "injection_recovered_after_svensson_refit": -0.09959897667288296,
     "acm_dtp_r2_on_5_curve_pcs": 0.9635313298742156
   },
   "announcement_timing": {

@@ -20,3 +20,5 @@ Created during the upgrade. Severity: high (fix before finishing), medium, low.
 | 14 | `timing.py` power simulation runs about 200,000 logit fits. | `timing.py` | low | open |
 | 15 | Pre-upgrade paper numbers beyond the original 45 hand-mapped ones still trace only by rounding. | `verify_numbers.py` | medium | open |
 | 16 | `cumulative.py` and `placebo_matched.py` draw placebos from the same seed in different orders (see #9). | both | low | open |
+| 17 | Deal pipeline had no `SAMPLE_END` cap and shared its input folder with the live scanner (DECISIONS D-22). | `eventlist.py`, `signal_live.py` | high | **fixed** |
+| 18 | Committed intermediates can go stale when `SAMPLE_END` moves, because nothing checks they were regenerated (D-28). The end-to-end run is the only guard. | pipeline | medium | open |

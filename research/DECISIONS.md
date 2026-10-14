@@ -147,3 +147,58 @@ the plan requires, not a model choice. Reversible: easy.
 **D-21. C5 power simulation details** (not specified by the plan): effect placed
 on the 10s2s slope, odds ratio 2 per sd, event probabilities rescaled to average
 16 events, 200 permutations per simulated sample. Reversible: easy.
+
+**NEEDS REVIEW. D-22. Found and fixed a holdout-contamination path in the deal
+pipeline.** The end-to-end run failed in `eventlist.py` on three files named
+`_live_*.htm` in `data/raw/filings/`, written by an earlier `signal_live.py`. Two
+real problems behind it: (1) `eventlist.build()` filtered deals on `SAMPLE_START`
+only, with no upper bound; (2) `signal_live.py` writes the filings it scans into
+the same folder `deals.load()` reads. Together, any live scan after 2026-09-24
+would have put holdout deals into the in-sample panel on the next pipeline run,
+breaking plan rules 7 and 8. Fixed: deals capped at `SAMPLE_END`; the live scanner
+now writes to `data/raw/live_scans/`; the three files moved there unopened. They
+are duplicates (same accessions) of Amazon's 9 and 11 September 2026 GBP filings,
+already in the folder under the standard names, and nothing in the folder was
+filed after `SAMPLE_END`, so no committed result was contaminated. The rerun
+confirms the 16 deals. `holdout.py` itself was not touched. Reversible: easy.
+
+**D-23. Paper title and abstract.** Plan E1 asked for framing around flow versus
+stock. Chosen title: "AI debt and the Treasury term premium: flow or stock?", with
+a one-paragraph abstract under the byline. Old title: "I tried to find AI debt in
+the Treasury curve". The local copy in the writeups folder keeps its old filename.
+Reversible: easy.
+
+**D-24. Phase E kept every existing section and its wording,** inserting new
+sections in spine order (inference additions inside "Then I tried to break it";
+then model dependence, localization, stock, existing mechanism sections, expected
+supply, trading plus D2, holdout, limitations, appendix). Alternative: a full
+rewrite in paper format. Rejected to keep the author's voice and the narrative
+the earlier review praised. Reversible: medium (it is a long document).
+
+**D-25. The stock levels regression was added to the paper's "too good" list,
+making seven artifacts, not six.** Same reasoning as D-17. Plan said to keep the
+six-artifacts section; this extends it rather than changing it. Reversible: easy.
+
+**D-26. README summary bullet updated** to match the paper (it had "gone within
+three days, with no persistent effect", both now unsupported). Earlier instruction
+said resume claims wait for Section 7; Section 7 is now done, and the plan's
+definition of done requires the summary bullet to match the paper. The actual
+resumes are not touched; `RESUME_CLAIMS.md` is the evidence for rewriting them.
+Reversible: easy.
+
+**D-27. Rounding convention.** Where the paper printed a hand-rounded half (0.0595
+as 0.060), it now prints Python's rounding (0.059) so the automated checks can
+hold every number. Three values changed by 0.001. Reversible: easy.
+
+**NEEDS REVIEW. D-28. The end-to-end run found stale committed curve files.**
+`nss_betas.csv`, `pca_factors.csv`, `pca_loadings.npy`, `recovery.npy` and
+`robustness_specs.csv` had last been generated with the sample ending 2026-09-15,
+before `SAMPLE_END` moved to 2026-09-22, and were never rerun. Regenerated on the
+current sample: injection recovery 77.7% becomes **78.0%** and −10.7% becomes
+**−10.0%**; the concession band −0.167 to +0.123 becomes **−0.165 to +0.122**.
+Updated in the paper, `03_FINDINGS`, `RESUME_CLAIMS`, the checker, Figure 2 and the
+interview guide. No headline number moved and no conclusion changes, but the two
+recovery figures appear on the ML resume ("77 percent", "negative 10 percent"),
+which now should read 78 and 10. Data vintages all verified unchanged, so this is
+staleness, not irreproducibility. Reversible: n/a (the old values were wrong for
+the current sample).

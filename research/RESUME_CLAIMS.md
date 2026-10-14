@@ -19,7 +19,7 @@ verdict. Nothing here rewrites a bullet; it is the evidence to rewrite them from
 | "permutation inference raising p to 0.08 from 0.0005 under Newey-West" | supported | `headline.json` `placebo_matched_h0`, `h0_inference.newey_west.p` | 0.083 matched; 0.00052 Newey-West. |
 | "Tested dealer-hedging channel via on-the-run spread and 0.87 real-nominal TIPS pass-through" | supported | `headline.json` `flow_tests` | A6: 0.87 is the corrected spec (no breakeven control). On-the-run spread is 4% of the move. |
 | "replicated Lou Yan Zhang pre-auction concession" | **unsupported** | `headline.json` `auction_lp` | All-tenor t 1.81: consistent with, not a replication (A9). |
-| "signal injection showing Svensson refit inverting maturity-local supply signal" | supported | `headline.json` `model_dependence` | 0.777 recovered before the refit, −0.107 after. |
+| "signal injection showing Svensson refit inverting maturity-local supply signal" | supported | `headline.json` `model_dependence` | 0.780 recovered before the refit, −0.100 after (was 0.777 / −0.107 on the stale Sep-15 files, DECISIONS D-28). |
 | "hashed holdout" | supported | `src/holdout.py`, hash `7afd3de6e97fcd28` | |
 
 ## ML resume
@@ -30,7 +30,7 @@ verdict. Nothing here rewrites a bullet; it is the evidence to rewrite them from
 | "parsing SEC EDGAR prospectuses into 16-deal panel" | supported | `deals_all.csv`, `tranches.csv` (103 tranches) | |
 | "engineering duration-weighted supply features" | supported | `deals_all.csv` `tenyr_equiv` | |
 | "announcement-time alignment eliminating look-ahead leakage" | supported | `headline.json` `announcement_timing` | A8: by pricing date +0.081; by filing date −0.022 (t −0.69). The effect only exists on the true announcement day. |
-| "synthetic signal injection recovering 77 percent of planted perturbation pre-smoothing against negative 10 percent post-fit" | supported | `headline.json` `model_dependence` | 77.7% and −10.7%. |
+| "synthetic signal injection recovering 77 percent of planted perturbation pre-smoothing against negative 10 percent post-fit" | supported | `headline.json` `model_dependence` | 78.0% and −10.0% (was 77.7% / −10.7%, D-28). "77 percent" should read 78. |
 | "PCA spanning exposing 96 percent target redundancy" | supported | `headline.json` `model_dependence.acm_dtp_r2_on_5_curve_pcs` | R² 0.964 on five curve PCs. |
 | "permutation testing correcting p to 0.08" | supported | `headline.json` `placebo_matched_h0` | |
 

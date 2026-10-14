@@ -70,15 +70,15 @@
     "in_paper": true
   },
   "concession_band_min_bp": {
-    "value": -0.1668582529146879,
-    "printed": "\u22120.167",
+    "value": -0.1645233022574413,
+    "printed": "\u22120.165",
     "matches": true,
     "source": "robustness_specs.csv exclusion band rows",
     "in_paper": true
   },
   "concession_band_max_bp": {
-    "value": 0.1234597419813047,
-    "printed": "+0.123",
+    "value": 0.1223629317596165,
+    "printed": "+0.122",
     "matches": true,
     "source": "robustness_specs.csv exclusion band rows",
     "in_paper": true

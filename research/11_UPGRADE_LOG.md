@@ -176,3 +176,54 @@ Strong heteroskedasticity and ARCH; fat tails (kurtosis 6.3); VIFs about 1; no
 deal day among the ten most influential observations; Chow rejects at 2025-01-01
 but with 2 deals before it. Retired from headline use: the 8 `regression.py`
 specs on the level of D or S (B5), including the level "30bp test".
+
+## Run to the end (2026-10-13)
+
+Mode changed by Aarav: Phases B to E and Section 7 in one pass, logging judgment
+calls in `DECISIONS.md`, parked ideas in `SCOPE.md`, debt in `DEBT.md`.
+
+**Review decisions applied first.** 8 of 11 replaced by the all-16 result (9 of 16,
+p 0.04, Holm p 0.13); timing-matched placebo kept as the headline, V1 reported
+alongside; the 30bp persistence claim traced and withdrawn (D-06); the
+variance-gap statement added; interview guide synced (D-08).
+
+**B9** spec curve: 216 specs, all positive, none survives Romano-Wolf or BH at
+0.10, headline Romano-Wolf p 0.69. **B10** power: MDE 0.116 at 16 deals.
+**C1** Kim-Wright +0.038 (p 0.048); observed yields rise with maturity to 30Y
++0.115 (p 0.007). **C2** localization +0.103, p 0.17. **C3** stock: changes
+−0.067 (p 0.71); levels t 3.87 read as a trend artifact (D-17). **C4** MBS bound:
+AI coefficient −4.9%. **C5** timing logit joint p 0.073, slope p 0.036, power
+0.39. **D1** text does not beat trailing issuance; NLP off the resume. **D2**
+supply adds no out-of-sample value. **E** paper restructured around flow versus
+stock (D-23 to D-25). **Section 7** in `RESUME_CLAIMS.md`.
+
+Wrong predictions this run: C3 (cointegration under the either-test rule; sign of
+the changes coefficient), C5 (joint p), D2 (zero forecast beat the mean). Earlier:
+T2, T3, V1, and half of P1.
+
+**Numbers or claims that changed, old to new, and why:**
+
+| Item | Old | New | Why |
+|---|---|---|---|
+| Persistence claim | "cannot be a persistent 30bp" | not ruled out; 95% bound about 41bp | placebo band at h = 5 (D-06) |
+| Timing claim | 8 of 11 priced just after releases | 9 of 16, p 0.04, Holm 0.13 | the 11 were selected near releases (T4) |
+| Headline framing | gone within three days | marginal on day 0 only (placebo) | approved A2 wording |
+| Paper title | I tried to find AI debt in the Treasury curve | AI debt and the Treasury term premium: flow or stock? | plan E1 (D-23) |
+| Measurement artifacts | six | seven | the C3 levels regression (D-25) |
+| Three appendix p-values | 0.060, 0.054, 0.071 | 0.059, 0.053, 0.070 | rounding convention (D-27) |
+
+No value in `headline.json` that existed before the upgrade changed.
+
+**Holdout:** `holdout.py` and hash `7afd3de6e97fcd28` untouched. A path that
+could have leaked holdout deals into the panel was found and closed (D-22).
+
+**End-to-end verification (2026-10-13).** The documented pipeline was run from the
+cached raw data twice. Run 1 found two problems, both fixed: stray live-scan files
+that broke `eventlist.py` and exposed a holdout-contamination path (D-22), and
+committed curve intermediates left over from the 09-15 sample (D-28). After the
+fixes, run 2 reproduced run 1's `headline.json` byte for byte. Against the
+previously committed `headline.json`, the only changes are the three recovery
+values in D-28. Checks: `paper_numbers.py` 136 of 136 match and appear in the
+PDF; `verify_numbers.py` 302 numbers, 0 untraced; `test_curve.py` and
+`test_upgrade.py` pass; `verify_vintage.py` 30 of 30. The README run order now
+builds the PDF before checking it.

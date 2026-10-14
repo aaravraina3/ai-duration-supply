@@ -1,7 +1,7 @@
 """Step 4: deals -> events. Applies the pre-registered filters from config.py
 in a fixed order and logs every drop, so the funnel is auditable."""
 import numpy as np, pandas as pd
-from config import (PROC, JUMBO_USD, MACRO_EXCL_BDAYS, CLUSTER_MERGE_BDAYS, SAMPLE_START)
+from config import (PROC, JUMBO_USD, MACRO_EXCL_BDAYS, CLUSTER_MERGE_BDAYS, SAMPLE_START, SAMPLE_END)
 from deals import build_deals
 
 def mod_duration(tenor, coupon, floating=False):
@@ -56,7 +56,8 @@ def filter_events(g, verbose=True, excl=None, jumbo=None, merge=None):
     merge = CLUSTER_MERGE_BDAYS if merge is None else merge
     cal = pd.read_csv(PROC / "macro_calendar.csv", parse_dates=["date"])
     log = []
-    g = g[g.announce >= SAMPLE_START].copy()
+    # upper bound too: deals after SAMPLE_END belong to the holdout and must never enter the panel
+    g = g[(g.announce >= SAMPLE_START) & (g.announce <= SAMPLE_END)].copy()
     log.append(("in sample window", len(g)))
 
     g["jumbo"] = g.total_usd >= jumbo

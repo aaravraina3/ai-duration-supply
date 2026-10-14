@@ -119,7 +119,8 @@ def main():
             resp = S.get(url, timeout=90)
             # parse_doc infers issuer/date/form/accession from the stem, so the
             # temp file has to follow the same naming convention as the corpus
-            tmp = RAW / "filings" / f"{x.issuer}_{x.date}_{x.form}_{x.accession}.htm"
+            # never the filings folder: deals.load reads it, and live deals are holdout data
+            tmp = RAW / "live_scans" / f"{x.issuer}_{x.date}_{x.form}_{x.accession}.htm"
             tmp.parent.mkdir(parents=True, exist_ok=True)
             tmp.write_bytes(resp.content)
             import events as E

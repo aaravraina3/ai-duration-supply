@@ -18,7 +18,7 @@ $92.8 billion,PAPER.pdf,headline.issuance_face_usd_bn.2025,"billion of dollar bo
 424B,PAPER.pdf,CONSTANT: form name 424B,The preliminary prospectus (form 424B) is filed the morning of the deal. It lists the tranches but
 "$5,000,000,000",PAPER.pdf,CONSTANT: cover-page example,"$5,000,000,000 4.250% NOTES DUE 2031, one line per tranche."
 4.250%,PAPER.pdf,CONSTANT: cover-page example,"$5,000,000,000 4.250% NOTES DUE 2031, one line per tranche."
-16,PAPER.pdf,headline.N_usd_deals_total,silently passing. All 16 deals matched at 1.00.
+16,PAPER.pdf,paper_numbers.concession_band_min_bp,silently passing. All 16 deals matched at 1.00.
 1.00,PAPER.pdf,headline.macro_excl_bdays,silently passing. All 16 deals matched at 1.00.
 +0.081,PAPER.pdf,paper_numbers.c1_b_ACM TP10,"priced, the day-0 estimate is +0.081 (Newey-West t 3.47). Dated by the final prospectus filing day"
 3.47,PAPER.pdf,headline.term_premium.impact_t,"priced, the day-0 estimate is +0.081 (Newey-West t 3.47). Dated by the final prospectus filing day"
@@ -56,10 +56,10 @@ $10 billion,PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,"The event study only u
 0.999,PAPER.pdf,CONSTANT: rhetorical,maturities had an R-squared of 1.000. Not 0.999.
 4,PAPER.pdf,paper_numbers.t4_p,4
 5bp,PAPER.pdf,CONSTANT: size of the injected bump,"Rather than argue about this, I tested it. I took real daily curve moves, injected a known 5bp bump at"
-77.7%,PAPER.pdf,headline.model_dependence.injection_recovered_residualisation_only,The three-factor step alone 77.7%
-−10.7%,PAPER.pdf,headline.X_pca.recovery,After the Fed's curve-fitting is applied first −10.7%
-−0.167bp,PAPER.pdf,paper_numbers.concession_band_min_bp,the control definition. It does. The measured concession swings from −0.167bp to +0.123bp as I
-+0.123bp,PAPER.pdf,paper_numbers.concession_band_max_bp,the control definition. It does. The measured concession swings from −0.167bp to +0.123bp as I
+78.0%,PAPER.pdf,headline.model_dependence.injection_recovered_residualisation_only,The three-factor step alone 78.0%
+−10.0%,PAPER.pdf,paper_numbers.est_wls_p,After the Fed's curve-fitting is applied first −10.0%
+−0.165bp,PAPER.pdf,paper_numbers.concession_band_min_bp,the control definition. It does. The measured concession swings from −0.165bp to +0.122bp as I
++0.122bp,PAPER.pdf,paper_numbers.concession_band_max_bp,the control definition. It does. The measured concession swings from −0.165bp to +0.122bp as I
 5,PAPER.pdf,CONSTANT: horizon label,5
 95%,PAPER.pdf,b3_tests.T2.vix_prior_close.deal_percentiles.2026-03-10,"Figure 3. The term premium response to announced AI duration supply, with 95% Newey-West bands."
 0,PAPER.pdf,CONSTANT: horizon label,"Marginal on day 0 under the timing-matched placebo, significant through day 2 under Newey-West, near"
@@ -82,7 +82,7 @@ $10 billion,PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,"The event study only u
 0.22,PAPER.pdf,paper_numbers.signal_to_noise,"explained below), it is marginal on day 0 only: p 0.08, then 0.22 on day 1. Under Newey-West, for"
 +0.091,PAPER.pdf,headline.explained_share.via_concession_X_abn.sum_2026_bp,"response over days 0 to 2 is +0.091, with a matched-placebo p of 0.08, the same as day 0 alone."
 $194 billion,PAPER.pdf,headline.term_premium.supply_2026_10y_equiv_bn,"Scaled by 2026 issuance, $194 billion in 10-year equivalents (the $179.5 billion face value weighted"
-16bp,PAPER.pdf,headline.N_usd_deals_total,"by duration), that is about 16bp of announcement-day effect across the whole year, and a point"
+16bp,PAPER.pdf,paper_numbers.concession_band_min_bp,"by duration), that is about 16bp of announcement-day effect across the whole year, and a point"
 30bp,PAPER.pdf,CONSTANT: the sell-side claim being tested,"That doesn't settle the 30bp claim, though. The day-5 estimate implies about 2bp of 2026's supply"
 2bp,PAPER.pdf,CONSTANT: maturity or horizon label,"That doesn't settle the 30bp claim, though. The day-5 estimate implies about 2bp of 2026's supply"
 41bp,PAPER.pdf,paper_numbers.persist_upper95_placebo,"effect persists, but the placebo band at day 5 is wide: the 95% upper bound is about 41bp (28bp under"
@@ -148,7 +148,7 @@ $194 billion,PAPER.pdf,headline.term_premium.supply_2026_10y_equiv_bn,"Scaled by
 "10,",PAPER.pdf,CONSTANT: 10-year maturity / 10 Hz,"across the 2, 5, 7, 10, 20 and 30-year points. 54% of all the deals' duration sits at the 30-year point"
 18%,PAPER.pdf,paper_numbers.buyback_surprise_days,and 18% at the 10-year.
 +0.103,PAPER.pdf,paper_numbers.tenor_beta,"answer is +0.103 per $bn of exposure, with a placebo p of 0.17. Positive, and not distinguishable from"
-0.17,PAPER.pdf,paper_numbers.concession_band_min_bp,"answer is +0.103 per $bn of exposure, with a placebo p of 0.17. Positive, and not distinguishable from"
+0.17,PAPER.pdf,paper_numbers.tenor_p,"answer is +0.103 per $bn of exposure, with a placebo p of 0.17. Positive, and not distinguishable from"
 0.043,PAPER.pdf,paper_numbers.stock_eg,"0.043), Johansen says no (5.10 against a 15.49 cutoff). By the rule I registered, either test was"
 5.10,PAPER.pdf,paper_numbers.stock_joh,"0.043), Johansen says no (5.10 against a 15.49 cutoff). By the rule I registered, either test was"
 15.49,PAPER.pdf,paper_numbers.stock_joh_cv,"0.043), Johansen says no (5.10 against a 15.49 cutoff). By the rule I registered, either test was"
@@ -209,7 +209,7 @@ $21 billion,PAPER.pdf,paper_numbers.mean_deal_10y_equiv_bn,on average against ab
 $518 billion,PAPER.pdf,paper_numbers.mbs_drop,"Fed's mortgage holdings, which fell $518 billion over the sample, to a weekly version of the"
 4.9%,PAPER.pdf,paper_numbers.mbs_ai_change,regression. The AI coefficient moved by 4.9% and the mortgage term wasn't significant (p 0.24).
 0.24,PAPER.pdf,paper_numbers.mbs_p,regression. The AI coefficient moved by 4.9% and the mortgage term wasn't significant (p 0.24).
-17,PAPER.pdf,paper_numbers.concession_band_min_bp,17
+17,PAPER.pdf,paper_numbers.tenor_p,17
 0.07,PAPER.pdf,paper_numbers.est_wls_b,"jointly (permutation p 0.07), driven by the slope: deals are more likely when the curve is steeper"
 39%,PAPER.pdf,paper_numbers.c5_power,that from day-to-day timing. Its power against an odds ratio of 2 per standard deviation is 39%.
 8.2,PAPER.pdf,paper_numbers.japan_naive_pickup_t,a t-statistic of 8.2 with the wrong sign.
@@ -232,39 +232,52 @@ $518 billion,PAPER.pdf,paper_numbers.mbs_drop,"Fed's mortgage holdings, which fe
 0.0002,PAPER.pdf,paper_numbers.chow_p,"(p 0.0002), but only 2 deals come before the break."
 19,PAPER.pdf,headline.term_premium.b_h5_t,19
 03,README.md,paper_numbers.signal_bp,Canonical numbers live in [`research/03_FINDINGS.md`](research/03_FINDINGS.md);
-680,README.md,headline.sample.lp_n,"On one sample, 2024-01-03 to 2026-09-22, n = 680 trading days:"
-10,README.md,CONSTANT: 10-year maturity / 10 Hz,- Announced USD duration from the five AI hyperscalers raises the 10Y term
-+0.081,README.md,paper_numbers.c1_b_ACM TP10,premium by **+0.081 bp per $bn of 10-year equivalents on the announcement
-3.47,README.md,headline.term_premium.impact_t,"day**. Newey-West t 3.47, plain OLS t 1.84 (p 0.066), randomization p 0.078, and"
-1.84,README.md,headline.h0_inference.ols.t,"day**. Newey-West t 3.47, plain OLS t 1.84 (p 0.066), randomization p 0.078, and"
-0.066,README.md,headline.h0_inference.ols.p,"day**. Newey-West t 3.47, plain OLS t 1.84 (p 0.066), randomization p 0.078, and"
-0.078,README.md,headline.explained_share.via_concession_scaled.share_of_Y,"day**. Newey-West t 3.47, plain OLS t 1.84 (p 0.066), randomization p 0.078, and"
-0.08,README.md,paper_numbers.est_huber_b,**p 0.08 to 0.11 against placebo dates matched on timing after macro
-0.11,README.md,paper_numbers.d1_surprise_b,**p 0.08 to 0.11 against placebo dates matched on timing after macro
-2.63,README.md,headline.h0_inference.leave_one_out.t_min,releases**. Survives leave-one-out (min t 2.63) and a wild cluster bootstrap
-0.015,README.md,paper_numbers.breakeven_h0_b,(p 0.015).
-0,README.md,CONSTANT: horizon label,"- **It is short-lived**: under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); und"
-0.22,README.md,paper_numbers.signal_to_noise,"- **It is short-lived**: under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); und"
-1,README.md,paper_numbers.three_factor_variance_share,"- **It is short-lived**: under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); und"
-2,README.md,CONSTANT: maturity or horizon label,"- **It is short-lived**: under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); und"
-5,README.md,CONSTANT: horizon label,"- **It is short-lived**: under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); und"
-+0.013,README.md,headline.placebo_matched_h0.matched on lag.mean,"- **It is short-lived**: under the timing-matched placebo it is marginal on day 0 only (p 0.08, then 0.22 on day 1); und"
-15.8,README.md,headline.term_premium.implied_impact_bp,issuance that is 15.8 bp of one-day impacts and about 2.4 bp that persists.
-2.4,README.md,headline.term_premium.implied_persistent_bp,issuance that is 15.8 bp of one-day impacts and about 2.4 bp that persists.
-30,README.md,CONSTANT: the sell-side claim / 10-to-30-year bucket,- It does not rule out a persistent 30 bp effect. The day-5 point estimate implies
-95%,README.md,b3_tests.T2.vix_prior_close.deal_percentiles.2026-03-10,"about 2.4 bp persists from 2026 supply, but the 95% upper bound is about 41 bp under"
-41,README.md,paper_numbers.persist_upper95_placebo,"about 2.4 bp persists from 2026 supply, but the 95% upper bound is about 41 bp under"
-28,README.md,paper_numbers.persist_upper95_nw,the timing-matched placebo (28 bp under Newey-West). Persistence is the stock
-0.87,README.md,paper_numbers.v1_sharpe,0.87 times as much as nominals.
+680,README.md,headline.sample.lp_n,"On one sample, 2024-01-03 to 2026-09-22, n = 680 trading days. The question is"
+10,README.md,CONSTANT: 10-year maturity / 10 Hz,hyperscalers raises the 10Y ACM term premium by **+0.081 bp per $bn of
++0.081,README.md,paper_numbers.c1_b_ACM TP10,hyperscalers raises the 10Y ACM term premium by **+0.081 bp per $bn of
+0.083,README.md,headline.placebo_matched_h0.matched on lag.p,timing-matched placebo: **p 0.083**. Newey-West t 3.47 and OLS t 1.84 (p 0.066)
+3.47,README.md,headline.term_premium.impact_t,timing-matched placebo: **p 0.083**. Newey-West t 3.47 and OLS t 1.84 (p 0.066)
+1.84,README.md,headline.h0_inference.ols.t,timing-matched placebo: **p 0.083**. Newey-West t 3.47 and OLS t 1.84 (p 0.066)
+0.066,README.md,headline.h0_inference.ols.p,timing-matched placebo: **p 0.083**. Newey-West t 3.47 and OLS t 1.84 (p 0.066)
+−0.022,README.md,headline.announcement_timing.b0_dated_by_final_filing,disappears (−0.022).
+0,README.md,CONSTANT: horizon label,- **Short-lived**: under the timing-matched placebo it is marginal on day 0 only
+0.08,README.md,paper_numbers.est_huber_b,"(p 0.08, then 0.22 on day 1); under Newey-West, for comparison, it is"
+0.22,README.md,paper_numbers.signal_to_noise,"(p 0.08, then 0.22 on day 1); under Newey-West, for comparison, it is"
+1,README.md,paper_numbers.three_factor_variance_share,"(p 0.08, then 0.22 on day 1); under Newey-West, for comparison, it is"
+2,README.md,CONSTANT: maturity or horizon label,significant through day 2; the point estimate is near zero by day 5 (+0.013).
+5,README.md,CONSTANT: horizon label,significant through day 2; the point estimate is near zero by day 5 (+0.013).
++0.013,README.md,headline.placebo_matched_h0.matched on lag.mean,significant through day 2; the point estimate is near zero by day 5 (+0.013).
+216,README.md,paper_numbers.spec_n,"- **Stable in sign, not in significance.** All 216 preregistered specifications"
+0.10,README.md,paper_numbers.est_wls_p,are positive; none survives Romano-Wolf or Benjamini-Hochberg at 0.10
+0.69,README.md,paper_numbers.v1_sharpe_10d,(headline Romano-Wolf p 0.69). At 16 deals the 80%-power detectable effect is
+16,README.md,paper_numbers.concession_band_min_bp,(headline Romano-Wolf p 0.69). At 16 deals the 80%-power detectable effect is
+80%,README.md,paper_numbers.events_for_t2,(headline Romano-Wolf p 0.69). At 16 deals the 80%-power detectable effect is
+0.116,README.md,paper_numbers.mde80_16,"0.116, above the estimate."
++0.038,README.md,paper_numbers.c1_b_Kim-Wright TP10,- **Not an ACM artifact.** Kim-Wright term premium +0.038 (placebo p 0.048);
+0.048,README.md,paper_numbers.c1_p_Kim-Wright TP10,- **Not an ACM artifact.** Kim-Wright term premium +0.038 (placebo p 0.048);
++0.097,README.md,paper_numbers.d1_surprise_p,"observed yields rise with maturity, 10Y +0.097 (p 0.025) to 30Y +0.115"
+0.025,README.md,paper_numbers.est_volscale_b,"observed yields rise with maturity, 10Y +0.097 (p 0.025) to 30Y +0.115"
+30,README.md,CONSTANT: the sell-side claim / 10-to-30-year bucket,"observed yields rise with maturity, 10Y +0.097 (p 0.025) to 30Y +0.115"
++0.115,README.md,paper_numbers.c1_b_DGS30,"observed yields rise with maturity, 10Y +0.097 (p 0.025) to 30Y +0.115"
+0.007,README.md,paper_numbers.c1_p_DGS30,(p 0.007).
+0.17,README.md,paper_numbers.tenor_p,- **Not shown to be localized** at the issued maturities (placebo p 0.17).
+−0.067,README.md,paper_numbers.stock_chg_b,- **Stock effect: open.** Monthly changes give −0.067 (permutation p 0.71). A
+0.71,README.md,paper_numbers.tp_change_on_release_days_bp,- **Stock effect: open.** Monthly changes give −0.067 (permutation p 0.71). A
+3.87,README.md,paper_numbers.stock_lev_t,levels regression gives t 3.87 but regresses a ramp on a trending series and is
+2.4,README.md,headline.term_premium.implied_persistent_bp,not read as evidence. The day-5 point estimate implies about 2.4 bp persists
+95%,README.md,b3_tests.T2.vix_prior_close.deal_percentiles.2026-03-10,"from 2026 supply, with a 95% upper bound of about 41 bp, so a persistent 30 bp"
+41,README.md,paper_numbers.persist_upper95_placebo,"from 2026 supply, with a 95% upper bound of about 41 bp, so a persistent 30 bp"
+0.87,README.md,paper_numbers.v1_sharpe,yields move 0.87 times as much as nominals.
+11,README.md,paper_numbers.largest_deal_tranches,"[`research/11_UPGRADE_LOG.md`](research/11_UPGRADE_LOG.md), with every test in"
 09,README.md,paper_numbers.all_deals_1to3_after_release,"Full review in [`research/09_ADVERSARIAL_REVIEW.md`](research/09_ADVERSARIAL_REVIEW.md),"
 20,README.md,CONSTANT: maturity or horizon label,"| F1 | The forward-curve test that ""ruled out"" hedging used a Svensson-fitted 20y10y forward | Refuted. On observed CMT "
 0.623,README.md,paper_numbers.cmt_f20y10y_r2,"| F1 | The forward-curve test that ""ruled out"" hedging used a Svensson-fitted 20y10y forward | Refuted. On observed CMT "
 0.062,README.md,paper_numbers.gsw_f20y10y_r2,"| F1 | The forward-curve test that ""ruled out"" hedging used a Svensson-fitted 20y10y forward | Refuted. On observed CMT "
 7,README.md,paper_numbers.n_floating_tranches,"| F2 | No result survives multiplicity correction | Conceded. One frozen held-out test registered, hash `7afd3de6e97fcd2"
+0.078,README.md,headline.explained_share.via_concession_scaled.share_of_Y,"| M1 | Placebos ignored that deals price just after macro releases | Timing-matched placebo run. Day-0 effect survives, "
 12.4%,README.md,paper_numbers.buyback_news_share,| M4 | Buyback dates and sizes are pre-announced | Surprise-only shock built. 12.4% of the raw series (|surprise| over a
 1.81,README.md,headline.auction_lp.all tenors|h0.t,"| M8 | Auction LP used a tenor bucket chosen after the fact | All-tenor LP is primary: t 1.81, not 2.59 |"
 2.59,README.md,headline.auction_lp.7-10y only (selected)|h0.t,"| M8 | Auction LP used a tenor bucket chosen after the fact | All-tenor LP is primary: t 1.81, not 2.59 |"
-16,README.md,headline.N_usd_deals_total,"| Announcement effect, persistence | 16 USD deals, 680 days | `localproj.py` |"
 68,README.md,stockeffect.changes_on_issuance.newey_west_t,"| Buybacks | 68 long-bucket operations, 18 with non-zero surprise | `buybacks.py` |"
 18,README.md,paper_numbers.buyback_surprise_days,"| Buybacks | 68 long-bucket operations, 18 with non-zero surprise | `buybacks.py` |"
 220,README.md,headline.auction_lp.all tenors|h0.n,"| Auctions | 220 auction days, all tenors | `auctions.py` |"
@@ -279,9 +292,12 @@ $34.8B,README.md,localproj_all.csv:t[22],"- Non-USD tranches (EUR, GBP, JPY): $3
 100%,README.md,headline.macro_excl_bdays,"> (announcement-dated, 100% term-sheet coupon match, validated at $92.8B 2025"
 $92.8B,README.md,headline.issuance_face_usd_bn.2025,"> (announcement-dated, 100% term-sheet coupon match, validated at $92.8B 2025"
 +0.08bp,README.md,paper_numbers.est_huber_b,> announced 10-year-equivalent duration: +0.08bp per $bn on the announcement day
-30bp,README.md,CONSTANT: the sell-side claim being tested,"> persistent effect, against sell-side estimates of 30bp"
+30bp,README.md,CONSTANT: the sell-side claim being tested,"> effect left open, against sell-side estimates of 30bp"
 00,README.md,paper_numbers.share_bdays_clean_3day_rule,00_PLAN.md ... 10_PREREGISTRATION.md
 "36,000",README.md,"CONSTANT: run-time note, 6 horizons x 3 placebos x 2000 draws","is believed. `placebo_matched.py` runs 36,000 local projections and takes a while."
 3,README.md,CONSTANT: horizon label,- Macro exclusion changed from ±3 business days to window contamination after
 12,README.md,paper_numbers.concession_band_max_bp,±3 kept 1 of 12 deals. The original is reported as a robustness row.
+4.9%,README.md,paper_numbers.mbs_ai_change,using the Fed's MBS holdings moves the AI coefficient by 4.9%.
+17,README.md,paper_numbers.tenor_p,(D-17); the 30 bp claim withdrawn (D-06).
+06,README.md,paper_numbers.gsw_f20y10y_r2,(D-17); the 30 bp claim withdrawn (D-06).
 32,README.md,headline.preregistration.n_min,will not report anything until 32 deals announced after 2026-09-24 exist. At the

@@ -194,7 +194,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
 ```bash
-cd src && for m in data_pull edgar_list edgar_fetch macro_cal eventlist curve test_curve concession recovery abnormal regression localproj placebo_matched buybacks auctions hedgeflow strategy2 robustness headline diagnostics b3_tests cumulative speccurve power altdv tenorlocal stockeffect mbs timing expected_supply oos_forecast diagnostics_b48 paper_numbers verify_numbers test_upgrade; do ../.venv/bin/python $m.py; done
+cd src && for m in data_pull edgar_list edgar_fetch macro_cal eventlist curve test_curve concession recovery abnormal regression localproj placebo_matched buybacks auctions hedgeflow strategy2 robustness headline diagnostics b3_tests cumulative speccurve power altdv tenorlocal stockeffect mbs timing expected_supply oos_forecast diagnostics_b48 make_pdf paper_numbers verify_numbers test_upgrade verify_vintage; do ../.venv/bin/python $m.py; done
 ```
 
 Raw downloads are cached. `test_curve.py` must pass before any downstream result
